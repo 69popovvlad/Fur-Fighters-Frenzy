@@ -45,6 +45,9 @@
         <Compile Include="EntityBase.cs" />
         <Compile Include="IEntity.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="Views\EntityView.cs" />
+        <Compile Include="Views\ViewsContainer.cs" />
+        <Compile Include="Views\ViewsFactory.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 
