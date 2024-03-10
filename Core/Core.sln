@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Ui.Editor", "Core.Ui.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tools.Editor", "Core.Tools.Editor\Core.Tools.Editor.csproj", "{15354518-53AD-4277-A05C-8684045DCD39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.FSM", "Core.FSM\Core.FSM.csproj", "{C5755ADD-EDE6-48FF-8452-A294DB527C68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{15354518-53AD-4277-A05C-8684045DCD39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15354518-53AD-4277-A05C-8684045DCD39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15354518-53AD-4277-A05C-8684045DCD39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5755ADD-EDE6-48FF-8452-A294DB527C68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5755ADD-EDE6-48FF-8452-A294DB527C68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5755ADD-EDE6-48FF-8452-A294DB527C68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5755ADD-EDE6-48FF-8452-A294DB527C68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
