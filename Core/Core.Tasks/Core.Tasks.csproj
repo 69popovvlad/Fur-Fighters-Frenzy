@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <Import Project="$(SolutionDir)Common.props" />
+    <Import Project="$(RootDirectory)\Dependencies\UnityRuntime.refs" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{37A2361A-FA7E-498A-9FED-43B2B7726F77}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>Core.Tasks</RootNamespace>
+        <AssemblyName>Core.Tasks</AssemblyName>
+        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="AsyncWebRequestException.cs" />
+        <Compile Include="Progress\IJobObserver.cs" />
+        <Compile Include="Progress\JobObserver.cs" />
+        <Compile Include="Progress\ProgressObserver.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="RemoteFileDownloader.cs" />
+        <Compile Include="TaskExtensions.cs" />
+        <Compile Include="ThreadTrampolines\SynchronizationContextExtensions.cs" />
+        <Compile Include="ThreadTrampolines\UnityTask.Awaiters.cs" />
+        <Compile Include="ThreadTrampolines\UnityTask.MainTherad.cs" />
+        <Compile Include="ThreadTrampolines\UnityTask.OffThread.cs" />
+        <Compile Include="WebRequestHandler.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Core.Ui\Core.Ui.csproj">
+        <Project>{7773f345-c893-4386-9aff-4605bfec3d49}</Project>
+        <Name>Core.Ui</Name>
+      </ProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+      <Reference Include="System" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+    <Target Name="AfterBuild">
+        <ItemGroup>
+            <PathFrom Include="$(ProjectDir)$(OutDir)$(ProjectName).*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(PathFrom)" DestinationFolder="$(ProjectDir)..\..\Assets\Plugins\Core\" />
+    </Target>
+</Project>

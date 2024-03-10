@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <Import Project="$(SolutionDir)Common.props" />
+    <Import Project="$(RootDirectory)\Dependencies\UnityEditor.refs" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{65D9D648-A4C3-4241-8278-13230E678372}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>Core.Ui.Editor</RootNamespace>
+        <AssemblyName>Core.Ui.Editor</AssemblyName>
+        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE;UNITY_EDITOR</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE;UNITY_EDITOR</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Xml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="WindowsLookupPostProcessing.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Core.Processing.Editor\Core.Processing.Editor.csproj">
+        <Project>{d0351f35-fc90-4d24-860f-77175e98e0d5}</Project>
+        <Name>Core.Processing.Editor</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\Core.Ui\Core.Ui.csproj">
+        <Project>{7773f345-c893-4386-9aff-4605bfec3d49}</Project>
+        <Name>Core.Ui</Name>
+      </ProjectReference>
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+    <Target Name="AfterBuild">
+        <ItemGroup>
+            <PathFrom Include="$(ProjectDir)$(OutDir)$(ProjectName).*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(PathFrom)" DestinationFolder="$(ProjectDir)..\..\Assets\Plugins\Core\Editor\" />
+    </Target>
+</Project>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <Import Project="$(SolutionDir)Common.props" />
+    <Import Project="$(RootDirectory)\Dependencies\UnityRuntime.refs" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{0C5C94DE-2D34-4CC8-8288-8289A062E1E8}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>Core.Application</RootNamespace>
+        <AssemblyName>Core.Application</AssemblyName>
+        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+            <Project>{32db36aa-a266-4f55-b0b3-b75b3fc36740}</Project>
+            <Name>Core.Ioc</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\Core.Reflection\Core.Reflection.csproj">
+            <Project>{7adf1976-8d32-4755-a244-37aba819610b}</Project>
+            <Name>Core.Reflection</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\Core.Timer\Core.Timer.csproj">
+          <Project>{2c5c70bb-6649-4bc2-a67e-7d8380fb3157}</Project>
+          <Name>Core.Timer</Name>
+        </ProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Include="ApplicationContext.cs" />
+      <Compile Include="ApplicationContext.UnityEvents.cs" />
+      <Compile Include="ApplicationLifeToken.cs" />
+      <Compile Include="Environment\Environment.cs" />
+      <Compile Include="Environment\IEnvironment.cs" />
+      <Compile Include="Events\IUnityApplicationPauseListener.cs" />
+      <Compile Include="Events\IUnityApplicationQuitListener.cs" />
+      <Compile Include="Events\IUnityUpdateListener.cs" />
+      <Compile Include="Events\UnityEventType.cs" />
+      <Compile Include="IApplicationResource.cs" />
+      <Compile Include="IInitializableResource.cs" />
+      <Compile Include="MonoBehaviourSingleton.cs" />
+      <Compile Include="Properties\AssemblyInfo.cs" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+    <Target Name="AfterBuild">
+        <ItemGroup>
+            <PathFrom Include="$(ProjectDir)$(OutDir)$(ProjectName).*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(PathFrom)" DestinationFolder="$(ProjectDir)..\..\Assets\Plugins\Core\" />
+    </Target>
+</Project>

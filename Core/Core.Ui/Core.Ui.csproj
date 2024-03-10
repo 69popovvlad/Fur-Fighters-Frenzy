@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <Import Project="$(SolutionDir)Common.props" />
+    <Import Project="$(RootDirectory)\Dependencies\UnityRuntime.refs" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{7773F345-C893-4386-9AFF-4605BFEC3D49}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>Core.Ui</RootNamespace>
+        <AssemblyName>Core.Ui</AssemblyName>
+        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="ExceptionWindow.cs" />
+        <Compile Include="PopUp.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="ScopeType.cs" />
+        <Compile Include="WindowBase.cs" />
+        <Compile Include="WindowsLookupConfig.cs" />
+        <Compile Include="WindowsScopeContainer.cs" />
+        <Compile Include="WindowsSystem.cs" />
+        <Compile Include="WindowsSystem.Pool.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Core.Collections.Utilities\Core.Collections.Utilities.csproj">
+        <Project>{8ea1a5d7-3e23-431d-9b4f-9b422e9de8a1}</Project>
+        <Name>Core.Collections.Utilities</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+        <Project>{32db36aa-a266-4f55-b0b3-b75b3fc36740}</Project>
+        <Name>Core.Ioc</Name>
+      </ProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+      <Reference Include="System" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+    <Target Name="AfterBuild">
+        <ItemGroup>
+            <PathFrom Include="$(ProjectDir)$(OutDir)$(ProjectName).*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(PathFrom)" DestinationFolder="$(ProjectDir)..\..\Assets\Plugins\Core\" />
+    </Target>
+</Project>

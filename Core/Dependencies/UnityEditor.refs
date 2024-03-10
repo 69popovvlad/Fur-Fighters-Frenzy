@@ -1,0 +1,83 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="UnityRuntime.refs" />
+  
+  <Target Name="Dependencies" BeforeTargets="Compile">
+      <Message Text="Edit Time Unity Dependencies Root: $(RootDirectory)" Importance="high" />
+  </Target>
+  
+  <PropertyGroup Condition = "'$(PrivateDependencies)' == ''">
+    <PrivateDependencies>False</PrivateDependencies>
+    <UnityEditorRefs>True</UnityEditorRefs>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Reference Include="Packages\UnityEditor.UI">
+      <HintPath>$(RootDirectory)\Dependencies\Unity\Packages\UnityEditor.UI.dll</HintPath>
+      <Private>$(PrivateDependencies)</Private>
+    </Reference>
+    <Reference Include="UnityEngine\UnityEditor.CoreModule">
+      <HintPath>$(RootDirectory)\Dependencies\Unity\UnityEngine\UnityEditor.CoreModule.dll</HintPath>
+      <Private>$(PrivateDependencies)</Private>
+    </Reference>
+    <Reference Include="UnityEngine\UnityEditor.DeviceSimulatorModule">
+      <HintPath>$(RootDirectory)\Dependencies\Unity\UnityEngine\UnityEditor.DeviceSimulatorModule.dll</HintPath>
+      <Private>$(PrivateDependencies)</Private>
+    </Reference>
+    <Reference Include="UnityEngine\UnityEditor.DiagnosticsModule">
+      <HintPath>$(RootDirectory)\Dependencies\Unity\UnityEngine\UnityEditor.DiagnosticsModule.dll</HintPath>
+      <Private>$(PrivateDependencies)</Private>
+    </Reference>
+    <Reference Include="UnityEngine\UnityEditor">
+      <HintPath>$(RootDirectory)\Dependencies\Unity\UnityEngine\UnityEditor.dll</HintPath>
+      <Private>$(PrivateDependencies)</Private>
+    </Reference>
+    <Reference Include="UnityEngine\UnityEditor.GraphViewModule">
+      <HintPath>$(RootDirectory)\Dependencies\Unity\UnityEngine\UnityEditor.GraphViewModule.dll</HintPath>
+      <Private>$(PrivateDependencies)</Private>
+    </Reference>
+    <Reference Include="UnityEngine\UnityEditor.PackageManagerUIModule">
+      <HintPath>$(RootDirectory)\Dependencies\Unity\UnityEngine\UnityEditor.PackageManagerUIModule.dll</HintPath>
+      <Private>$(PrivateDependencies)</Private>
+    </Reference>
+    <Reference Include="UnityEngine\UnityEditor.QuickSearchModule">
+      <HintPath>$(RootDirectory)\Dependencies\Unity\UnityEngine\UnityEditor.QuickSearchModule.dll</HintPath>
+      <Private>$(PrivateDependencies)</Private>
+    </Reference>
+    <Reference Include="UnityEngine\UnityEditor.SceneTemplateModule">
+      <HintPath>$(RootDirectory)\Dependencies\Unity\UnityEngine\UnityEditor.SceneTemplateModule.dll</HintPath>
+      <Private>$(PrivateDependencies)</Private>
+    </Reference>
+    <Reference Include="UnityEngine\UnityEditor.TextCoreFontEngineModule">
+      <HintPath>$(RootDirectory)\Dependencies\Unity\UnityEngine\UnityEditor.TextCoreFontEngineModule.dll</HintPath>
+      <Private>$(PrivateDependencies)</Private>
+    </Reference>
+    <Reference Include="UnityEngine\UnityEditor.TextCoreTextEngineModule">
+      <HintPath>$(RootDirectory)\Dependencies\Unity\UnityEngine\UnityEditor.TextCoreTextEngineModule.dll</HintPath>
+      <Private>$(PrivateDependencies)</Private>
+    </Reference>
+    <Reference Include="UnityEngine\Unity.Timeline.Editor">
+      <HintPath>$(RootDirectory)\Dependencies\Unity\Packages\Unity.Timeline.Editor.dll</HintPath>
+      <Private>$(PrivateDependencies)</Private>
+    </Reference>
+    <Reference Include="UnityEngine\UnityEditor.UIBuilderModule">
+      <HintPath>$(RootDirectory)\Dependencies\Unity\UnityEngine\UnityEditor.UIBuilderModule.dll</HintPath>
+      <Private>$(PrivateDependencies)</Private>
+    </Reference>
+    <Reference Include="UnityEngine\UnityEditor.UIElementsModule">
+      <HintPath>$(RootDirectory)\Dependencies\Unity\UnityEngine\UnityEditor.UIElementsModule.dll</HintPath>
+      <Private>$(PrivateDependencies)</Private>
+    </Reference>
+    <Reference Include="UnityEngine\UnityEditor.UIElementsSamplesModule">
+      <HintPath>$(RootDirectory)\Dependencies\Unity\UnityEngine\UnityEditor.UIElementsSamplesModule.dll</HintPath>
+      <Private>$(PrivateDependencies)</Private>
+    </Reference>
+    <Reference Include="UnityEngine\UnityEditor.UIServiceModule">
+      <HintPath>$(RootDirectory)\Dependencies\Unity\UnityEngine\UnityEditor.UIServiceModule.dll</HintPath>
+      <Private>$(PrivateDependencies)</Private>
+    </Reference>
+    <Reference Include="UnityEngine\UnityEditor.UnityConnectModule">
+      <HintPath>$(RootDirectory)\Dependencies\Unity\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
+      <Private>$(PrivateDependencies)</Private>
+    </Reference>
+  </ItemGroup>
+</Project>
