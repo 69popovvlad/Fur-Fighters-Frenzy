@@ -44,6 +44,10 @@
         <Compile Include="BroadcastHandlerBase.cs" />
         <Compile Include="BroadcastHelper.cs" />
         <Compile Include="BucketBase.cs" />
+        <Compile Include="Examples\CommandListener.cs" />
+        <Compile Include="Examples\CommandInvoker.cs" />
+        <Compile Include="Examples\BucketExample.cs" />
+        <Compile Include="Examples\CommandExample.cs" />
         <Compile Include="IBroadcast.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
