@@ -43,12 +43,23 @@
         <Compile Include="EntitiesContainer.cs" />
         <Compile Include="EntitiesFactory.cs" />
         <Compile Include="EntityBase.cs" />
-        <Compile Include="Examples\BuilderExample.cs" />
+        <Compile Include="EntityBuilderBase.cs" />
+        <Compile Include="Examples\EntityBuilderExample.cs" />
+        <Compile Include="Examples\EntityExample.cs" />
+        <Compile Include="Examples\EntityViewExample.cs" />
+        <Compile Include="Examples\ViewBuilderExample.cs" />
         <Compile Include="IEntity.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Views\EntityView.cs" />
+        <Compile Include="Views\ViewBuilderBase.cs" />
         <Compile Include="Views\ViewsContainer.cs" />
         <Compile Include="Views\ViewsFactory.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Core.Application\Core.Application.csproj">
+        <Project>{0c5c94de-2d34-4cc8-8288-8289a062e1e8}</Project>
+        <Name>Core.Application</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 
