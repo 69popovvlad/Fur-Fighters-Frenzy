@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="Packages\Newtonsoft.Json">
+        <HintPath>$(RootDirectory)\Dependencies\Unity\Packages\Newtonsoft.Json.dll</HintPath>
+        <Private>$(PrivateDependencies)</Private>
+    </Reference>
     <Reference Include="Packages\UnityEngine.UI">
       <HintPath>$(RootDirectory)\Dependencies\Unity\Packages\UnityEngine.UI.dll</HintPath>
       <Private>$(PrivateDependencies)</Private>
