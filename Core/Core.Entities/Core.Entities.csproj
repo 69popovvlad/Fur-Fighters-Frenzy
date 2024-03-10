@@ -43,6 +43,7 @@
         <Compile Include="EntitiesContainer.cs" />
         <Compile Include="EntitiesFactory.cs" />
         <Compile Include="EntityBase.cs" />
+        <Compile Include="Examples\BuilderExample.cs" />
         <Compile Include="IEntity.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Views\EntityView.cs" />
