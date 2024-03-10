@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tools.Editor", "Core.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.FSM", "Core.FSM\Core.FSM.csproj", "{C5755ADD-EDE6-48FF-8452-A294DB527C68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Utilities.Editor", "Core.Utilities.Editor\Core.Utilities.Editor.csproj", "{2D470DF0-D604-4095-9384-D97EB257A9C8}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Data", "Core.Data\Core.Data.csproj", "{C46CBA73-C8F2-4D3B-8923-B5FEAADDF7D6}"
 EndProject
 Global
