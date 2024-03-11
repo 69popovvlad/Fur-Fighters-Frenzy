@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Buckets", "Core.Bucket
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Assets", "Core.Assets\Core.Assets.csproj", "{F0F9F743-6FD5-4011-8DD8-65A9CA039407}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Assets.Editor", "Core.Assets.Editor\Core.Assets.Editor.csproj", "{71515BE2-66C2-42BE-A94B-842D26D773CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +117,10 @@ Global
 		{F0F9F743-6FD5-4011-8DD8-65A9CA039407}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0F9F743-6FD5-4011-8DD8-65A9CA039407}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0F9F743-6FD5-4011-8DD8-65A9CA039407}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71515BE2-66C2-42BE-A94B-842D26D773CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71515BE2-66C2-42BE-A94B-842D26D773CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71515BE2-66C2-42BE-A94B-842D26D773CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71515BE2-66C2-42BE-A94B-842D26D773CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,5 +130,6 @@ Global
 		{65D9D648-A4C3-4241-8278-13230E678372} = {75AE88BB-79E3-49FF-B04E-81C06656C202}
 		{15354518-53AD-4277-A05C-8684045DCD39} = {75AE88BB-79E3-49FF-B04E-81C06656C202}
 		{2D470DF0-D604-4095-9384-D97EB257A9C8} = {75AE88BB-79E3-49FF-B04E-81C06656C202}
+		{71515BE2-66C2-42BE-A94B-842D26D773CB} = {75AE88BB-79E3-49FF-B04E-81C06656C202}
 	EndGlobalSection
 EndGlobal
