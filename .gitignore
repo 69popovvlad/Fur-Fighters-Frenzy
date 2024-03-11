@@ -142,12 +142,15 @@ fabric.properties
 /Assembly-CSharp*.csproj*
 
 # dll, pdb and mbd files
-Assets/Plugins/Core/**/*.dll
+Assets/Plugins/Core/**/*.dll*
 Assets/Plugins/Core/**/*.pdb*
 Assets/Plugins/Core/**/*.mdb*
-Assets/Plugins/Client/**/*.dll
+Assets/Plugins/Client/**/*.dll*
 Assets/Plugins/Client/**/*.pdb*
 Assets/Plugins/Client/**/*.mdb*
+Assets/Plugins/Editor/**/*.dll*
+Assets/Plugins/Editor/**/*.pdb*
+Assets/Plugins/Editor/**/*.mdb*
 
 # Unity recordings
 [Rr]ecordings/**/*
