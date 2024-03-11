@@ -817,7 +817,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 1795696092}
   _rigidbody: {fileID: 1501250923}
-  _speed: 0.05
+  _forwardSpeed: 0.05
+  _backwardSpeed: 0.025
+  _sideSpeed: 0.025
+  _animationStoppingSpeed: 1
 --- !u!95 &1795696092 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8402806133816875183, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
@@ -899,30 +902,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1501250920}
     m_Modifications:
-    - target: {fileID: 1431268830551112930, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
-      propertyPath: _comebackDuration
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1788165823807694810, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
-      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
-      value: 
-      objectReference: {fileID: 298416812}
-    - target: {fileID: 2624310399885462015, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
-      propertyPath: m_Weight
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2624310399885462015, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
       propertyPath: m_Data.m_Target
       value: 
       objectReference: {fileID: 1197907309}
+    - target: {fileID: 4211540690708830157, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
+      propertyPath: m_Data.m_Target
+      value: 
+      objectReference: {fileID: 298416812}
     - target: {fileID: 4927266271232178887, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
       propertyPath: m_Name
       value: cat_000
       objectReference: {fileID: 0}
-    - target: {fileID: 5583834942117798590, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
-      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
-      value: 
-      objectReference: {fileID: 298416812}
     - target: {fileID: 5704647022082973821, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -963,26 +954,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6460677666143842356, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
-      propertyPath: _comebackDuration
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7377083393953039923, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
-      propertyPath: m_Weight
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7377083393953039923, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
       propertyPath: m_Data.m_Target
       value: 
       objectReference: {fileID: 219442201}
-    - target: {fileID: 8402806133816875183, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9214719831229384850, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
-      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
-      value: 
-      objectReference: {fileID: 298416812}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
