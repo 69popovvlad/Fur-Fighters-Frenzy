@@ -9,21 +9,20 @@ namespace Client.GameLogic.Movement
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody _rigidbody;
-        
+
         [Header("Speeds")]
         [SerializeField] private float _forwardSpeed = 0.05f;
         [SerializeField] private float _backwardSpeed = 0.025f;
         [SerializeField] private float _sideSpeed = 0.025f;
-        
+
         [Header("Animation")]
         [SerializeField] private float _animationStoppingSpeed = 1;
-        
+
 
         private readonly int XSpeedHash = Animator.StringToHash("XSpeed");
         private readonly int ZSpeedHash = Animator.StringToHash("ZSpeed");
 
         private InputBucket _inputBucket;
-        private Vector3 _targetPosition;
 
         private void Awake()
         {
@@ -51,9 +50,9 @@ namespace Client.GameLogic.Movement
             var vector = new Vector3(command.XSpeed, 0, command.ZSpeed).normalized;
             vector.z *= vector.z > 0 ? _forwardSpeed : _backwardSpeed;
             vector.x *= _sideSpeed;
-            
-            _targetPosition = _rigidbody.position + vector;
-            _rigidbody.MovePosition(_targetPosition);
+
+            var targetPosition = _rigidbody.position + vector;
+            _rigidbody.MovePosition(targetPosition);
         }
 
         private void ResetAnimationFloat(int id, float delta)
@@ -67,7 +66,7 @@ namespace Client.GameLogic.Movement
                 _animator.SetFloat(id, 0);
                 return;
             }
-            
+
             _animator.SetFloat(id, value * sign);
         }
     }
