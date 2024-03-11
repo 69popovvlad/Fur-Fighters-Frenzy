@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <Import Project="$(SolutionDir)Common.props" />
+    <Import Project="$(RootDirectory)\Dependencies\UnityRuntime.refs" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{F0F9F743-6FD5-4011-8DD8-65A9CA039407}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>Core.Assets</RootNamespace>
+        <AssemblyName>Core.Assets</AssemblyName>
+        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Xml" />
+        <Reference Include="UnityEditor.CoreModule">
+          <HintPath>..\Dependencies\Unity\UnityEngine\UnityEditor.CoreModule.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="AssetData.cs" />
+        <Compile Include="AssetsDirectoriesData.cs" />
+        <Compile Include="AssetsDirectoriesHolder.cs" />
+        <Compile Include="AssetsLoader.cs" />
+        <Compile Include="AssetsType.cs" />
+        <Compile Include="Containers\AssetsContainer.cs" />
+        <Compile Include="Containers\AssetsContainerBase.cs" />
+        <Compile Include="Containers\MaterialsContainer.cs" />
+        <Compile Include="Containers\ObjectsContainer.cs" />
+        <Compile Include="Containers\SpritesContainer.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Core.Application\Core.Application.csproj">
+        <Project>{0c5c94de-2d34-4cc8-8288-8289a062e1e8}</Project>
+        <Name>Core.Application</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\Core.Utilities\Core.Utilities.csproj">
+        <Project>{3b173462-47b2-4791-ad33-5033ee929d7d}</Project>
+        <Name>Core.Utilities</Name>
+      </ProjectReference>
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    
+    <Target Name="AfterBuild">
+        <ItemGroup>
+            <PathFrom Include="$(ProjectDir)$(OutDir)$(ProjectName).*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(PathFrom)" DestinationFolder="$(ProjectDir)..\..\Assets\Plugins\Core\" />
+    </Target>
+</Project>
