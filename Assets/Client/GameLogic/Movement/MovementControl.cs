@@ -51,7 +51,7 @@ namespace Client.GameLogic.Movement
             vector.z *= vector.z > 0 ? _forwardSpeed : _backwardSpeed;
             vector.x *= _sideSpeed;
 
-            var targetPosition = _rigidbody.position + vector;
+            var targetPosition = _rigidbody.position + transform.TransformDirection(vector);;
             _rigidbody.MovePosition(targetPosition);
         }
 
