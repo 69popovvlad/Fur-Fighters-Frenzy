@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1835157486, guid: dc206c6133ab6774bafda4d99cf76619, type: 3}
+  m_Script: {fileID: -1835157486, guid: 1670183aad115744ca6aafb21ed3df27, type: 3}
   m_Name: WindowsLookupConfig
   m_EditorClassIdentifier: 
   _lookup: []
