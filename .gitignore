@@ -152,6 +152,9 @@ Assets/Plugins/Editor/**/*.dll*
 Assets/Plugins/Editor/**/*.pdb*
 Assets/Plugins/Editor/**/*.mdb*
 
+# packages manifest
+!/Packages/manifest.json
+
 # Unity recordings
 [Rr]ecordings/**/*
 
