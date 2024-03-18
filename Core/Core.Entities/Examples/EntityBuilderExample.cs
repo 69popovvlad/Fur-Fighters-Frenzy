@@ -5,7 +5,7 @@ namespace Core.Entities.Examples
     // Instance of this builder you can get from Ioc
     public class EntityBuilderExample : EntityBuilderBase
     {
-        protected override void Initialize()
+        public override void Initialize()
         {
             EntitiesFactory.AddBuilder<EntityExample>(CreateEntityExample);
         }

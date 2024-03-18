@@ -8,9 +8,9 @@ namespace Core.Entities
         
         public string Guid { get; private set; }
 
-        protected EntityBase()
+        protected EntityBase(string guid = null)
         {
-            Guid = EntitiesContainer.GenerateEntityGuid();
+            Guid = guid ?? EntitiesContainer.GenerateEntityGuid();
             EntitiesContainer.AddEntity(this);
         }
 

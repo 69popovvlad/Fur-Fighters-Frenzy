@@ -2,14 +2,8 @@
 
 namespace Core.Entities
 {
-    public abstract class EntityBuilderBase: IApplicationResource
+    public abstract class EntityBuilderBase: IInitializableResource
     {
-        protected EntityBuilderBase()
-        {
-            // ReSharper disable once VirtualMemberCallInConstructor
-            Initialize();
-        }
-
-        protected abstract void Initialize();
+        public abstract void Initialize();
     }
 }
