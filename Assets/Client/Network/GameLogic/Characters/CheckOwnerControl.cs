@@ -20,7 +20,7 @@ namespace Client.Network.GameLogic.Characters
                 Destroy(_onlyOwnerComponents[i]);
             }
 
-            _onlyOwnerComponents = null;
+            Destroy(this);
         }
     }
 }

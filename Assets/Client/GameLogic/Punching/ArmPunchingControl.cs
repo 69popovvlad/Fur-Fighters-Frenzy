@@ -1,11 +1,12 @@
 ﻿using Client.GameLogic.Collision;
 using Client.GameLogic.Inputs.Commands.Punching;
+using FishNet.Object;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
 namespace Client.GameLogic.Punching
 {
-    public class ArmPunchingControl : MonoBehaviour
+    public class ArmPunchingControl : NetworkBehaviour
     {
         [SerializeField] private ChainIKConstraint _armIK;
         [SerializeField] private CollisionProxy _armCollision;
@@ -19,16 +20,41 @@ namespace Client.GameLogic.Punching
             }
 
             _armIK.weight -= Time.deltaTime / _comebackDuration;
-            if (_armIK.weight <= 0)
+            
+            if (_armIK.weight > 0)
             {
-                _armCollision.Enable(false);
+                return;
             }
+            
+            if (!IsOwner)
+            {
+                return;
+            }
+            
+            SetWeightToServer(0);
         }
 
         internal void Punch(in PunchInputCommand command)
         {
-            _armIK.weight = 1;
-            _armCollision.Enable(true);
+            if (!IsOwner)
+            {
+                return;
+            }
+
+            SetWeightToServer(1);
+        }
+
+        [ServerRpc]
+        private void SetWeightToServer(float weight)
+        {
+            SetWeightOnClients(weight);
+        }
+
+        [ObserversRpc]
+        private void SetWeightOnClients(float weight)
+        {
+            _armIK.weight = weight;
+            _armCollision.Enable(weight > 0);
         }
     }
 }

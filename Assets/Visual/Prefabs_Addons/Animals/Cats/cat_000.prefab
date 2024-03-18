@@ -67,8 +67,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce245b8388f43e7bc45d94709079b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterView: {fileID: 0}
   _onCollisionEnterKey: right_arm
-  _onCollisionEnter: []
+  _collider: {fileID: 0}
+  _onCollisionEnter:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &5644165836686964903
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -212,6 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecfbd23dafbc406f88c15677c609360d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterView: {fileID: 0}
   _onCollisionEnterKey: head
 --- !u!54 &8540812697298235567
 Rigidbody:
@@ -308,6 +313,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e048b8de67f4c8d862869032d1ac2fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 4228861389104937359}
+  _networkObjectCache: {fileID: 0}
   _armIK: {fileID: 2624310399885462015}
   _armCollision: {fileID: 2949124787225463279}
   _comebackDuration: 0.3
@@ -378,8 +386,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce245b8388f43e7bc45d94709079b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterView: {fileID: 0}
   _onCollisionEnterKey: left_arm
-  _onCollisionEnter: []
+  _collider: {fileID: 0}
+  _onCollisionEnter:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &974532836364962714
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -475,6 +487,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e048b8de67f4c8d862869032d1ac2fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 4228861389104937359}
+  _networkObjectCache: {fileID: 0}
   _armIK: {fileID: 7377083393953039923}
   _armCollision: {fileID: 8252920165270543255}
   _comebackDuration: 0.3
@@ -616,10 +631,7 @@ PrefabInstance:
       addedObject: {fileID: 3745591917315895645}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 962db8aeb7f2f044cbe539151d4edb11, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5351285151125404959}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 962db8aeb7f2f044cbe539151d4edb11, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8879131311715633629}
+      addedObject: {fileID: 4228861389104937359}
   m_SourcePrefab: {fileID: 100100000, guid: 962db8aeb7f2f044cbe539151d4edb11, type: 3}
 --- !u!4 &250698483452903657 stripped
 Transform:
@@ -787,7 +799,7 @@ MonoBehaviour:
   - {fileID: 2811419717373325724}
   - {fileID: 7724550401711927870}
   - {fileID: 5842839471055730782}
---- !u!114 &5351285151125404959
+--- !u!114 &4228861389104937359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -796,27 +808,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 4927266271232178887}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40d72de7cc744399823120ac2a93f1ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftArm: {fileID: 6460677666143842356}
-  _rightArm: {fileID: 1431268830551112930}
---- !u!114 &8879131311715633629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4927266271232178887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af4b45b12d85457fab6c5a0a675284ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _colliders:
-  - {fileID: 2949124787225463279}
-  - {fileID: 3463838607926879718}
-  - {fileID: 8252920165270543255}
+  <IsNested>k__BackingField: 0
+  <ComponentIndex>k__BackingField: 0
+  <PredictedSpawn>k__BackingField: {fileID: 0}
+  _networkBehaviours: []
+  <SerializedRootNetworkBehaviour>k__BackingField: {fileID: 0}
+  <NestedRootNetworkBehaviours>k__BackingField: []
+  SerializedTransformProperties:
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+    LocalScale: {x: 0, y: 0, z: 0}
+  _isNetworked: 1
+  _isSpawnable: 1
+  _isGlobal: 0
+  _initializeOrder: 0
+  _defaultDespawnType: 0
+  NetworkObserver: {fileID: 0}
+  <PrefabId>k__BackingField: 0
+  <SpawnableCollectionId>k__BackingField: 0
+  _scenePathHash: 0
+  <SceneId>k__BackingField: 0
+  <AssetPathHash>k__BackingField: 11012249205632417592
 --- !u!4 &5599286193971779577 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 366175167995203695, guid: 962db8aeb7f2f044cbe539151d4edb11, type: 3}
