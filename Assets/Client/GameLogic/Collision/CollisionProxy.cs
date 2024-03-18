@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -30,6 +31,32 @@ namespace Client.GameLogic.Collision
             {
                 _onCollisionEnter[i].Invoke(CharacterEntityKey, OnCollisionEnterKey, colliderData);
             }
+            
+#if UNITY_EDITOR
+            _collisions.Add((other.contacts[0].point, 5));
+#endif
+            
         }
+
+#if UNITY_EDITOR
+
+        private readonly List<(Vector3 position, float liveDuration)> _collisions = new List<(Vector3, float)>();
+        
+        private void OnDrawGizmos()
+        {
+            for (int i = 0, iLen = _collisions.Count; i < iLen; ++i)
+            {
+                var point = _collisions[i];
+                if (point.liveDuration <= 0)
+                {
+                    continue;   
+                }
+                
+                Gizmos.DrawSphere(point.position, 0.05f);
+
+                point.liveDuration -= Time.deltaTime;
+            }
+        }
+#endif
     }
 }
