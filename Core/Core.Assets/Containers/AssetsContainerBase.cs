@@ -19,8 +19,6 @@ namespace Core.Assets.Containers
 
         public abstract IEnumerable<T> GetAssets<T>();
 
-        public abstract Object LoadAssetAtPath(string path);
-        
         public abstract object CreateAssetData(string resourceName, Object resource);
     }
 }

@@ -33,7 +33,7 @@ namespace Core.Assets.Editor
             if (!File.Exists(assetFullPath))
             {
                 CreateDirectoryIfNeed(ConfigsPath);
-            
+
                 directoriesHolder = ScriptableObject.CreateInstance<AssetsDirectoriesHolder>();
                 AssetDatabase.CreateAsset(directoriesHolder, assetFullPath);
                 AssetDatabase.SaveAssetIfDirty(directoriesHolder);
@@ -42,7 +42,8 @@ namespace Core.Assets.Editor
             else
             {
                 directoriesHolder = Resources.Load<AssetsDirectoriesHolder>(assetFullPath.GetResourcePathForLoading());
-                Debug.Log($"{directoriesHolder.name} was loaded with {directoriesHolder.AllDirectories.Length} directories");
+                Debug.Log(
+                    $"{directoriesHolder.name} was loaded with {directoriesHolder.AllDirectories.Length} directories");
             }
 
             ClearOutputPath();
@@ -69,27 +70,29 @@ namespace Core.Assets.Editor
 
         private static void CreateAssetsContainer(AssetsDirectoriesData data)
         {
-            var container = CreateContainer(data.AssetsType);
-            
+            var (container, editorLoadAssetDelegate) = CreateContainer(data.AssetsType);
+
             var assets = new List<object>();
             var resourceTypeKey = data.AssetsKey.ToString();
             for (int j = 0, jLength = data.Directories.Length; j < jLength; ++j)
             {
-                var newAssets = CollectAssets(container, data.Directories[j]);
+                var newAssets = CollectAssets(container, data.Directories[j], editorLoadAssetDelegate);
                 assets.AddRange(newAssets);
             }
-            
+
             container.Initialize(assets.ToArray());
 
-            var containersAssetPath = Path.Combine(OutputPath, resourceTypeKey) + "_" +data.AssetsType + ScriptableObjectFormat;
+            var containersAssetPath = Path.Combine(OutputPath, resourceTypeKey) + "_" + data.AssetsType +
+                                      ScriptableObjectFormat;
             AssetDatabase.CreateAsset(container, containersAssetPath);
             AssetDatabase.SaveAssetIfDirty(container);
         }
 
-        private static IEnumerable<object> CollectAssets(AssetsContainerBase container, string directory)
+        private static IEnumerable<object> CollectAssets(AssetsContainerBase container, string directory,
+            LoadAssetEditorDelegate @delegate)
         {
             return AssetDatabase.FindAssets(string.Empty, new[] { directory })
-                .Select(guid => container.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(guid)))
+                .Select(guid => @delegate(AssetDatabase.GUIDToAssetPath(guid)))
                 .Select(resource => container.CreateAssetData(resource.name, resource))
                 .DefaultIfEmpty();
         }

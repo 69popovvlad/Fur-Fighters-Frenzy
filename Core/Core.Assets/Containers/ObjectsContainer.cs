@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Core.Assets.Containers
@@ -10,13 +9,6 @@ namespace Core.Assets.Containers
         public override T Get<T>(string resourceKey)
         {
             return ResourcesLookup[resourceKey] as T;
-        }
-
-        public override Object LoadAssetAtPath(string path)
-        {
-            base.LoadAssetAtPath(path);
-
-            return AssetDatabase.LoadAssetAtPath<Object>(path);
         }
     }
 }
