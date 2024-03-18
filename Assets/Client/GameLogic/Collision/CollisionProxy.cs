@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 namespace Client.GameLogic.Collision
@@ -8,8 +7,7 @@ namespace Client.GameLogic.Collision
     {
         [SerializeField] private Collider _collider;
 
-        [SerializeField] private UnityEvent<string, string, ColliderDataControl>[] _onCollisionEnter =
-            Array.Empty<UnityEvent<string, string, ColliderDataControl>>();
+        [SerializeField] private UnityEvent<string, string, ColliderDataControl> _onCollisionEnter;
 
         private bool _enabled;
 
@@ -35,10 +33,7 @@ namespace Client.GameLogic.Collision
 
             Enable(false);
 
-            for (int i = 0, iLen = _onCollisionEnter.Length; i < iLen; ++i)
-            {
-                _onCollisionEnter[i].Invoke(CharacterEntityKey, OnCollisionEnterKey, colliderData);
-            }
+            _onCollisionEnter.Invoke(CharacterEntityKey, OnCollisionEnterKey, colliderData);
         }
     }
 }
