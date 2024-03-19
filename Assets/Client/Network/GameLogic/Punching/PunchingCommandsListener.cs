@@ -1,13 +1,12 @@
 ﻿using Client.GameLogic.Collision;
 using Client.GameLogic.Collision.Commands;
-using Core.Application;
 using Core.Ioc;
 using FishNet;
 using FishNet.Object;
 
 namespace Client.Network.GameLogic.Punching
 {
-    public class PunchingCommandsListener : NetworkBehaviour, IApplicationResource
+    public class PunchingCommandsListener : NetworkBehaviour
     {
         private CollisionBucket _collisionBucket;
 
