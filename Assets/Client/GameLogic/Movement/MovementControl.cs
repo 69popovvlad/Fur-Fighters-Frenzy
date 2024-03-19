@@ -29,6 +29,8 @@ namespace Client.GameLogic.Movement
         {
             _inputBucket = Ioc.Instance.Get<InputBucket>();
             _inputBucket.Subscribe<MovementCommand>(OnMovementCommand);
+
+            _targetPosition = transform.position;
         }
 
         private void OnDestroy()

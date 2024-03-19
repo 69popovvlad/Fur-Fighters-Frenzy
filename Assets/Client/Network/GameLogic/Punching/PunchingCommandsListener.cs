@@ -22,7 +22,7 @@ namespace Client.Network.GameLogic.Punching
         {
             base.OnStopServer();
             
-            _collisionBucket?.Subscribe<PunchCollisionCommand>(OnPunchCollisionCommand);
+            _collisionBucket?.Unsubscribe<PunchCollisionCommand>(OnPunchCollisionCommand);
         }
 
         private void OnPunchCollisionCommand(PunchCollisionCommand command)

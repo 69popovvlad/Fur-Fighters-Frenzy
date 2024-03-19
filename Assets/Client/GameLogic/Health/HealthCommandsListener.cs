@@ -26,8 +26,8 @@ namespace Client.GameLogic.Health
                 return;
             }
 
-            _healthBucket.Subscribe<DecreaseHealthCommand>(OnDecreaseHealthCommand);
-            _healthBucket.Subscribe<IncreaseHealthCommand>(OnIncreaseHealthCommand);
+            _healthBucket.Unsubscribe<DecreaseHealthCommand>(OnDecreaseHealthCommand);
+            _healthBucket.Unsubscribe<IncreaseHealthCommand>(OnIncreaseHealthCommand);
         }
 
         public void Add(HealthEntity healthEntity)
@@ -52,6 +52,11 @@ namespace Client.GameLogic.Health
                 return;
             }
 
+            if (entity.Dead)
+            {
+                return;
+            }
+            
             entity.Damage(command.Value);
         }
 
@@ -62,6 +67,11 @@ namespace Client.GameLogic.Health
                 return;
             }
 
+            if (entity.Dead)
+            {
+                return;
+            }
+            
             entity.IncreaseMaxHealth(command.Value);
         }
     }

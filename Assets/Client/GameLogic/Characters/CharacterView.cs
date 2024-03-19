@@ -1,6 +1,10 @@
 ﻿using Client.GameLogic.Collision.Commands;
 using Client.GameLogic.Health;
+using Client.GameLogic.Health.Commands;
 using Client.Network.Entities;
+using Client.Network.GameLogic.Characters;
+using Client.Network.GameLogic.Characters.Commands;
+using Core.Ioc;
 using FishNet.Transporting;
 using UnityEngine;
 
@@ -22,6 +26,10 @@ namespace Client.GameLogic.Characters
             Initialize(_entity);
 
             _health.Initialize(_entity.Health);
+            
+            var characterOwnerBucket = Ioc.Instance.Get<CharacterOwnerBucket>();
+            var command = new SetCharacterOwnerCommand(Guid, OwnerId);
+            characterOwnerBucket.Invoke(command);
         }
 
         protected override void InitializeInternal()
@@ -40,7 +48,7 @@ namespace Client.GameLogic.Characters
 
         private void OnPunchCollisionCommand(PunchCollisionCommand command, Channel channel)
         {
-            if (!Guid.Equals(command.ToKey))
+            if (!Guid.Equals(command.ToKey) || Health.Dead)
             {
                 return;
             }
@@ -51,6 +59,15 @@ namespace Client.GameLogic.Characters
             // damage += partEntity.getPartDamageBonus();
             
             Health.Damage(command.FromKey, damage);
+
+            if (!Health.Dead)
+            {
+                return;
+            }
+            
+            var deadCommand = new DeadHealthCommand(command.FromKey, command.ToKey);
+            var healthBucket = Ioc.Instance.Get<HealthBucket>();
+            healthBucket.Invoke(deadCommand);
         }
     }
 }
