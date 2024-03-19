@@ -180,8 +180,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 1386418635062787878}
   _aim: {fileID: 7884657121871013518}
-  _radius: 1.5
+  _radius: 1
   _rotationSpeed: 10
+  _upLimit: 0.5
+  _downLimit: 0
 --- !u!114 &8860398902019695461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,7 +315,7 @@ MonoBehaviour:
   <NestedRootNetworkBehaviours>k__BackingField:
   - {fileID: 1735837251574234795}
   SerializedTransformProperties:
-    Position: {x: 0, y: 0, z: 0}
+    Position: {x: -1, y: 0, z: -1}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     LocalScale: {x: 1, y: 1, z: 1}
   _isNetworked: 1
