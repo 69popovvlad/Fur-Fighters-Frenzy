@@ -104,8 +104,8 @@
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\AppVersionPort.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Editor\EdgegapServerDataManager.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\Application.cs" />
-     <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\ComponentCredentials.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\DeploymentLocation.cs" />
+     <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\ComponentCredentials.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\GeoIpListModel.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Editor\Api\Models\ProtocolType.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\StaticSites.cs" />
@@ -158,18 +158,18 @@
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\AppVersionUpdateSessionConfig.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Editor\Api\Models\Requests\CreateDeploymentRequest.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\Error.cs" />
-     <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\AppCreation.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\AppVersionProbe.cs" />
+     <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\AppCreation.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\ContainerLogStorageModel.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\AppVersionCreateSessionConfig.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\SelectorModel.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\CustomSessionDeleteModel.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Editor\Api\Models\Results\GetCreateAppResult.cs" />
-     <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\CustomBulkSessionModel.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\MetricsModel.cs" />
-     <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\SessionRequest.cs" />
+     <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\CustomBulkSessionModel.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\Locations.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Editor\EdgegapToolScript.cs" />
+     <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\SDK\SessionRequest.cs" />
      <Compile Include="Assets\FishNet\Plugins\Edgegap\Models\AppVersionUpdatePatchData.cs" />
      <Folder Include="Assets\FishNet\Plugins\Edgegap\Editor\Fonts" />
      <Folder Include="Assets\FishNet\Plugins\Edgegap\Models" />
@@ -438,6 +438,9 @@
      <Reference Include="nunit.framework">
      <HintPath>D:\Projects\Unity\Fur-Fighters Frenzy\Library\PackageCache\com.unity.ext.nunit@2.0.3\net40\unity-custom\nunit.framework.dll</HintPath>
      </Reference>
+     <Reference Include="FishNet.CodeAnalysis">
+     <HintPath>D:\Projects\Unity\Fur-Fighters Frenzy\Assets\FishNet\Runtime\Plugins\CodeAnalysis\FishNet.CodeAnalysis.dll</HintPath>
+     </Reference>
      <Reference Include="Core.Data">
      <HintPath>D:\Projects\Unity\Fur-Fighters Frenzy\Assets\Plugins\Core\Core.Data.dll</HintPath>
      </Reference>
@@ -506,9 +509,6 @@
      </Reference>
      <Reference Include="Core.Application">
      <HintPath>D:\Projects\Unity\Fur-Fighters Frenzy\Assets\Plugins\Core\Core.Application.dll</HintPath>
-     </Reference>
-     <Reference Include="FishNet.CodeAnalysis">
-     <HintPath>D:\Projects\Unity\Fur-Fighters Frenzy\Assets\FishNet\Runtime\Plugins\CodeAnalysis\FishNet.CodeAnalysis.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Android.Types">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.15f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>

@@ -50,8 +50,8 @@
      <Compile Include="Assets\FishNet\Demos\Prediction V2 (Experimental)\Rigidbody\Scripts\RigidbodyPredictionV2.cs" />
      <Compile Include="Assets\FishNet\Demos\Scripts\NetworkHudCanvases.cs" />
      <Compile Include="Assets\FishNet\Demos\ColliderRollback\Scripts\Player\Aim.cs" />
-     <Compile Include="Assets\FishNet\Demos\Network LOD\Scripts\NetworkLodTester.cs" />
      <Compile Include="Assets\FishNet\Demos\Prediction V1\Transform\Scripts\TransformPrediction.cs" />
+     <Compile Include="Assets\FishNet\Demos\Network LOD\Scripts\NetworkLodTester.cs" />
      <Compile Include="Assets\FishNet\Demos\ColliderRollback\Scripts\Player\Fire.cs" />
      <Compile Include="Assets\FishNet\Demos\Prediction V1\Rigidbody\Scripts\PredictedBullet.cs" />
      <Compile Include="Assets\FishNet\Demos\Authenticator\Scripts\Broadcasts.cs" />
@@ -414,6 +414,9 @@
      <Reference Include="nunit.framework">
      <HintPath>D:\Projects\Unity\Fur-Fighters Frenzy\Library\PackageCache\com.unity.ext.nunit@2.0.3\net40\unity-custom\nunit.framework.dll</HintPath>
      </Reference>
+     <Reference Include="FishNet.CodeAnalysis">
+     <HintPath>D:\Projects\Unity\Fur-Fighters Frenzy\Assets\FishNet\Runtime\Plugins\CodeAnalysis\FishNet.CodeAnalysis.dll</HintPath>
+     </Reference>
      <Reference Include="Core.Data">
      <HintPath>D:\Projects\Unity\Fur-Fighters Frenzy\Assets\Plugins\Core\Core.Data.dll</HintPath>
      </Reference>
@@ -482,9 +485,6 @@
      </Reference>
      <Reference Include="Core.Application">
      <HintPath>D:\Projects\Unity\Fur-Fighters Frenzy\Assets\Plugins\Core\Core.Application.dll</HintPath>
-     </Reference>
-     <Reference Include="FishNet.CodeAnalysis">
-     <HintPath>D:\Projects\Unity\Fur-Fighters Frenzy\Assets\FishNet\Runtime\Plugins\CodeAnalysis\FishNet.CodeAnalysis.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Android.Types">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.15f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>

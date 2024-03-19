@@ -96,8 +96,8 @@
      <Compile Include="Assets\FishNet\CodeGenerating\ILCore\PostProcessorAssemblyResolver.cs" />
      <Compile Include="Assets\FishNet\CodeGenerating\Helpers\Extension\InstructionExtensions.cs" />
      <Compile Include="Assets\FishNet\CodeGenerating\Helpers\Typed\SyncIndexData.cs" />
-     <Compile Include="Assets\FishNet\CodeGenerating\Processing\CodegenBase.cs" />
      <Compile Include="Assets\FishNet\CodeGenerating\Helpers\PhysicsHelper.cs" />
+     <Compile Include="Assets\FishNet\CodeGenerating\Processing\CodegenBase.cs" />
      <Folder Include="Assets\FishNet\CodeGenerating" />
      <Folder Include="Assets\FishNet\CodeGenerating\Processing\Rpc" />
      <None Include="Assets\FishNet\CodeGenerating\FN_README.txt" />
