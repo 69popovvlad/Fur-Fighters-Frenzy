@@ -1,13 +1,13 @@
-﻿using UnityEngine;
-using UnityEngine.Events;
+﻿using System;
+using UnityEngine;
 
 namespace Client.GameLogic.Collision
 {
     public class CollisionProxy : ColliderDataControl
     {
-        [SerializeField] private Collider _collider;
+        public event Action<string, string, ColliderDataControl> OnCollided; 
 
-        [SerializeField] private UnityEvent<string, string, ColliderDataControl> _onCollisionEnter;
+        [SerializeField] private Collider _collider;
 
         private bool _enabled;
 
@@ -33,7 +33,7 @@ namespace Client.GameLogic.Collision
 
             Enable(false);
 
-            _onCollisionEnter.Invoke(CharacterEntityKey, OnCollisionEnterKey, colliderData);
+            OnCollided?.Invoke(CharacterEntityKey, OnCollisionEnterKey, colliderData);
         }
     }
 }
