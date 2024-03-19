@@ -4,7 +4,7 @@ using Core.Utilities.ObservableProperty;
 
 namespace Client.GameLogic.Health
 {
-    public class HealthEntity: EntityBase, IHealthHolder
+    public class HealthEntity : EntityBase, IHealthHolder
     {
         public event Action<HealthEntity> OnDead;
 
@@ -14,13 +14,13 @@ namespace Client.GameLogic.Health
 
         public int MaxHealth => _maxHealth.Value;
         public IReadOnlyObservableProperty<int> MaxHealthObserver => _maxHealth;
-        
+
         public int Health => _health.Value;
         public IReadOnlyObservableProperty<int> HealthObserver => _health;
 
         public bool Dead => _dead;
 
-        public HealthEntity(int maxHealth)
+        public HealthEntity(int maxHealth, string guidBase) : base(guidBase + $"_{nameof(HealthEntity)}")
         {
             _maxHealth = new ObservableProperty<int>(maxHealth);
             _health = new ObservableProperty<int>(maxHealth);
@@ -32,7 +32,7 @@ namespace Client.GameLogic.Health
             {
                 return;
             }
-            
+
             _health.Value -= damage;
             if (_health.Value <= 0)
             {
@@ -46,7 +46,7 @@ namespace Client.GameLogic.Health
             {
                 return;
             }
-            
+
             _maxHealth.Value += increaseValue;
             _health.Value += increaseValue;
         }
@@ -57,7 +57,7 @@ namespace Client.GameLogic.Health
             {
                 return;
             }
-            
+
             _dead = true;
             OnDead?.Invoke(this);
         }

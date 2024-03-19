@@ -5,7 +5,7 @@ namespace Core.Entities.Views
 {
     public static class ViewsContainer
     {
-        private static readonly Dictionary<string, EntityView> _views = new Dictionary<string, EntityView>();
+        private static readonly Dictionary<string, IEntityView> _views = new Dictionary<string, IEntityView>();
 
         public static string GenerateEntityGuid()
         {
@@ -18,16 +18,16 @@ namespace Core.Entities.Views
             return guid;
         }
 
-        public static EntityView GetView(string guid) =>
+        public static IEntityView GetView(string guid) =>
             _views[guid];
         
-        public static T GetView<T>(string guid) where T: EntityView =>
-            _views[guid] as T;
+        public static T GetView<T>(string guid) where T: IEntityView =>
+            (T)_views[guid];
 
-        internal static void AddEntity(EntityView view) =>
+        public static void AddEntity(IEntityView view) =>
             _views.Add(view.Guid, view);
         
-        internal static void RemoveEntity(EntityView view) =>
+        public static void RemoveEntity(IEntityView view) =>
             _views.Remove(view.Guid);
     }
 }

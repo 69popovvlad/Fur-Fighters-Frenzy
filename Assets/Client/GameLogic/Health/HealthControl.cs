@@ -7,6 +7,8 @@ namespace Client.GameLogic.Health
 {
     public class HealthControl : MonoBehaviour
     {
+        [SerializeField] private HealthView _healthView;
+        
         private HealthEntity _healthEntity;
         private HealthBucket _healthBucket;
         private HealthCommandsListener _healthCommandsListener;
@@ -20,14 +22,19 @@ namespace Client.GameLogic.Health
         public IReadOnlyObservableProperty<int> MaxHealthObserver => _healthEntity.MaxHealthObserver;
         public IReadOnlyObservableProperty<int> HealthObserver => _healthEntity.HealthObserver;
 
-        public void Initialize(int maxHealth)
+        public void Initialize(HealthEntity healthEntity)
         {
-            _healthEntity = new HealthEntity(maxHealth);
+            _healthEntity = healthEntity;
 
             _healthBucket = Ioc.Instance.Get<HealthBucket>();
 
             _healthCommandsListener = Ioc.Instance.Get<HealthCommandsListener>();
             _healthCommandsListener.Add(_healthEntity);
+
+            if (_healthView != null)
+            {
+                _healthView.Initialize(this);
+            }
         }
 
         private void OnDestroy()

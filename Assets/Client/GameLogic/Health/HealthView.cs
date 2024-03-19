@@ -3,17 +3,18 @@ using UnityEngine.UI;
 
 namespace Client.GameLogic.Health
 {
-    [DefaultExecutionOrder(5000)] // Should start after CharacterView
     public class HealthView : MonoBehaviour
     {
-        [SerializeField] private HealthControl _healthControl;
         [SerializeField] private Slider _healthBar;
 
+        private HealthControl _healthControl;
         private int _maxHealth;
         private int _currentHealth;
 
-        private void Awake()
+        public void Initialize(HealthControl healthControl)
         {
+            _healthControl = healthControl;
+            
             _maxHealth = _healthControl.MaxHealth;
             _currentHealth = _healthControl.Health;
             UpdateView();
@@ -24,6 +25,11 @@ namespace Client.GameLogic.Health
 
         private void OnDestroy()
         {
+            if (_healthControl == null)
+            {
+                return;
+            }
+            
             _healthControl.HealthObserver.PropertyChanged -= OnHealthChanged;
             _healthControl.MaxHealthObserver.PropertyChanged -= OnMaxHealthChanged;
         }

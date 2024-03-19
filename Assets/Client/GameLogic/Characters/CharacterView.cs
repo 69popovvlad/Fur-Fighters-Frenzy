@@ -1,10 +1,12 @@
-﻿using Client.GameLogic.Health;
-using Core.Entities.Views;
+﻿using Client.GameLogic.Collision.Commands;
+using Client.GameLogic.Health;
+using Client.Network.Entities;
+using FishNet.Transporting;
 using UnityEngine;
 
 namespace Client.GameLogic.Characters
 {
-    public class CharacterView : EntityView
+    public class CharacterView : NetworkEntityView
     {
         [SerializeField] private HealthControl _health;
         [SerializeField, Tooltip("Start and max health value at the same time")]
@@ -14,12 +16,41 @@ namespace Client.GameLogic.Characters
 
         public HealthControl Health => _health;
 
-        private void Awake()
+        public override void OnStartClient()
         {
-            _entity = new CharacterEntity(); // TODO: set guid from network (need update CORE for it)
+            _entity = new CharacterEntity(_maxHealth, ObjectId.ToString());
             Initialize(_entity);
 
-            _health.Initialize(_maxHealth);
+            _health.Initialize(_entity.Health);
+        }
+
+        protected override void InitializeInternal()
+        {
+            base.InitializeInternal();
+            
+            ClientManager.RegisterBroadcast<PunchCollisionCommand>(OnPunchCollisionCommand);
+        }
+
+        protected override void DeinitializationInternal()
+        {
+            base.DeinitializationInternal();
+            
+            ClientManager.UnregisterBroadcast<PunchCollisionCommand>(OnPunchCollisionCommand);
+        }
+
+        private void OnPunchCollisionCommand(PunchCollisionCommand command, Channel channel)
+        {
+            if (!Guid.Equals(command.ToKey))
+            {
+                return;
+            }
+            
+            var damage = 1;
+            // TODO: calculate damage here and send damage command
+            // var partEntity = EntitiesContainer.GetEntity(command.FromPartKey);
+            // damage += partEntity.getPartDamageBonus();
+            
+            Health.Damage(command.FromKey, damage);
         }
     }
 }

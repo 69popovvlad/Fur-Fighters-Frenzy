@@ -1,15 +1,15 @@
-﻿using System;
-using UnityEngine;
+﻿using Core.Entities;
+using Core.Entities.Views;
+using FishNet.Object;
 
-namespace Core.Entities.Views
+namespace Client.Network.Entities
 {
-    public abstract class EntityView: MonoBehaviour, IEntityView
+    public abstract class NetworkEntityView: NetworkBehaviour, IEntityView
     {
         protected IEntity Entity;
-        private bool _initialized;
         
         public string Guid => Entity.Guid;
-
+        
         public void Initialize(IEntity entity)
         {
             Entity = entity;
@@ -17,10 +17,8 @@ namespace Core.Entities.Views
             ViewsContainer.AddEntity(this);
 
             InitializeInternal();
-            
-            _initialized = true;
         }
-
+        
         /// <summary>
         /// Here you should refer to a specific entity type and subscribe to events
         /// </summary>
@@ -29,16 +27,17 @@ namespace Core.Entities.Views
             /* Nothing to do */
         }
 
-        private void Start()
+        /// <summary>
+        /// Here you should refer to a specific entity type and unsubscribe from events
+        /// </summary>
+        protected virtual void DeinitializationInternal()
         {
-            if (!_initialized)
-            {
-                throw new Exception($"{gameObject.name} with type {GetType().Name} should be initialized first");
-            }
+            /* Nothing to do */
         }
-
+        
         private void OnDestroy()
         {
+            DeinitializationInternal();
             ViewsContainer.RemoveEntity(this);
         }
 

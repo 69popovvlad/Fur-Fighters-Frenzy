@@ -51,6 +51,7 @@
         <Compile Include="IEntity.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Views\EntityView.cs" />
+        <Compile Include="Views\IEntityView.cs" />
         <Compile Include="Views\ViewBuilderBase.cs" />
         <Compile Include="Views\ViewsContainer.cs" />
         <Compile Include="Views\ViewsFactory.cs" />
