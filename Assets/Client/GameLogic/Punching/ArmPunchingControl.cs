@@ -50,7 +50,7 @@ namespace Client.GameLogic.Punching
             SetWeightOnClients(weight);
         }
 
-        [ObserversRpc]
+        [ObserversRpc(RunLocally = true)]
         private void SetWeightOnClients(float weight)
         {
             _armIK.weight = weight;
