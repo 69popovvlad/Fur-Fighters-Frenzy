@@ -20,6 +20,7 @@ namespace Client.Network.GameLogic
         private AssetsLoader _assetsLoader;
         private CharacterView _characterView;
         private HealthBucket _healthBucket;
+        private PlayerInputHandler _input;
 
         private void Awake()
         {
@@ -33,7 +34,7 @@ namespace Client.Network.GameLogic
         {
             base.OnStartClient();
             
-            var input = Instantiate(_inputPrefab);
+            _input = Instantiate(_inputPrefab);
             
             _characterOwnerBucket.Subscribe<SetCharacterOwnerCommand>(OnSetCharacterOwnerCommand);
             _healthBucket.Subscribe<DeadHealthCommand>(OnDeadHealthCommand);
@@ -46,6 +47,7 @@ namespace Client.Network.GameLogic
             base.OnStopClient();
 
             UnSubscribe();
+            Destroy(_input.gameObject);
         }
 
         private void UnSubscribe()

@@ -13,7 +13,6 @@ namespace Client.Network.Entities
         public void Initialize(IEntity entity)
         {
             Entity = entity;
-            Entity.Disposed += OnEntityDisposed;
             ViewsContainer.AddEntity(this);
 
             InitializeInternal();
@@ -38,13 +37,8 @@ namespace Client.Network.Entities
         private void OnDestroy()
         {
             DeinitializationInternal();
+            Entity.Dispose();
             ViewsContainer.RemoveEntity(this);
-        }
-
-        private void OnEntityDisposed()
-        {
-            Entity.Disposed -= OnEntityDisposed;
-            Destroy(gameObject);
         }
     }
 }
