@@ -1,8 +1,6 @@
-﻿using FishNet.Broadcast;
-
-namespace Client.GameLogic.Collision.Commands
+﻿namespace Client.GameLogic.Collision.Commands
 {
-    public struct PunchCollisionCommand: ICollisionCommand, IBroadcast
+    public struct PunchCollisionCommand: ICollisionCommand
     {
         public string FromKey { get; set; }
         public string FromPartKey { get; set; }

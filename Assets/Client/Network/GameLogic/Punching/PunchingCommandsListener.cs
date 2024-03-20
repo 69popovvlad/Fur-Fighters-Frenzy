@@ -1,7 +1,9 @@
-﻿using Client.GameLogic.Collision;
+﻿using Client.GameLogic.Characters;
+using Client.GameLogic.Collision;
 using Client.GameLogic.Collision.Commands;
+using Client.Network.GameLogic.Punching.Commands;
+using Core.Entities.Views;
 using Core.Ioc;
-using FishNet;
 using FishNet.Object;
 
 namespace Client.Network.GameLogic.Punching
@@ -27,7 +29,21 @@ namespace Client.Network.GameLogic.Punching
 
         private void OnPunchCollisionCommand(PunchCollisionCommand command)
         {
-            InstanceFinder.ServerManager.Broadcast(command);
+            var characterView = ViewsContainer.GetView<CharacterView>(command.ToKey);
+            if (characterView.Health.Dead)
+            {
+                return;
+            }
+            
+            var damage = 1;
+            // TODO: calculate damage here and send damage command
+            // var partEntity = EntitiesContainer.GetEntity(command.FromPartKey);
+            // damage += partEntity.getPartDamageBonus();
+
+            var damageCommand = new PunchDamageCommand(command.FromKey, command.ToKey, damage);
+            ServerManager.Broadcast(damageCommand);
+            
+            characterView.Health.Damage(command.FromKey, damage);
         }
     }
 }

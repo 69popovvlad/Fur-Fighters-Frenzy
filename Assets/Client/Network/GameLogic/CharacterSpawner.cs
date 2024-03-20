@@ -83,12 +83,17 @@ namespace Client.Network.GameLogic
             ServerManager.Spawn(instance, Owner);
         }
 
-        [ServerRpc(RequireOwnership = true)]
         private void DespawnCharacter()
         {
-            ServerManager.Despawn(_characterView.gameObject);
+            DespawnCharacterOnServer(_characterView.gameObject);
             Destroy(_characterView.gameObject);
             _characterView = null;
+        }
+
+        [ServerRpc(RequireOwnership = true)]
+        private void DespawnCharacterOnServer(GameObject character)
+        {
+            ServerManager.Despawn(character);
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using Client.GameLogic.Collision.Commands;
-using Client.GameLogic.Health;
+﻿using Client.GameLogic.Health;
 using Client.GameLogic.Health.Commands;
 using Client.Network.Entities;
 using Client.Network.GameLogic.Characters;
 using Client.Network.GameLogic.Characters.Commands;
+using Client.Network.GameLogic.Punching.Commands;
 using Core.Ioc;
 using FishNet.Transporting;
 using UnityEngine;
@@ -13,6 +13,7 @@ namespace Client.GameLogic.Characters
     public class CharacterView : NetworkEntityView
     {
         [SerializeField] private HealthControl _health;
+
         [SerializeField, Tooltip("Start and max health value at the same time")]
         private int _maxHealth = 10;
 
@@ -20,13 +21,20 @@ namespace Client.GameLogic.Characters
 
         public HealthControl Health => _health;
 
-        public override void OnStartClient()
+        public override void OnStartNetwork()
         {
+            base.OnStartNetwork();
+
             _entity = new CharacterEntity(_maxHealth, ObjectId.ToString());
             Initialize(_entity);
 
             _health.Initialize(_entity.Health);
-            
+        }
+
+        public override void OnStartClient()
+        {
+            base.OnStartClient();
+
             var characterOwnerBucket = Ioc.Instance.Get<CharacterOwnerBucket>();
             var command = new SetCharacterOwnerCommand(Guid, OwnerId);
             characterOwnerBucket.Invoke(command);
@@ -35,36 +43,38 @@ namespace Client.GameLogic.Characters
         protected override void InitializeInternal()
         {
             base.InitializeInternal();
-            
-            ClientManager.RegisterBroadcast<PunchCollisionCommand>(OnPunchCollisionCommand);
+
+            if (IsClientInitialized)
+            {
+                ClientManager.RegisterBroadcast<PunchDamageCommand>(OnPunchDamageCommand);
+            }
         }
 
         protected override void DeinitializationInternal()
         {
             base.DeinitializationInternal();
-            
-            ClientManager.UnregisterBroadcast<PunchCollisionCommand>(OnPunchCollisionCommand);
+
+            if (IsClientInitialized)
+            {
+                ClientManager.UnregisterBroadcast<PunchDamageCommand>(OnPunchDamageCommand);
+            }
         }
 
-        private void OnPunchCollisionCommand(PunchCollisionCommand command, Channel channel)
+        private void OnPunchDamageCommand(PunchDamageCommand command, Channel channel)
         {
             if (!Guid.Equals(command.ToKey) || Health.Dead)
             {
                 return;
             }
-            
-            var damage = 1;
-            // TODO: calculate damage here and send damage command
-            // var partEntity = EntitiesContainer.GetEntity(command.FromPartKey);
-            // damage += partEntity.getPartDamageBonus();
-            
-            Health.Damage(command.FromKey, damage);
+
+            Health.Damage(command.FromKey, command.Damage);
 
             if (!Health.Dead)
             {
                 return;
             }
-            
+
+            // Sending to respawn our character
             var deadCommand = new DeadHealthCommand(command.FromKey, command.ToKey);
             var healthBucket = Ioc.Instance.Get<HealthBucket>();
             healthBucket.Invoke(deadCommand);
