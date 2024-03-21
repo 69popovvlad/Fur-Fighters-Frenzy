@@ -1,4 +1,4 @@
-﻿using FishNet.Transporting;
+﻿using Client.Bootstrappers;
 using FishNet.Transporting.Tugboat;
 using TMPro;
 using UnityEngine;
@@ -16,6 +16,14 @@ namespace Client.Network
         {
             _ipField.onValueChanged.AddListener(OnIpChanged);
             _portField.onValueChanged.AddListener(OnPortChanged);
+            
+            if (!Bootstrapper.Arguments.IsServer)
+            {
+                return;
+            }
+
+            _ipField.text = Bootstrapper.Arguments.ServerIp;
+            _portField.text = Bootstrapper.Arguments.ServerPort.ToString();
         }
 
         private void OnDestroy()
@@ -26,7 +34,7 @@ namespace Client.Network
 
         private void OnIpChanged(string ip)
         {
-            _tugboat.SetServerBindAddress(ip, IPAddressType.IPv4);
+            _tugboat.SetClientAddress(ip);
         }
 
         private void OnPortChanged(string port)

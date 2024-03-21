@@ -197,8 +197,8 @@
      <Compile Include="Assets\FishNet\Runtime\Object\NetworkBehaviour.RPCLinks.cs" />
      <Compile Include="Assets\FishNet\Runtime\Transporting\ConnectionStates.cs" />
      <Compile Include="Assets\FishNet\Runtime\Managing\Scened\SceneProcessorBase.cs" />
-     <Compile Include="Assets\FishNet\Runtime\Managing\Transporting\IntermediateLayer.cs" />
      <Compile Include="Assets\FishNet\Runtime\Managing\Client\ClientManager.LOD.cs" />
+     <Compile Include="Assets\FishNet\Runtime\Managing\Transporting\IntermediateLayer.cs" />
      <Compile Include="Assets\FishNet\Runtime\Transporting\Transports\Tugboat\LiteNetLib\Utils\CRC32C.cs" />
      <Compile Include="Assets\FishNet\Runtime\Object\ReplicateState.cs" />
      <Compile Include="Assets\FishNet\Runtime\Editor\Configuring\FIshNetGettingStartedEditor.cs" />
@@ -647,6 +647,9 @@
      </Reference>
      <Reference Include="UnityEditor.WindowsStandalone.Extensions">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.15f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEditor.LinuxStandalone.Extensions">
+     <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.15f1\Editor\Data\PlaybackEngines\LinuxStandaloneSupport\UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
      </Reference>
      <Reference Include="UnityEditor.UWP.Extensions">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.15f1\Editor\Data\PlaybackEngines\MetroSupport\UnityEditor.UWP.Extensions.dll</HintPath>
