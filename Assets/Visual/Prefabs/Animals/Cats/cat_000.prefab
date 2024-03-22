@@ -147,6 +147,7 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 2726531022822806906}
   _networkObjectCache: {fileID: 2726531022822806906}
   _health: {fileID: 4844299089436209990}
+  _aimingControl: {fileID: 7436572829995375272}
   _maxHealth: 10
 --- !u!114 &6069222852627778931
 MonoBehaviour:
@@ -180,10 +181,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 1386418635062787878}
   _aim: {fileID: 7884657121871013518}
-  _radius: 1
   _rotationSpeed: 10
-  _upLimit: 0.5
-  _downLimit: 0
+  _radius: 1
+  _angleCorrection: 280
+  _heightCorrection: 0.1
 --- !u!114 &8860398902019695461
 MonoBehaviour:
   m_ObjectHideFlags: 0

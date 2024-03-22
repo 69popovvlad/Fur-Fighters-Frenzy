@@ -1,4 +1,5 @@
-﻿using Client.GameLogic.Characters;
+﻿using Client.GameLogic.CameraLogic;
+using Client.GameLogic.Characters;
 using Client.GameLogic.Health;
 using Client.GameLogic.Health.Commands;
 using Client.GameLogic.Inputs;
@@ -15,7 +16,7 @@ namespace Client.Network.GameLogic
     public class CharacterSpawner : NetworkBehaviour
     {
         [SerializeField] private PlayerInputHandler _inputPrefab;
-        
+
         private CharacterOwnerBucket _characterOwnerBucket;
         private AssetsLoader _assetsLoader;
         private CharacterView _characterView;
@@ -33,12 +34,12 @@ namespace Client.Network.GameLogic
         public override void OnStartClient()
         {
             base.OnStartClient();
-            
+
             _input = Instantiate(_inputPrefab);
-            
+
             _characterOwnerBucket.Subscribe<SetCharacterOwnerCommand>(OnSetCharacterOwnerCommand);
             _healthBucket.Subscribe<DeadHealthCommand>(OnDeadHealthCommand);
-            
+
             SpawnCharacter();
         }
 
@@ -64,6 +65,7 @@ namespace Client.Network.GameLogic
             }
 
             _characterView = ViewsContainer.GetView<CharacterView>(command.EntityKey);
+            FindObjectOfType<CameraFollow>().SetTarget(_characterView.transform, _characterView.AimingControl);
         }
 
         private void OnDeadHealthCommand(DeadHealthCommand command)
@@ -76,11 +78,12 @@ namespace Client.Network.GameLogic
             DespawnCharacter();
             SpawnCharacter();
         }
-        
+
         [ServerRpc]
         private void SpawnCharacter()
         {
-            var prefab = _assetsLoader.LoadResource<GameObject>("character", "cat_000"); // TODO: Load key or character data
+            var prefab =
+                _assetsLoader.LoadResource<GameObject>("character", "cat_000"); // TODO: Load key or character data
             var instance = Instantiate(prefab, transform.position, Quaternion.identity);
             ServerManager.Spawn(instance, Owner);
         }

@@ -1,6 +1,7 @@
 ﻿using Client.GameLogic.Inputs.Commands.Aiming;
 using Client.Services.Inputs;
 using Core.Ioc;
+using UnityEngine;
 
 namespace Client.GameLogic.Inputs.Parts
 {
@@ -22,13 +23,8 @@ namespace Client.GameLogic.Inputs.Parts
         }
 
         public void Update(in InputPartData data, float delta)
-        {
-            if (!_gridRaycastService.TryGetWorldTouchPosition(out var worldPosition))
-            {
-                return;
-            }
-            
-            var command = new AimInputCommand(data.OwnerKey, worldPosition.x, .5f, worldPosition.z); // TODO: Replace 0.5f with some data
+        {   
+            var command = new AimInputCommand(data.OwnerKey, Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
             _inputBucket.Invoke(command);
         }
     }

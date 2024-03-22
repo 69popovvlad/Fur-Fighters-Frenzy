@@ -1585,6 +1585,8 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194230}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1666,6 +1668,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ecc75e9ae04b7bba3a1e3ca913ade2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lockCursor: 0
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 365a7b31817b4728a414110dfd7d0b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 0}
+  _aimingControl: {fileID: 0}
+  _smoothSpeedX: 1
+  _smoothSpeedY: 4
+  _distance: 3.5
+  _maxVerticalAngle: 75
+  _minVerticalAngle: 35
 --- !u!1 &1014824025 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7443408887813606051, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
@@ -3281,6 +3315,7 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 2002653622}
   _networkObjectCache: {fileID: 2002653622}
   _health: {fileID: 2002653618}
+  _aimingControl: {fileID: 0}
   _maxHealth: 2147483647
 --- !u!114 &2002653620
 MonoBehaviour:

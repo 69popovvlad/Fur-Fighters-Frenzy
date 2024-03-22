@@ -1,4 +1,5 @@
-﻿using Client.GameLogic.Health;
+﻿using Client.GameLogic.Aiming;
+using Client.GameLogic.Health;
 using Client.GameLogic.Health.Commands;
 using Client.Network.Entities;
 using Client.Network.GameLogic.Characters;
@@ -13,6 +14,7 @@ namespace Client.GameLogic.Characters
     public class CharacterView : NetworkEntityView
     {
         [SerializeField] private HealthControl _health;
+        [SerializeField] private AimingControl _aimingControl;
 
         [SerializeField, Tooltip("Start and max health value at the same time")]
         private int _maxHealth = 10;
@@ -20,6 +22,8 @@ namespace Client.GameLogic.Characters
         private CharacterEntity _entity;
 
         public HealthControl Health => _health;
+
+        public AimingControl AimingControl => _aimingControl;
 
         public override void OnStartNetwork()
         {
@@ -34,6 +38,11 @@ namespace Client.GameLogic.Characters
         public override void OnStartClient()
         {
             base.OnStartClient();
+
+            if (!IsOwner)
+            {
+                return;
+            }
 
             var characterOwnerBucket = Ioc.Instance.Get<CharacterOwnerBucket>();
             var command = new SetCharacterOwnerCommand(Guid, OwnerId);

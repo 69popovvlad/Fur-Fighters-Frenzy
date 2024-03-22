@@ -3,16 +3,14 @@
     public struct AimInputCommand : IInputCommand
     {
         public string OwnerKey { get; private set; }
-        public float XPosition { get; private set; }
-        public float YPosition { get; private set; }
-        public float ZPosition { get; private set; }
+        public float AxisX { get; private set; }
+        public float AxisY { get; private set; }
 
-        public AimInputCommand(string ownerKey, float xPosition, float yPosition, float zPosition)
+        public AimInputCommand(string ownerKey, float axisX, float axisY)
         {
             OwnerKey = ownerKey;
-            XPosition = xPosition;
-            YPosition = yPosition;
-            ZPosition = zPosition;
+            AxisX = axisX;
+            AxisY = axisY;
         }
     }
 }
