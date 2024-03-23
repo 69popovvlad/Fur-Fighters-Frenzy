@@ -20,6 +20,7 @@ namespace Client.GameLogic.Inputs
             _inputParts.Add(new PunchingInputPart());
             _inputParts.Add(new MovementInputPart());
             _inputParts.Add(new AimingInputPart());
+            _inputParts.Add(new ZoomingInputPart());
         }
 
         private void OnDestroy()
