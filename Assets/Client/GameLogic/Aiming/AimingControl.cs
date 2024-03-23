@@ -30,7 +30,6 @@ namespace Client.GameLogic.Aiming
 
         public void SetAimAngle(float angle)
         {
-            Debug.Log(angle);
             var desiredPosition = transform.position -
                                   Quaternion.Euler(_angleCorrection - angle, _lookRotation.eulerAngles.y, 0) * _offset;
             desiredPosition.y += _heightCorrection;
