@@ -1697,9 +1697,12 @@ MonoBehaviour:
   _aimingControl: {fileID: 0}
   _smoothSpeedX: 1
   _smoothSpeedY: 4
-  _distance: 3.5
   _maxVerticalAngle: 75
   _minVerticalAngle: 35
+  _distance: 3.5
+  _maxDistance: 5
+  _minDistance: 1
+  _heightOffset: 0.7
 --- !u!1 &1014824025 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7443408887813606051, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
