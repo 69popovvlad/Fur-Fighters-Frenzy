@@ -35,6 +35,11 @@ namespace Client.Network.GameLogic
         {
             base.OnStartClient();
 
+            if (!IsOwner)
+            {
+                return;
+            }
+            
             _input = Instantiate(_inputPrefab);
 
             _characterOwnerBucket.Subscribe<SetCharacterOwnerCommand>(OnSetCharacterOwnerCommand);
@@ -47,6 +52,11 @@ namespace Client.Network.GameLogic
         {
             base.OnStopClient();
 
+            if (!IsOwner)
+            {
+                return;
+            }
+            
             UnSubscribe();
             Destroy(_input.gameObject);
         }
