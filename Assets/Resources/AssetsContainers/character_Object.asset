@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Assets:
   - AssetPath: cat_000
-    Resource: {fileID: 1601355986984420237, guid: 5042271972fb9174db9eb0a7674a633d, type: 3}
+    Resource: {fileID: 1601355986984420237, guid: 498e781d2aa56a64fa42c97bf627ce2f, type: 3}

@@ -1,11 +1,11 @@
-﻿using Client.GameLogic.Characters;
+﻿using Client.Network.Entities;
 using UnityEngine;
 
 namespace Client.GameLogic.Collision
 {
     public class ColliderDataControl: MonoBehaviour
     {
-        [SerializeField] private CharacterView _characterView;
+        [SerializeField] private NetworkEntityView _networkEntityView;
         [SerializeField] private string _onCollisionEnterKey;
         
         private int _id;
@@ -14,7 +14,7 @@ namespace Client.GameLogic.Collision
 
         public string OnCollisionEnterKey => _onCollisionEnterKey;
 
-        public string CharacterEntityKey => _characterView.Guid;
+        public string CharacterEntityKey => _networkEntityView.Guid;
 
         internal void SetId(int id)
         {
