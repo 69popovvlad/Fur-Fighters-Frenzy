@@ -23,14 +23,11 @@ namespace Client.GameLogic.Movement
         private readonly int ZSpeedHash = Animator.StringToHash("ZSpeed");
 
         private InputBucket _inputBucket;
-        private Vector3 _targetPosition;
 
         private void Awake()
         {
             _inputBucket = Ioc.Instance.Get<InputBucket>();
             _inputBucket.Subscribe<MovementCommand>(OnMovementCommand);
-
-            _targetPosition = transform.position;
         }
 
         private void OnDestroy()
@@ -45,11 +42,6 @@ namespace Client.GameLogic.Movement
             ResetAnimationFloat(ZSpeedHash, delta);
         }
 
-        private void FixedUpdate()
-        {
-            _rigidbody.MovePosition(_targetPosition);
-        }
-
         private void OnMovementCommand(MovementCommand command)
         {
             _animator.SetFloat(XSpeedHash, command.XSpeed);
@@ -59,7 +51,7 @@ namespace Client.GameLogic.Movement
             vector.z *= vector.z > 0 ? _forwardSpeed : _backwardSpeed;
             vector.x *= _sideSpeed;
 
-            _targetPosition = _rigidbody.position + transform.TransformDirection(vector);
+            _rigidbody.AddForce(transform.TransformDirection(vector));
         }
 
         private void ResetAnimationFloat(int id, float delta)

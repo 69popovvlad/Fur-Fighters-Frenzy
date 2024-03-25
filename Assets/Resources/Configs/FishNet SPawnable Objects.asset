@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FishNet SPawnable Objects
   m_EditorClassIdentifier: 
   _prefabs:
-  - {fileID: 2928413452614922113, guid: a1dfcc574bba70b47b8e3e19cdd8e042, type: 3}
-  - {fileID: 2726531022822806906, guid: 5042271972fb9174db9eb0a7674a633d, type: 3}
+  - {fileID: 2928413452614922113, guid: 07df27238d15b9e4e84ab9ab79fc291d, type: 3}
+  - {fileID: 2726531022822806906, guid: 498e781d2aa56a64fa42c97bf627ce2f, type: 3}
