@@ -297,8 +297,8 @@
      <Compile Include="Assets\FishNet\Runtime\Generated\SyncTypes\SyncTimer.cs" />
      <Compile Include="Assets\FishNet\Runtime\Serializing\ReaderStatics.cs" />
      <Compile Include="Assets\FishNet\Runtime\Observing\Conditions\GridCondition\HashGrid.cs" />
-     <Compile Include="Assets\FishNet\Runtime\Managing\Server\ServerManager.Broadcast.cs" />
      <Compile Include="Assets\FishNet\Runtime\Object\ChangedTransformProperties.cs" />
+     <Compile Include="Assets\FishNet\Runtime\Managing\Server\ServerManager.Broadcast.cs" />
      <Compile Include="Assets\FishNet\Runtime\Managing\Timing\PhysicsMode.cs" />
      <Compile Include="Assets\FishNet\Runtime\Object\Attributes.cs" />
      <Compile Include="Assets\FishNet\Runtime\Transporting\Transports\Tugboat\LiteNetLib\NatPunchModule.cs" />

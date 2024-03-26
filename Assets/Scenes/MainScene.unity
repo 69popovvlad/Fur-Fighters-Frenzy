@@ -1040,7 +1040,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.79, y: 0.485, z: -2.25}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1061,7 +1061,7 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 63336821}
   _networkObjectCache: {fileID: 63336821}
   _componentConfiguration: 2
-  _synchronizeParent: 1
+  _synchronizeParent: 0
   _packing:
     Position: 1
     Rotation: 1
@@ -1069,8 +1069,8 @@ MonoBehaviour:
   _interpolation: 2
   _extrapolation: 2
   _enableTeleport: 0
-  _teleportThreshold: 1
-  _scaleThreshold: 1
+  _teleportThreshold: 6
+  _scaleThreshold: 0
   _clientAuthoritative: 0
   _sendToOwner: 1
   _enableNetworkLod: 1
@@ -1114,9 +1114,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &63336821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1140,7 +1140,7 @@ MonoBehaviour:
   SerializedTransformProperties:
     Position: {x: 0.79, y: 0.485, z: -2.25}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
-    LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+    LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   _isNetworked: 1
   _isSpawnable: 0
   _isGlobal: 0
@@ -1167,7 +1167,10 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 63336821}
   _networkObjectCache: {fileID: 63336821}
+  _networkObject: {fileID: 63336821}
+  _networkTransform: {fileID: 63336819}
   _rigidbody: {fileID: 63336820}
+  _collider: {fileID: 63336815}
   _throwPower: 10
   _damage: 2
 --- !u!114 &63336823
@@ -26274,6 +26277,10 @@ PrefabInstance:
     - target: {fileID: 1006362663002247363, guid: 47e711f06f5e47446aac7635e5c4b9ed, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 356921453446549496
+      objectReference: {fileID: 0}
+    - target: {fileID: 1044014970579599379, guid: 47e711f06f5e47446aac7635e5c4b9ed, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6949784716418469774, guid: 47e711f06f5e47446aac7635e5c4b9ed, type: 3}
       propertyPath: m_Name

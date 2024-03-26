@@ -5,15 +5,17 @@ using UnityEngine.Animations.Rigging;
 
 namespace Client.GameLogic.Throwing.Taking
 {
-    public class TakingArmControl: NetworkBehaviour
+    public class TakingArmControl : NetworkBehaviour
     {
         [SerializeField] private ArmPunchingControl _armPunchingControl;
         [SerializeField] private ChainIKConstraint _armIK;
         [SerializeField] private Transform _takingItemAim;
         [SerializeField] private Transform _itemParent;
-        
+        [SerializeField] private ThrowingDirection _direction;
+
         [Header("Animation")]
         [SerializeField] private AnimationCurve _takingCurve = AnimationCurve.Linear(0, 0, 1, 1);
+
         [SerializeField] private float _takingDuration = 0.2f;
         [SerializeField] private float _comebackDuration = 0.3f;
 
@@ -37,12 +39,27 @@ namespace Client.GameLogic.Throwing.Taking
             if (_punchT >= 1)
             {
                 _isTaking = false;
-                _item.transform.SetParent(_itemParent);
+                SetParent();
                 return;
             }
 
             _punchT += Time.deltaTime / _takingDuration;
             _armIK.weight = _takingCurve.Evaluate(_punchT);
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        private void SetParent()
+        {
+            SetParentToAllClients();
+        }
+
+        [ObserversRpc(RunLocally = true)]
+        private void SetParentToAllClients()
+        {
+            var itemTransform = _item.transform;
+            itemTransform.SetParent(_itemParent);
+            itemTransform.localPosition = Vector3.zero;
+            itemTransform.localRotation = Quaternion.identity;
         }
 
         private void CalculateTakingReturn()
@@ -55,7 +72,7 @@ namespace Client.GameLogic.Throwing.Taking
             _punchT -= Time.deltaTime / _comebackDuration;
             _armIK.weight = _takingCurve.Evaluate(_punchT);
         }
-        
+
         [ServerRpc]
         public void SetItem(ThrowingItemView item)
         {
@@ -64,9 +81,9 @@ namespace Client.GameLogic.Throwing.Taking
 
         [ObserversRpc(RunLocally = true)]
         private void SetItemToAllClients(ThrowingItemView item)
-        {   
+        {
             _armPunchingControl.OnPunched += OnPunched;
-            
+
             _item = item;
             _takingItemAim.position = item.transform.position;
             _isTaking = true;
@@ -87,8 +104,18 @@ namespace Client.GameLogic.Throwing.Taking
                 _isTaking = false;
                 _punchT = 0;
             }
-            
-            _item.Throw(_itemParent.forward);
+
+            var direction = _direction switch
+            {
+                ThrowingDirection.Forward => _itemParent.forward,
+                ThrowingDirection.Right => _itemParent.right,
+                ThrowingDirection.Left => -_itemParent.right,
+                ThrowingDirection.Up => _itemParent.up,
+                ThrowingDirection.Down => -_itemParent.up,
+                _ => default(Vector3)
+            };
+
+            _item.Throw(direction);
             _item = null;
         }
     }
