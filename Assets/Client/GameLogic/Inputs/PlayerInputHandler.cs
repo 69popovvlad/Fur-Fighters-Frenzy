@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Client.GameLogic.Inputs
 {
-    public class PlayerInputHandler: InputHandlerBase
+    public class PlayerInputHandler : InputHandlerBase
     {
         private readonly List<IInputPart> _inputParts = new List<IInputPart>();
 
@@ -16,12 +16,13 @@ namespace Client.GameLogic.Inputs
         protected override void AwakeInternal()
         {
             base.AwakeInternal();
-            
+
             _inputParts.Add(new PunchingInputPart());
             _inputParts.Add(new MovementInputPart());
             _inputParts.Add(new AimingInputPart());
             _inputParts.Add(new ZoomingInputPart());
             _inputParts.Add(new DodgeInputPart());
+            _inputParts.Add(new TakingItemInputPart());
         }
 
         private void OnDestroy()

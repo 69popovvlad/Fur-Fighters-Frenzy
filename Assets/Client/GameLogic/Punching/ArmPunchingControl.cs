@@ -1,4 +1,5 @@
-﻿using Client.GameLogic.Collision;
+﻿using System;
+using Client.GameLogic.Collision;
 using Client.GameLogic.Inputs.Commands.Punching;
 using FishNet.Object;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace Client.GameLogic.Punching
 {
     public class ArmPunchingControl : NetworkBehaviour
     {
+        public event Action OnPunched;
+            
         [SerializeField] private ChainIKConstraint _armIK;
         [SerializeField] private CollisionProxy _armCollision;
         [SerializeField] private AnimationCurve _punchCurve = AnimationCurve.Linear(0, 0, 1, 1);
@@ -32,6 +35,7 @@ namespace Client.GameLogic.Punching
         {
             if (_punchT >= 1)
             {
+                OnPunched?.Invoke();
                 _inPunching = false;
                 return;
             }
@@ -81,7 +85,7 @@ namespace Client.GameLogic.Punching
             {
                 return;
             }
-            
+
             _inPunching = true;
             _armCollision.Enable(true);
             _punchT = 0;
