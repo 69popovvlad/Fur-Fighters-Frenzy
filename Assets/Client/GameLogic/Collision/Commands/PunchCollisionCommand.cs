@@ -2,10 +2,10 @@
 {
     public struct PunchCollisionCommand: ICollisionCommand
     {
-        public string FromKey { get; set; }
-        public string FromPartKey { get; set; }
-        public string ToKey { get; set; }
-        public string ToPartKey { get; set; }
+        public string FromKey { get; private set; }
+        public string FromPartKey { get; private set; }
+        public string ToKey { get; private set; }
+        public string ToPartKey { get; private set; }
 
         public PunchCollisionCommand(string fromKey, string fromPartKey, string toKey, string toPartKey)
         {
