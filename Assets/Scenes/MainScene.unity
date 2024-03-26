@@ -1066,7 +1066,7 @@ MonoBehaviour:
     Position: 1
     Rotation: 1
     Scale: 0
-  _interpolation: 2
+  _interpolation: 5
   _extrapolation: 2
   _enableTeleport: 0
   _teleportThreshold: 6
@@ -13893,9 +13893,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89e60ae362d74e34b2c976ed06cdbc37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 1
   _addedNetworkObject: {fileID: 1759943492}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 1759943492}
 --- !u!1 &1258673627
 GameObject:
   m_ObjectHideFlags: 0
@@ -20700,6 +20700,7 @@ MonoBehaviour:
   <PredictedSpawn>k__BackingField: {fileID: 0}
   _networkBehaviours:
   - {fileID: 678116943}
+  - {fileID: 1254905492}
   <SerializedRootNetworkBehaviour>k__BackingField: {fileID: 0}
   <NestedRootNetworkBehaviours>k__BackingField: []
   SerializedTransformProperties:

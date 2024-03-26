@@ -82,11 +82,11 @@ namespace Client.GameLogic.Throwing
             _isTaken = false;
         }
 
-        private void OnCollisionEnter(UnityEngine.Collision other)
+        private void OnTriggerEnter(Collider other)
         {
             if (!IsServerInitialized
                 || _isTaken
-                || !other.transform.TryGetComponent<ColliderDataControl>(out var colliderData)
+                || !other.TryGetComponent<ColliderDataControl>(out var colliderData)
                 || _ownerKey.Equals(colliderData.CharacterEntityKey))
             {
                 return;
