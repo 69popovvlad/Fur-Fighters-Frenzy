@@ -51,7 +51,7 @@ namespace Client.GameLogic.Movement
             vector.z *= vector.z > 0 ? _forwardSpeed : _backwardSpeed;
             vector.x *= _sideSpeed;
 
-            _rigidbody.AddForce(transform.TransformDirection(vector));
+            _rigidbody.AddForce(transform.TransformDirection(vector) * Time.deltaTime);
         }
 
         private void ResetAnimationFloat(int id, float delta)

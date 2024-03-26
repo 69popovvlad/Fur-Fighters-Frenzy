@@ -165,9 +165,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 6207581409183195019}
   _rigidbody: {fileID: 1386418635062787878}
-  _forwardSpeed: 12
-  _backwardSpeed: 10
-  _sideSpeed: 10
+  _forwardSpeed: 1200
+  _backwardSpeed: 1000
+  _sideSpeed: 1000
   _animationStoppingSpeed: 1
 --- !u!114 &6314840385504659209
 MonoBehaviour:
@@ -913,7 +913,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   _takingDuration: 0.2
   _comebackDuration: 0.1
-  _itemParentNOB: {fileID: 4992265518858099906}
 --- !u!1 &7805237290653422829
 GameObject:
   m_ObjectHideFlags: 0
