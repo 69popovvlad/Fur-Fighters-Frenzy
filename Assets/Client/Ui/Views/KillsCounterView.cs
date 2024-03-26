@@ -48,6 +48,11 @@ namespace Client.Ui.Views
 
         private void OnDeadHealthCommand(DeadHealthCommand command)
         {
+            if (string.IsNullOrEmpty(_myCharacterEntityKey))
+            {
+                return;
+            }
+            
             if (_myCharacterEntityKey.Equals(command.FromEntityKey))
             {
                 _killsCount.text = $"{++_kills}";
