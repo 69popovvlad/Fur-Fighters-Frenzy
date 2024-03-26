@@ -2,6 +2,7 @@
 using Client.GameLogic.Throwing.Commands;
 using Client.Network.Entities;
 using Core.Ioc;
+using DG.Tweening;
 using FishNet.Object;
 using UnityEngine;
 
@@ -13,15 +14,15 @@ namespace Client.GameLogic.Throwing
         [SerializeField] private Collider _collider;
         [SerializeField] private float _throwPower = 10;
         [SerializeField] private int _damage = 2;
+        [SerializeField] private float _availabilityPauseDelay = 0.5f;
+        [SerializeField] private float _takenSize = 0.2f;
+        [SerializeField] private float _scaleReturnDuration = 0.5f;
 
         private bool _isTaken;
         private string _ownerKey;
         private ThrowingItemEntity _entity;
         private CollisionBucket _collisionBucket;
-
-        public bool IsTaken => _isTaken;
-
-        public string OwnerKey => _ownerKey;
+        private Vector3 _startScale;
 
         public override void OnStartNetwork()
         {
@@ -41,22 +42,12 @@ namespace Client.GameLogic.Throwing
         [ServerRpc(RequireOwnership = false)]
         public void Take(string ownerKey)
         {
-            TakeToAllClients(ownerKey);
-        }
-
-        [ObserversRpc(RunLocally = true)]
-        private void TakeToAllClients(string ownerKey)
-        {
             if (_isTaken)
             {
                 return;
             }
-
-            _isTaken = true;
-            _ownerKey = ownerKey;
-
-            _rigidbody.isKinematic = true;
-            _collider.enabled = false;
+            
+            TakeToAllClients(ownerKey);
         }
 
         [ServerRpc(RequireOwnership = false)]
@@ -69,32 +60,52 @@ namespace Client.GameLogic.Throwing
 
             ThrowToAllClients(direction);
         }
-        
+
+        [ObserversRpc(RunLocally = true)]
+        private void TakeToAllClients(string ownerKey)
+        {
+            _isTaken = true;
+            _ownerKey = ownerKey;
+
+            _rigidbody.isKinematic = true;
+            _collider.enabled = false;
+
+            _startScale = transform.localScale;
+            transform.localScale = _startScale * _takenSize;
+        }
+
         [ObserversRpc(RunLocally = true)]
         private void ThrowToAllClients(Vector3 direction)
         {
+            transform.SetParent(null);
+            
             _rigidbody.isKinematic = false;
             _collider.enabled = true;
 
-            transform.SetParent(null);
             _rigidbody.AddForce(direction.normalized * _throwPower, ForceMode.Impulse);
             
-            _isTaken = false;
+            transform.DOScale(_startScale, _scaleReturnDuration);
+            Invoke(nameof(AllowEveryone), _availabilityPauseDelay);
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (!IsServerInitialized
-                || _isTaken
+                || string.IsNullOrEmpty(_ownerKey)
                 || !other.TryGetComponent<ColliderDataControl>(out var colliderData)
                 || _ownerKey.Equals(colliderData.CharacterEntityKey))
             {
                 return;
             }
-
+            
             var command = new ThrowingCollisionCommand(_ownerKey, colliderData.CharacterEntityKey, _damage, colliderData.OnCollisionEnterKey);
-            _ownerKey = string.Empty;
             _collisionBucket.Invoke(command);
+        }
+
+        private void AllowEveryone()
+        {
+            _isTaken = false;
+            _ownerKey = string.Empty;
         }
     }
 }
