@@ -13,6 +13,7 @@ namespace Client.GameLogic.Music
 
         [Header("Shake animation")]
         [SerializeField] private float _shakeDuration = 0.3f;
+
         [SerializeField] private float _shakeStrength = 10;
         [SerializeField] private int _shakeVibrato = 5;
         [SerializeField] private float _shakeRandomness = 10;
@@ -38,13 +39,13 @@ namespace Client.GameLogic.Music
 
         private void OnCollisionEnter(UnityEngine.Collision other)
         {
-            if (_inShaking)
+            if (!IsServerInitialized || _inShaking)
             {
                 return;
             }
 
             _inShaking = true;
-            
+
             NextStation();
         }
 
@@ -61,7 +62,7 @@ namespace Client.GameLogic.Music
         [ObserversRpc(RunLocally = true, BufferLast = true)]
         private void NextStationToAllClients(int clipIndex)
         {
-             transform.DOShakeRotation(_shakeDuration, _shakeStrength, _shakeVibrato, _shakeRandomness)
+            transform.DOShakeRotation(_shakeDuration, _shakeStrength, _shakeVibrato, _shakeRandomness)
                 .OnComplete(() =>
                 {
                     _inShaking = false;
@@ -73,6 +74,7 @@ namespace Client.GameLogic.Music
                         {
                             _particles[i].Stop();
                         }
+
                         return;
                     }
 
@@ -84,7 +86,7 @@ namespace Client.GameLogic.Music
                     {
                         return;
                     }
-                    
+
                     // Enable only for the first clip
                     for (int i = 0, iLen = _particles.Length; i < iLen; ++i)
                     {

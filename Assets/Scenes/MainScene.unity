@@ -26325,10 +26325,6 @@ PrefabInstance:
       propertyPath: <SceneId>k__BackingField
       value: 356921453446549496
       objectReference: {fileID: 0}
-    - target: {fileID: 1044014970579599379, guid: 47e711f06f5e47446aac7635e5c4b9ed, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6949784716418469774, guid: 47e711f06f5e47446aac7635e5c4b9ed, type: 3}
       propertyPath: m_Name
       value: Boombox_000
