@@ -1,39 +1,39 @@
 ﻿using Client.GameLogic.Characters;
 using Client.GameLogic.Collision;
-using Client.GameLogic.Collision.Commands;
 using Client.GameLogic.Health;
 using Client.GameLogic.Health.Commands;
-using Client.Network.GameLogic.Punching.Commands;
+using Client.GameLogic.Throwing.Commands;
+using Client.Network.GameLogic.Throwing.Commands;
 using Core.Entities.Views;
 using Core.Ioc;
 using FishNet.Object;
 
-namespace Client.Network.GameLogic.Punching
+namespace Client.Network.GameLogic.Throwing
 {
-    public class PunchingCommandsListener : NetworkBehaviour
+    public class ThrowingCommandsListener: NetworkBehaviour
     {
-        private HealthBucket _healthBucket;
         private CollisionBucket _collisionBucket;
+        private HealthBucket _healthBucket;
 
         public override void OnStartServer()
         {
             base.OnStartServer();
-
+            
             var ioc = Ioc.Instance;
             _healthBucket = ioc.Get<HealthBucket>();
             
             _collisionBucket = ioc.Get<CollisionBucket>();
-            _collisionBucket.Subscribe<PunchCollisionCommand>(OnPunchCollisionCommand);
+            _collisionBucket.Subscribe<ThrowingCollisionCommand>(OnThrowingCollisionCommand);
         }
 
         public override void OnStopServer()
         {
             base.OnStopServer();
             
-            _collisionBucket?.Unsubscribe<PunchCollisionCommand>(OnPunchCollisionCommand);
+            _collisionBucket?.Unsubscribe<ThrowingCollisionCommand>(OnThrowingCollisionCommand);
         }
 
-        private void OnPunchCollisionCommand(PunchCollisionCommand command)
+        private void OnThrowingCollisionCommand(ThrowingCollisionCommand command)
         {
             var characterView = ViewsContainer.GetView<CharacterView>(command.ToKey);
             if (characterView.Health.Dead)
@@ -41,20 +41,20 @@ namespace Client.Network.GameLogic.Punching
                 return;
             }
             
-            var calculatedDamage = 1;
+            var calculatedDamage = command.ItemDamage;
             // TODO: calculate damage here and send damage command
             // var partEntity = EntitiesContainer.GetEntity(command.FromPartKey);
             // calculatedDamage += partEntity.getPartDamageBonus();
             // var toPartEntity = EntitiesContainer.GetEntity(command.ToPartKey);
             // calculatedDamage -= toPartEntity.getPartDamageBonus();
 
-            var damageCommand = new PunchDamageCommand(command.FromKey, command.ToKey, calculatedDamage);
+            var damageCommand = new ThrowingDamageCommand(command.FromKey, command.ToKey, calculatedDamage);
             ServerManager.Broadcast(damageCommand);
-
+            
             ChangeHealthServerLocal(characterView, command, calculatedDamage);
         }
-
-        private void ChangeHealthServerLocal(CharacterView characterView, PunchCollisionCommand command, int damage)
+        
+        private void ChangeHealthServerLocal(CharacterView characterView, ThrowingCollisionCommand command, int damage)
         {
             var health = characterView.Health;
             health.Damage(command.FromKey, damage);

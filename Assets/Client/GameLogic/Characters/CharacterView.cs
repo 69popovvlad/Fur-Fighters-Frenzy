@@ -5,6 +5,7 @@ using Client.Network.Entities;
 using Client.Network.GameLogic.Characters;
 using Client.Network.GameLogic.Characters.Commands;
 using Client.Network.GameLogic.Punching.Commands;
+using Client.Network.GameLogic.Throwing.Commands;
 using Core.Ioc;
 using FishNet.Transporting;
 using UnityEngine;
@@ -53,30 +54,43 @@ namespace Client.GameLogic.Characters
         {
             base.InitializeInternal();
 
-            if (IsClientInitialized)
+            if (!IsClientInitialized)
             {
-                ClientManager.RegisterBroadcast<PunchDamageCommand>(OnPunchDamageCommand);
+                return;
             }
+            
+            ClientManager.RegisterBroadcast<PunchDamageCommand>(OnPunchDamageCommand);
+            ClientManager.RegisterBroadcast<ThrowingDamageCommand>(OnThrowingDamageCommand);
         }
 
         protected override void DeinitializationInternal()
         {
             base.DeinitializationInternal();
 
-            if (IsClientInitialized)
+            if (!IsClientInitialized)
             {
-                ClientManager.UnregisterBroadcast<PunchDamageCommand>(OnPunchDamageCommand);
+                return;
             }
+            
+            ClientManager.UnregisterBroadcast<PunchDamageCommand>(OnPunchDamageCommand);
+            ClientManager.UnregisterBroadcast<ThrowingDamageCommand>(OnThrowingDamageCommand);
         }
 
-        private void OnPunchDamageCommand(PunchDamageCommand command, Channel channel)
+        private void OnPunchDamageCommand(PunchDamageCommand command, Channel channel) =>
+            OnThrowingDamageCommand(command.FromKey, command.ToKey, command.Damage, channel);
+
+        private void OnThrowingDamageCommand(ThrowingDamageCommand command, Channel channel) =>
+            OnThrowingDamageCommand(command.FromKey, command.ToKey, command.Damage, channel);
+
+        private void OnThrowingDamageCommand(string from, string to, int damage, Channel channel)
         {
-            if (!Guid.Equals(command.ToKey) || Health.Dead)
+            if (!Guid.Equals(to) || Health.Dead)
             {
                 return;
             }
 
-            Health.Damage(command.FromKey, command.Damage);
+            // TODO: Code block below for kills counter only
+            Health.Damage(from, damage);
 
             if (!Health.Dead)
             {
@@ -84,7 +98,7 @@ namespace Client.GameLogic.Characters
             }
 
             // Sending to respawn our character
-            var deadCommand = new DeadHealthCommand(command.FromKey, command.ToKey);
+            var deadCommand = new DeadHealthCommand(from, to);
             var healthBucket = Ioc.Instance.Get<HealthBucket>();
             healthBucket.Invoke(deadCommand);
         }

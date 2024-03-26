@@ -1,5 +1,7 @@
-﻿using Client.GameLogic.Health;
+﻿using Client.GameLogic.Collision;
+using Client.GameLogic.Throwing.Commands;
 using Client.Network.Entities;
+using Core.Ioc;
 using FishNet.Object;
 using UnityEngine;
 
@@ -15,6 +17,7 @@ namespace Client.GameLogic.Throwing
         private bool _isTaken;
         private string _ownerKey;
         private ThrowingItemEntity _entity;
+        private CollisionBucket _collisionBucket;
 
         public bool IsTaken => _isTaken;
 
@@ -26,6 +29,13 @@ namespace Client.GameLogic.Throwing
 
             _entity = new ThrowingItemEntity(ObjectId.ToString());
             Initialize(_entity);
+
+            if (!IsServerInitialized)
+            {
+                return;
+            }
+
+            _collisionBucket = Ioc.Instance.Get<CollisionBucket>();
         }
 
         [ServerRpc(RequireOwnership = false)]
@@ -70,22 +80,21 @@ namespace Client.GameLogic.Throwing
             _rigidbody.AddForce(direction.normalized * _throwPower, ForceMode.Impulse);
             
             _isTaken = false;
-            _ownerKey = string.Empty;
         }
 
         private void OnCollisionEnter(UnityEngine.Collision other)
         {
-            if (!IsServerInitialized)
+            if (!IsServerInitialized
+                || _isTaken
+                || !other.transform.TryGetComponent<ColliderDataControl>(out var colliderData)
+                || _ownerKey.Equals(colliderData.CharacterEntityKey))
             {
                 return;
             }
-            
-            if (_isTaken || !other.transform.TryGetComponent<HealthControl>(out var health))
-            {
-                return;
-            }
-            
-            health.Damage(_ownerKey, _damage);
+
+            var command = new ThrowingCollisionCommand(_ownerKey, colliderData.CharacterEntityKey, _damage, colliderData.OnCollisionEnterKey);
+            _ownerKey = string.Empty;
+            _collisionBucket.Invoke(command);
         }
     }
 }

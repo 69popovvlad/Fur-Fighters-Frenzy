@@ -744,8 +744,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
@@ -987,6 +987,14 @@ PrefabInstance:
     - target: {fileID: 122343254188122251, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 974532836364962714, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974532836364962714, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1326018262204260584, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
       propertyPath: m_IsTrigger
@@ -1240,6 +1248,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: cat_000
       objectReference: {fileID: 0}
+    - target: {fileID: 5644165836686964903, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644165836686964903, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5704647022082973821, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1423,6 +1439,14 @@ PrefabInstance:
     - target: {fileID: 8252920165270543255, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
       propertyPath: _onCollisionEnter.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8540812697298235567, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8540812697298235567, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5351285151125404959, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
