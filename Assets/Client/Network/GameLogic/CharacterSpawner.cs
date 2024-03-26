@@ -33,8 +33,13 @@ namespace Client.Network.GameLogic
             {
                 OnServerSideInitialized();
             }
-            
-            if (IsClientInitialized)
+        }
+
+        public override void OnStartClient()
+        {
+            base.OnStartClient();
+
+            if (IsOwner)
             {
                 OnClientSideInitialized();
             }
@@ -43,13 +48,18 @@ namespace Client.Network.GameLogic
         public override void OnStopNetwork()
         {
             base.OnStopNetwork();
-            
+
             if (IsServerInitialized)
             {
                 OnServerSideDeinitialized();
             }
-            
-            if (IsClientInitialized)
+        }
+
+        public override void OnStopClient()
+        {
+            base.OnStopClient();
+
+            if (IsOwner)
             {
                 OnClientSideDeinitialized();
             }
