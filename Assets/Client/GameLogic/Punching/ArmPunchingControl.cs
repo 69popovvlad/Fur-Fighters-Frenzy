@@ -18,6 +18,7 @@ namespace Client.GameLogic.Punching
         [SerializeField] private float _comebackDuration = 0.3f;
 
         private bool _inPunching;
+        private bool _dontEnableCollisionToggle; // Onetime toggle
         private float _punchT;
 
         private void Update()
@@ -62,6 +63,11 @@ namespace Client.GameLogic.Punching
             _armCollision.Enable(false);
         }
 
+        public void SetDontEnableColliderToggle()
+        {
+            _dontEnableCollisionToggle = true;
+        }
+
         internal void Punch(in PunchInputCommand command)
         {
             if (!IsOwner)
@@ -87,7 +93,14 @@ namespace Client.GameLogic.Punching
             }
 
             _inPunching = true;
-            _armCollision.Enable(true);
+            if (_dontEnableCollisionToggle)
+            {
+                _dontEnableCollisionToggle = false;
+            }
+            else
+            {
+                _armCollision.Enable(true);
+            }
             _punchT = 0;
         }
     }

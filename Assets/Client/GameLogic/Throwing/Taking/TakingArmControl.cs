@@ -11,7 +11,11 @@ namespace Client.GameLogic.Throwing.Taking
         [SerializeField] private ChainIKConstraint _armIK;
         [SerializeField] private Transform _takingItemAim;
         [SerializeField] private Transform _itemParent;
-        [SerializeField] private ThrowingDirection _direction;
+        [SerializeField] private Transform _throwingDirectionAim;
+        
+        [Header("Offset")]
+        [SerializeField] private Vector3 _takingItemOffset;
+        [SerializeField] private Vector3 _takingItemRotation;
 
         [Header("Animation")]
         [SerializeField] private AnimationCurve _takingCurve = AnimationCurve.Linear(0, 0, 1, 1);
@@ -58,8 +62,8 @@ namespace Client.GameLogic.Throwing.Taking
         {
             var itemTransform = _item.transform;
             itemTransform.SetParent(_itemParent);
-            itemTransform.localPosition = Vector3.zero;
-            itemTransform.localRotation = Quaternion.identity;
+            itemTransform.localPosition = _takingItemOffset;
+            itemTransform.localRotation = Quaternion.Euler(_takingItemRotation);
         }
 
         private void CalculateTakingReturn()
@@ -83,6 +87,7 @@ namespace Client.GameLogic.Throwing.Taking
         private void SetItemToAllClients(ThrowingItemView item)
         {
             _armPunchingControl.OnPunched += OnPunched;
+            _armPunchingControl.SetDontEnableColliderToggle();
 
             _item = item;
             _takingItemAim.position = item.transform.position;
@@ -105,16 +110,7 @@ namespace Client.GameLogic.Throwing.Taking
                 _punchT = 0;
             }
 
-            var direction = _direction switch
-            {
-                ThrowingDirection.Forward => _itemParent.forward,
-                ThrowingDirection.Right => _itemParent.right,
-                ThrowingDirection.Left => -_itemParent.right,
-                ThrowingDirection.Up => _itemParent.up,
-                ThrowingDirection.Down => -_itemParent.up,
-                _ => default(Vector3)
-            };
-
+            var direction = _throwingDirectionAim.position - _itemParent.position;
             _item.Throw(direction);
             _item = null;
         }

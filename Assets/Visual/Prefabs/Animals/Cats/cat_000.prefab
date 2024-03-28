@@ -488,6 +488,7 @@ Transform:
   - {fileID: 6038422873796423669}
   - {fileID: 8372813448861346060}
   - {fileID: 8396570066872468645}
+  - {fileID: 3626196106887723043}
   m_Father: {fileID: 7751814165931152601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1834113687809009403
@@ -749,6 +750,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!1 &4799727879974868555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3626196106887723043}
+  m_Layer: 0
+  m_Name: Throwing aim
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3626196106887723043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4799727879974868555}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.053, y: -0, z: 0.466}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7884657121871013518}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5048195150153947062
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,6 +919,9 @@ MonoBehaviour:
   _takingItemAim: {fileID: 8396570066872468645}
   _itemParent: {fileID: 8335298992185704314}
   _direction: 3
+  _throwingDirectionAim: {fileID: 3626196106887723043}
+  _takingItemOffset: {x: 0, y: 0.05, z: 0.01}
+  _takingItemRotation: {x: -45, y: 0, z: 0}
   _takingCurve:
     serializedVersion: 2
     m_Curve:
@@ -1180,6 +1215,14 @@ PrefabInstance:
       propertyPath: m_Data.m_Target
       value: 
       objectReference: {fileID: 7884657121871013518}
+    - target: {fileID: 4211540690708830157, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
+      propertyPath: m_Data.m_MaintainTargetPositionOffset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211540690708830157, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
+      propertyPath: m_Data.m_MaintainTargetRotationOffset
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4228861389104937359, guid: 57852a4d9af4b1c4dab49b1cc22683a4, type: 3}
       propertyPath: <IsNested>k__BackingField
       value: 1
