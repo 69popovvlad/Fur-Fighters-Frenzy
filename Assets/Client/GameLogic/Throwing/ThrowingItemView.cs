@@ -18,6 +18,14 @@ namespace Client.GameLogic.Throwing
         [SerializeField] private float _takenSize = 0.2f;
         [SerializeField] private float _scaleReturnDuration = 0.5f;
 
+        [Header("Holding settings")]
+        [SerializeField] private Vector3 _takingItemOffset;
+        [SerializeField] private Vector3 _takingItemRotation;
+
+        [Header("Additional settings")]
+        [SerializeField] private bool _isDestroyable;
+        [SerializeField] private GameObject _destroyParticlePrefab;
+
         private bool _isTaken;
         private string _ownerKey;
         private ThrowingItemEntity _entity;
@@ -26,6 +34,9 @@ namespace Client.GameLogic.Throwing
 
         public bool HasOwner => _isTaken || !string.IsNullOrEmpty(_ownerKey);
         public bool IsThrowing => _collider.enabled;
+        
+        public Vector3 TakingItemOffset => _takingItemOffset;
+        public Vector3 TakingItemRotation => _takingItemRotation;
 
         public override void OnStartNetwork()
         {
@@ -103,12 +114,24 @@ namespace Client.GameLogic.Throwing
             
             var command = new ThrowingCollisionCommand(_ownerKey, colliderData.CharacterEntityKey, _damage, colliderData.OnCollisionEnterKey);
             _collisionBucket.Invoke(command);
+
+            if(_isDestroyable)
+            {
+                DestroyToAllClients();
+                Despawn();
+            }
         }
 
         private void AllowEveryone()
         {
             _isTaken = false;
             _ownerKey = string.Empty;
+        }
+
+        [ObserversRpc]
+        private void DestroyToAllClients()
+        {
+            Instantiate(_destroyParticlePrefab, transform.position, Quaternion.identity);
         }
     }
 }

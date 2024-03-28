@@ -13,10 +13,6 @@ namespace Client.GameLogic.Throwing.Taking
         [SerializeField] private Transform _takingItemAim;
         [SerializeField] private Transform _itemParent;
         [SerializeField] private Transform _throwingDirectionAim;
-        
-        [Header("Offset")]
-        [SerializeField] private Vector3 _takingItemOffset;
-        [SerializeField] private Vector3 _takingItemRotation;
 
         [Header("Animation")]
         [SerializeField] private AnimationCurve _takingCurve = AnimationCurve.Linear(0, 0, 1, 1);
@@ -70,8 +66,8 @@ namespace Client.GameLogic.Throwing.Taking
             
             var itemTransform = _item.transform;
             itemTransform.SetParent(_itemParent);
-            itemTransform.localPosition = _takingItemOffset;
-            itemTransform.localRotation = Quaternion.Euler(_takingItemRotation);
+            itemTransform.localPosition = _item.TakingItemOffset;
+            itemTransform.localRotation = Quaternion.Euler(_item.TakingItemRotation);
         }
 
         private void CalculateTakingReturn()
