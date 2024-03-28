@@ -105,7 +105,7 @@ MonoBehaviour:
   _collider: {fileID: 4826742266282611749}
   _throwPower: 10
   _damage: 2
-  _availabilityPauseDelay: 0.5
+  _availabilityPauseDelay: 2
   _takenSize: 0.4
   _scaleReturnDuration: 0.3
 --- !u!114 &7818208998770920973
@@ -129,8 +129,8 @@ MonoBehaviour:
   <SerializedRootNetworkBehaviour>k__BackingField: {fileID: 0}
   <NestedRootNetworkBehaviours>k__BackingField: []
   SerializedTransformProperties:
-    Position: {x: 0.187, y: 0.485, z: -2.25}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Position: {x: -2.442, y: 1.049, z: 8.175}
+    Rotation: {x: -0, y: 0.51425403, z: -0, w: 0.85763794}
     LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   _isNetworked: 1
   _isSpawnable: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   NetworkObserver: {fileID: 0}
   <PrefabId>k__BackingField: 0
   <SpawnableCollectionId>k__BackingField: 0
-  _scenePathHash: 83102251
+  _scenePathHash: 0
   <SceneId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 0
 --- !u!114 &1921717042666804725

@@ -29,12 +29,18 @@ namespace Client.GameLogic.Throwing.Taking
 
         private void OnTakingInputCommand(TakingInputCommand command)
         {
-            var nearestItem = GetNearestItem();
-            if (nearestItem == null)
+            if(_takingArm.HasItem)
             {
                 return;
             }
 
+            var nearestItem = GetNearestItem();
+            if (nearestItem == null || nearestItem.HasOwner)
+            {
+                return;
+            }
+
+            _itemsNearby.Remove(nearestItem);
             nearestItem.Take(_characterView.Guid);
             _takingArm.SetItem(nearestItem);
         }

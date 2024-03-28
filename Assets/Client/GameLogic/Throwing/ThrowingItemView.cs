@@ -24,6 +24,9 @@ namespace Client.GameLogic.Throwing
         private CollisionBucket _collisionBucket;
         private Vector3 _startScale;
 
+        public bool HasOwner => _isTaken || !string.IsNullOrEmpty(_ownerKey);
+        public bool IsThrowing => _collider.enabled;
+
         public override void OnStartNetwork()
         {
             base.OnStartNetwork();
@@ -53,7 +56,7 @@ namespace Client.GameLogic.Throwing
         [ServerRpc(RequireOwnership = false)]
         public void Throw(Vector3 direction)
         {
-            if (!_isTaken)
+            if (!_isTaken || IsThrowing)
             {
                 return;
             }

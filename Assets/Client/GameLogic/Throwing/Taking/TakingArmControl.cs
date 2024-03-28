@@ -1,4 +1,5 @@
-﻿using Client.GameLogic.Punching;
+﻿using System;
+using Client.GameLogic.Punching;
 using FishNet.Object;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -26,6 +27,8 @@ namespace Client.GameLogic.Throwing.Taking
         private ThrowingItemView _item;
         private float _punchT;
         private bool _isTaking;
+
+        public bool HasItem => _item != null;
 
         private void Update()
         {
@@ -60,6 +63,11 @@ namespace Client.GameLogic.Throwing.Taking
         [ObserversRpc(RunLocally = true)]
         private void SetParentToAllClients()
         {
+            if(_item == null)
+            {
+                return;
+            }
+            
             var itemTransform = _item.transform;
             itemTransform.SetParent(_itemParent);
             itemTransform.localPosition = _takingItemOffset;
