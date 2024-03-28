@@ -88,7 +88,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4972573370150757632, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: m_Size.x
-      value: 0.13644111
+      value: 0.19784701
       objectReference: {fileID: 0}
     - target: {fileID: 4972573370150757632, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: m_Size.y
@@ -96,19 +96,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4972573370150757632, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: m_Size.z
-      value: 0.15472975
+      value: 0.25600153
       objectReference: {fileID: 0}
     - target: {fileID: 4972573370150757632, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: m_Center.x
-      value: -0.0034526587
+      value: -0.0027974844
       objectReference: {fileID: 0}
     - target: {fileID: 4972573370150757632, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: m_Center.y
-      value: 0.010132212
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4972573370150757632, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: m_Center.z
-      value: 0.0012237914
+      value: 0.0016262233
       objectReference: {fileID: 0}
     - target: {fileID: 6959954681212952543, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: _takingItemOffset.y
@@ -176,7 +176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8512692077182140772, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: SerializedTransformProperties.Position.x
-      value: 0
+      value: -0.284
       objectReference: {fileID: 0}
     - target: {fileID: 8512692077182140772, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: SerializedTransformProperties.Position.y
@@ -184,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8512692077182140772, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: SerializedTransformProperties.Position.z
-      value: 0
+      value: -0.468
       objectReference: {fileID: 0}
     - target: {fileID: 8512692077182140772, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: SerializedTransformProperties.LocalScale.x
