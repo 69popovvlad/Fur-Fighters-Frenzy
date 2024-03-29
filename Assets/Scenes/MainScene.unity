@@ -19858,7 +19858,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1956055448}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1341109675
@@ -33846,6 +33847,60 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1955782011}
   m_Mesh: {fileID: -1411106207176939674, guid: 438de4916c19fe04bbf4c6d14d9be79b, type: 3}
+--- !u!1 &1956055447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1956055448}
+  - component: {fileID: 1956055449}
+  m_Layer: 0
+  m_Name: AudioClipsHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1956055448
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956055447}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1340813271}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1956055449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956055447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2294c5567fc41049b52deeb82e2c005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioPlayerPrefab: {fileID: 2799887992702499092, guid: 4bc951ff87d2596419572981fb687746, type: 3}
+  _clipsInfos:
+  - Key: punch
+    Clip: {fileID: 8300000, guid: f793065b1dfd8334b9e0828bd5ec7064, type: 3}
+  - Key: punch
+    Clip: {fileID: 8300000, guid: 3f3d936c6a821e04d8c52169630ae480, type: 3}
+  - Key: throwing
+    Clip: {fileID: 8300000, guid: ed0a5c02277067c4196e49b3eb23bc88, type: 3}
+  - Key: throwing
+    Clip: {fileID: 8300000, guid: 51d44fb3548467749bbe9e9901d54fe8, type: 3}
 --- !u!1 &1961548796
 GameObject:
   m_ObjectHideFlags: 0

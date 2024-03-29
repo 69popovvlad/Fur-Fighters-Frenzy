@@ -545,7 +545,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3167650164243596692}
-  - component: {fileID: 1226863093186349311}
+  - component: {fileID: 5884955733373912551}
   - component: {fileID: 8651305394265959278}
   - component: {fileID: 4893012424994189308}
   - component: {fileID: 1783626756572610577}
@@ -571,8 +571,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7751814165931152601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1226863093186349311
-SphereCollider:
+--- !u!65 &5884955733373912551
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -590,8 +590,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.5, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &8651305394265959278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -918,10 +918,7 @@ MonoBehaviour:
   _armIK: {fileID: 3789723120265003769}
   _takingItemAim: {fileID: 8396570066872468645}
   _itemParent: {fileID: 8335298992185704314}
-  _direction: 3
   _throwingDirectionAim: {fileID: 3626196106887723043}
-  _takingItemOffset: {x: 0, y: 0.05, z: 0.01}
-  _takingItemRotation: {x: -45, y: 0, z: 0}
   _takingCurve:
     serializedVersion: 2
     m_Curve:

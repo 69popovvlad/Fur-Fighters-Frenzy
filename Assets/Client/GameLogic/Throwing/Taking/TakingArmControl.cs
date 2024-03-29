@@ -1,5 +1,6 @@
-﻿using System;
+﻿using Client.Audio;
 using Client.GameLogic.Punching;
+using Core.Ioc;
 using FishNet.Object;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -20,11 +21,17 @@ namespace Client.GameLogic.Throwing.Taking
         [SerializeField] private float _takingDuration = 0.2f;
         [SerializeField] private float _comebackDuration = 0.3f;
 
+        private AudioPlayerService _audioPlayerService;
         private ThrowingItemView _item;
         private float _punchT;
         private bool _isTaking;
 
         public bool HasItem => _item != null;
+
+        private void Awake()
+        {
+            _audioPlayerService = Ioc.Instance.Get<AudioPlayerService>();
+        }
 
         private void Update()
         {
@@ -117,6 +124,8 @@ namespace Client.GameLogic.Throwing.Taking
             var direction = _throwingDirectionAim.position - _itemParent.position;
             _item.Throw(direction);
             _item = null;
+
+            _audioPlayerService.PlayClip(transform.position, "throwing");
         }
     }
 }
