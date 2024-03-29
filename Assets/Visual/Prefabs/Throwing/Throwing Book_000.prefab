@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1004858783508326518
 Transform:
   m_ObjectHideFlags: 0
@@ -14644,6 +14644,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.0016262233
       objectReference: {fileID: 0}
+    - target: {fileID: 6743004087018471340, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6959954681212952543, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: _takingItemOffset.y
       value: 0.1
@@ -14662,15 +14666,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7243994434884173043, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 7243994434884173043, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.04
       objectReference: {fileID: 0}
     - target: {fileID: 7243994434884173043, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -3.86
       objectReference: {fileID: 0}
     - target: {fileID: 7243994434884173043, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14702,7 +14706,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8512692077182140772, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: _scenePathHash
-      value: 0
+      value: 83102251
       objectReference: {fileID: 0}
     - target: {fileID: 8512692077182140772, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: <SceneId>k__BackingField
@@ -14710,15 +14714,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8512692077182140772, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: SerializedTransformProperties.Position.x
-      value: 0
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 8512692077182140772, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: SerializedTransformProperties.Position.y
-      value: 0
+      value: 1.04
       objectReference: {fileID: 0}
     - target: {fileID: 8512692077182140772, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: SerializedTransformProperties.Position.z
-      value: 0
+      value: -3.86
       objectReference: {fileID: 0}
     - target: {fileID: 8512692077182140772, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: SerializedTransformProperties.LocalScale.x
