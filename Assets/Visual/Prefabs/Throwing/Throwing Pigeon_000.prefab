@@ -2621,7 +2621,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3720542675208579021, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: m_Name
-      value: Throwing Pigeon_000 Variant
+      value: Throwing Pigeon_000
       objectReference: {fileID: 0}
     - target: {fileID: 4972573370150757632, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: m_Size.x
@@ -2639,6 +2639,14 @@ PrefabInstance:
       propertyPath: _takenSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6959954681212952543, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
+      propertyPath: _isDestroyable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959954681212952543, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
+      propertyPath: _destroyParticlePrefab
+      value: 
+      objectReference: {fileID: 1890581295539120, guid: 5cea16086cb38cc43a4efa8bbac749cb, type: 3}
     - target: {fileID: 7243994434884173043, guid: eff71a717522e0d4db3096f90d8162f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

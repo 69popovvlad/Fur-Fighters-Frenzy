@@ -105,7 +105,7 @@ namespace Client.GameLogic.Throwing
         private void OnTriggerEnter(Collider other)
         {
             if (!IsServerInitialized
-                || string.IsNullOrEmpty(_ownerKey)
+                || !HasOwner
                 || !other.TryGetComponent<ColliderDataControl>(out var colliderData)
                 || _ownerKey.Equals(colliderData.CharacterEntityKey))
             {
@@ -115,9 +115,32 @@ namespace Client.GameLogic.Throwing
             var command = new ThrowingCollisionCommand(_ownerKey, colliderData.CharacterEntityKey, _damage, colliderData.OnCollisionEnterKey);
             _collisionBucket.Invoke(command);
 
-            if(_isDestroyable)
+            if(_destroyParticlePrefab != null)
             {
                 DestroyToAllClients();
+            }
+
+            if(_isDestroyable)
+            {
+                Despawn();
+            }
+        }
+
+        private void OnCollisionEnter(UnityEngine.Collision other)
+        {
+            if (!IsServerInitialized
+                || !HasOwner)
+            {
+                return;
+            }
+
+            if(_destroyParticlePrefab != null)
+            {
+                DestroyToAllClients();
+            }
+
+            if(_isDestroyable)
+            {
                 Despawn();
             }
         }
