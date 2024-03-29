@@ -37,7 +37,7 @@ namespace Client.Network.Entities
         private void OnDestroy()
         {
             DeinitializationInternal();
-            Entity.Dispose();
+            Entity?.Dispose();
             ViewsContainer.RemoveEntity(this);
         }
     }
