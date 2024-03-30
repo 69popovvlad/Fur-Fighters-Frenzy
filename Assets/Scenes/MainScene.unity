@@ -33898,13 +33898,19 @@ MonoBehaviour:
   _audioPlayerPrefab: {fileID: 2799887992702499092, guid: 4bc951ff87d2596419572981fb687746, type: 3}
   _clipsInfos:
   - Key: punch
-    Clip: {fileID: 8300000, guid: f793065b1dfd8334b9e0828bd5ec7064, type: 3}
+    Clip: {fileID: 8300000, guid: eb2843784399afe4a9305ff5021ad263, type: 3}
   - Key: punch
-    Clip: {fileID: 8300000, guid: 3f3d936c6a821e04d8c52169630ae480, type: 3}
+    Clip: {fileID: 8300000, guid: 6396965bb24cfd7468d2e5e1a7a283b1, type: 3}
+  - Key: punch
+    Clip: {fileID: 8300000, guid: 8320f17c17b6f9f40b6450f708dbc312, type: 3}
   - Key: throwing
-    Clip: {fileID: 8300000, guid: ed0a5c02277067c4196e49b3eb23bc88, type: 3}
+    Clip: {fileID: 8300000, guid: 61f031134d53e984cae08525b5441bec, type: 3}
   - Key: throwing
     Clip: {fileID: 8300000, guid: 51d44fb3548467749bbe9e9901d54fe8, type: 3}
+  - Key: throwing
+    Clip: {fileID: 8300000, guid: c81e7d630ee1d374c99e21be362e8b32, type: 3}
+  - Key: throwing
+    Clip: {fileID: 8300000, guid: db92e5a76bd23334a92e63b617b4757a, type: 3}
   - Key: bottle_galss
     Clip: {fileID: 8300000, guid: 0f1da3a46da1374489c99ccd0f603141, type: 3}
   - Key: bottle_galss
