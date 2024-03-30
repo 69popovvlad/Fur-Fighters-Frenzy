@@ -75,6 +75,7 @@ namespace Client.GameLogic.Health
                 return;
             }
 
+            _bleedingParticle.SetActive(false);
             _deadBloodParticle.SetActive(true);
         }
 
