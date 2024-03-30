@@ -77,12 +77,12 @@ namespace Client.GameLogic.Characters
         }
 
         private void OnPunchDamageCommand(PunchDamageCommand command, Channel channel) =>
-            OnThrowingDamageCommand(command.FromKey, command.ToKey, command.Damage, channel);
+            OnDamageCommand(command.FromKey, command.ToKey, command.Damage, channel);
 
         private void OnThrowingDamageCommand(ThrowingDamageCommand command, Channel channel) =>
-            OnThrowingDamageCommand(command.FromKey, command.ToKey, command.Damage, channel);
+            OnDamageCommand(command.FromKey, command.ToKey, command.Damage, channel);
 
-        private void OnThrowingDamageCommand(string from, string to, int damage, Channel channel)
+        private void OnDamageCommand(string from, string to, int damage, Channel channel)
         {
             if (!Guid.Equals(to) || Health.Dead)
             {
