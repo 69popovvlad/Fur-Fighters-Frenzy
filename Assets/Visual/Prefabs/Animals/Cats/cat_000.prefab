@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 376623385146064165}
   - component: {fileID: 8806829127270018992}
   - component: {fileID: 4844299089436209990}
+  - component: {fileID: 1677819515997281060}
   - component: {fileID: 1386418635062787878}
   - component: {fileID: 7748902339975057692}
   - component: {fileID: 2726531022822806906}
@@ -264,6 +265,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthView: {fileID: 2968945693728876234}
+--- !u!114 &1677819515997281060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601355986984420237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed0427a620d1194486d0df39465c3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterView: {fileID: 7100730572031213986}
+  _animator: {fileID: 6207581409183195019}
 --- !u!54 &1386418635062787878
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -415,11 +430,13 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 2726531022822806906}
   IgnoredParameters:
   - Speed
+  - HitHead
+  - HitBody
   _animator: {fileID: 6207581409183195019}
   _smoothFloats: 0
   _interpolation: 1
   _clientAuthoritative: 1
-  _sendToOwner: 0
+  _sendToOwner: 1
 --- !u!114 &2194771645844864773
 MonoBehaviour:
   m_ObjectHideFlags: 0
