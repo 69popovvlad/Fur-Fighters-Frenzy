@@ -57,6 +57,19 @@ namespace Client.GameLogic.Throwing.Taking
             _armIK.weight = _takingCurve.Evaluate(_punchT);
         }
 
+        public override void OnStopClient()
+        {
+            base.OnStopClient();
+
+            if(HasItem)
+            {
+                _item.Throw(Vector3.zero);
+
+                // If client will recoonect, this object should be without owner locally
+                _item.ThrowToAllClients(Vector3.zero);
+            }
+        }
+
         [ServerRpc(RequireOwnership = false)]
         private void SetParent()
         {

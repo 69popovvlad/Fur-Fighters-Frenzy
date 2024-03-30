@@ -30,7 +30,7 @@ namespace Client.GameLogic.Throwing
         }
 
         [ObserversRpc(RunLocally = true)]
-        private void ThrowToAllClients(Vector3 direction)
+        internal void ThrowToAllClients(Vector3 direction)
         {
             transform.SetParent(null);
 
