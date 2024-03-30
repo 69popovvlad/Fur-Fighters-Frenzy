@@ -56,7 +56,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.24307692
+        functionName: OnStepAnimationTrigger
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: f703d2f754928a44e9ff8cf598959a22, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.6923077
+        functionName: OnStepAnimationTrigger
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: f703d2f754928a44e9ff8cf598959a22, type: 3}
+        floatParameter: 0
+        intParameter: 1
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
