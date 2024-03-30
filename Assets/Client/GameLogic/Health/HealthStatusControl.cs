@@ -10,6 +10,7 @@ namespace Client.GameLogic.Health
     public class HealthStatusControl : MonoBehaviour
     {
         private readonly int DeadHash = Animator.StringToHash("Dead");
+        private readonly int HealthRateHash = Animator.StringToHash("HealthRate");
 
         [SerializeField] private Animator _animator;
         [SerializeField] private Rig _rig;
@@ -97,7 +98,9 @@ namespace Client.GameLogic.Health
             }
 
             var healthControl = _characterView.Health;
-            _bleedingParticle.SetActive(healthControl.Health / (float)healthControl.MaxHealth <= _bleedingEnablingPercent);
+            var helathRate = healthControl.Health / (float)healthControl.MaxHealth;
+            _bleedingParticle.SetActive(helathRate <= _bleedingEnablingPercent);
+            _animator.SetFloat(HealthRateHash, helathRate);
         }
     }
 }
