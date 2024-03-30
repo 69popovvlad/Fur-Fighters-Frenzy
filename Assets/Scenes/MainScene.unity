@@ -33923,6 +33923,12 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: 2543e573f3e9efd4fa6afacd2ff8b1ea, type: 3}
   - Key: can_metal
     Clip: {fileID: 8300000, guid: 6574983c5a194964cb0b06d572aebaac, type: 3}
+  - Key: dodge
+    Clip: {fileID: 8300000, guid: 61f031134d53e984cae08525b5441bec, type: 3}
+  - Key: punch_swing
+    Clip: {fileID: 8300000, guid: 51d44fb3548467749bbe9e9901d54fe8, type: 3}
+  - Key: punch_swing
+    Clip: {fileID: 8300000, guid: db92e5a76bd23334a92e63b617b4757a, type: 3}
 --- !u!1 &1961548796
 GameObject:
   m_ObjectHideFlags: 0

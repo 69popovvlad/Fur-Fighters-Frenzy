@@ -286,7 +286,7 @@ MonoBehaviour:
   _characterView: {fileID: 7100730572031213986}
   _deadBloodParticle: {fileID: 6874782608185972230}
   _bleedingParticle: {fileID: 6613964995134405984}
-  _bleedingEnablingPercent: 0.5
+  _bleedingEnablingPercent: 0.2
 --- !u!114 &1677819515997281060
 MonoBehaviour:
   m_ObjectHideFlags: 0

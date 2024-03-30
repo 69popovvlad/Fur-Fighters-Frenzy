@@ -1,6 +1,8 @@
 ﻿using System;
+using Client.Audio;
 using Client.GameLogic.Collision;
 using Client.GameLogic.Inputs.Commands.Punching;
+using Core.Ioc;
 using FishNet.Object;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -10,16 +12,23 @@ namespace Client.GameLogic.Punching
     public class ArmPunchingControl : NetworkBehaviour
     {
         public event Action OnPunched;
-            
+
         [SerializeField] private ChainIKConstraint _armIK;
         [SerializeField] private CollisionProxy _armCollision;
         [SerializeField] private AnimationCurve _punchCurve = AnimationCurve.Linear(0, 0, 1, 1);
         [SerializeField] private float _punchDuration = 0.2f;
         [SerializeField] private float _comebackDuration = 0.3f;
 
+        private AudioPlayerService _audioPlayerService;
         private bool _inPunching;
         private bool _dontEnableCollisionToggle; // Onetime toggle
         private float _punchT;
+
+        private void Awake()
+        {
+            var ioc = Ioc.Instance;
+            _audioPlayerService = ioc.Get<AudioPlayerService>();
+        }
 
         private void Update()
         {
@@ -38,6 +47,7 @@ namespace Client.GameLogic.Punching
             {
                 OnPunched?.Invoke();
                 _inPunching = false;
+                _audioPlayerService.PlayClip(transform.position, "punch_swing");
                 return;
             }
 

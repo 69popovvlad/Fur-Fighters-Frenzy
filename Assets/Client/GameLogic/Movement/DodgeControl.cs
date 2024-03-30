@@ -1,4 +1,5 @@
-﻿using Client.GameLogic.Inputs;
+﻿using Client.Audio;
+using Client.GameLogic.Inputs;
 using Client.GameLogic.Inputs.Commands.Movement;
 using Core.Ioc;
 using FishNet.Object;
@@ -12,15 +13,19 @@ namespace Client.GameLogic.Movement
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private float _dodgePower = 10;
         [SerializeField] private float _dodgeCooldown = 2;
-        
+
         private readonly int DodgeHash = Animator.StringToHash("Dodge");
 
+        private AudioPlayerService _audioPlayerService;
         private InputBucket _inputBucket;
         private float _dodgeCooldownLeft;
 
         private void Awake()
         {
-            _inputBucket = Ioc.Instance.Get<InputBucket>();
+            var ioc = Ioc.Instance;
+            _audioPlayerService = ioc.Get<AudioPlayerService>();
+
+            _inputBucket = ioc.Get<InputBucket>();
             _inputBucket.Subscribe<DodgeInputCommand>(OnDodgeInputCommand);
         }
 
@@ -35,7 +40,7 @@ namespace Client.GameLogic.Movement
             {
                 return;
             }
-            
+
             _dodgeCooldownLeft -= Time.deltaTime;
         }
 
@@ -45,7 +50,7 @@ namespace Client.GameLogic.Movement
             {
                 return;
             }
-            
+
             _dodgeCooldownLeft = _dodgeCooldown;
             DodgeJump(command.XSpeed, command.ZSpeed);
         }
@@ -62,6 +67,8 @@ namespace Client.GameLogic.Movement
             var direction = transform.TransformDirection(new Vector3(x, 0, z));
             _rigidbody.AddForce(direction.normalized * _dodgePower, ForceMode.Impulse);
             _animator.SetTrigger(DodgeHash);
+
+            _audioPlayerService.PlayClip(transform.position, "dodge");
         }
     }
 }
