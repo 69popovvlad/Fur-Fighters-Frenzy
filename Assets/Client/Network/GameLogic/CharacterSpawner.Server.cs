@@ -10,23 +10,28 @@ namespace Client.Network.GameLogic
         
         private void OnServerSideInitialized()
         {
-            _healthBucket.Subscribe<DeadHealthCommand>(OnDeadHealthCommand);
+            _healthBucket.Subscribe<DeadHealthCommand>(OnDeadHealthCommandServer);
 
             SpawnCharacter();
         }
         
         private void OnServerSideDeinitialized()
         {
-            _healthBucket?.Unsubscribe<DeadHealthCommand>(OnDeadHealthCommand);
+            _healthBucket?.Unsubscribe<DeadHealthCommand>(OnDeadHealthCommandServer);
         }
         
-        private void OnDeadHealthCommand(DeadHealthCommand command)
+        private void OnDeadHealthCommandServer(DeadHealthCommand command)
         {
             if (!_characterViewServerSide || !_characterViewServerSide.Guid.Equals(command.ToEntityKey))
             {
                 return;
             }
 
+            Invoke(nameof(RespawnCharacter), 3);
+        }
+
+        private void RespawnCharacter()
+        {
             DespawnCharacter();
             SpawnCharacter();
         }

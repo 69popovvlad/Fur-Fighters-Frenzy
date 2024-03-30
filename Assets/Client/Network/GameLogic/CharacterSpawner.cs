@@ -1,21 +1,16 @@
 ﻿using Client.GameLogic.Health;
-using Client.GameLogic.Inputs;
 using Client.Network.GameLogic.Characters;
 using Core.Assets;
 using Core.Ioc;
 using FishNet.Object;
-using UnityEngine;
 
 namespace Client.Network.GameLogic
 {
     public partial class CharacterSpawner : NetworkBehaviour
     {
-        [SerializeField] private PlayerInputHandler _inputPrefab;
-
         private CharacterOwnerBucket _characterOwnerBucket;
         private AssetsLoader _assetsLoader;
         private HealthBucket _healthBucket;
-        private PlayerInputHandler _input;
 
         private void Awake()
         {

@@ -13,6 +13,11 @@ namespace Client.GameLogic.Inputs
             // CurrentEntityKey
         }
 
+        public override void SetEnable(bool enable)
+        {
+            enabled = enable;
+        }
+
         protected override void AwakeInternal()
         {
             base.AwakeInternal();

@@ -40,6 +40,12 @@ namespace Client.GameLogic.Characters
         {
             base.OnStartClient();
 
+            if (!IsServerInitialized)
+            {
+                ClientManager.RegisterBroadcast<PunchDamageCommand>(OnPunchDamageCommand);
+                ClientManager.RegisterBroadcast<ThrowingDamageCommand>(OnThrowingDamageCommand);
+            }
+
             if (!IsOwner)
             {
                 return;
@@ -50,30 +56,15 @@ namespace Client.GameLogic.Characters
             characterOwnerBucket.Invoke(command);
         }
 
-        protected override void InitializeInternal()
+        public override void OnStopClient()
         {
-            base.InitializeInternal();
+            base.OnStopClient();
 
-            if (!IsClientInitialized)
+            if (!IsServerInitialized)
             {
-                return;
+                ClientManager.UnregisterBroadcast<PunchDamageCommand>(OnPunchDamageCommand);
+                ClientManager.UnregisterBroadcast<ThrowingDamageCommand>(OnThrowingDamageCommand);
             }
-            
-            ClientManager.RegisterBroadcast<PunchDamageCommand>(OnPunchDamageCommand);
-            ClientManager.RegisterBroadcast<ThrowingDamageCommand>(OnThrowingDamageCommand);
-        }
-
-        protected override void DeinitializationInternal()
-        {
-            base.DeinitializationInternal();
-
-            if (!IsClientInitialized)
-            {
-                return;
-            }
-            
-            ClientManager.UnregisterBroadcast<PunchDamageCommand>(OnPunchDamageCommand);
-            ClientManager.UnregisterBroadcast<ThrowingDamageCommand>(OnThrowingDamageCommand);
         }
 
         private void OnPunchDamageCommand(PunchDamageCommand command, Channel channel) =>

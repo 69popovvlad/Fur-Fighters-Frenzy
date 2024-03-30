@@ -11,6 +11,8 @@ namespace Client.GameLogic.Inputs
 
         public abstract void Initialize();
         
+        public abstract void SetEnable(bool enable);
+
         protected virtual void AwakeInternal()
         {
             /* Nothing to do */
