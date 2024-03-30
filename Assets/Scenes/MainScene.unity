@@ -8956,8 +8956,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4427002660181736475, guid: 7c03ada71683a554e8520d4081581680, type: 3}
+      propertyPath: _scenePathHash
+      value: 83102251
+      objectReference: {fileID: 0}
+    - target: {fileID: 4427002660181736475, guid: 7c03ada71683a554e8520d4081581680, type: 3}
       propertyPath: <SceneId>k__BackingField
-      value: 356921453235113847
+      value: 356921450316611591
       objectReference: {fileID: 0}
     - target: {fileID: 8714169478425025202, guid: 7c03ada71683a554e8520d4081581680, type: 3}
       propertyPath: m_Name
@@ -33901,6 +33905,18 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: ed0a5c02277067c4196e49b3eb23bc88, type: 3}
   - Key: throwing
     Clip: {fileID: 8300000, guid: 51d44fb3548467749bbe9e9901d54fe8, type: 3}
+  - Key: bottle_galss
+    Clip: {fileID: 8300000, guid: 0f1da3a46da1374489c99ccd0f603141, type: 3}
+  - Key: bottle_galss
+    Clip: {fileID: 8300000, guid: fdf57aa41e66ebf45b877fc1435e2731, type: 3}
+  - Key: bottle_plastic
+    Clip: {fileID: 8300000, guid: 9dd578167ddc262449a0198f4749d7ba, type: 3}
+  - Key: can_metal
+    Clip: {fileID: 8300000, guid: cec8be942a10d9347afee032702d7d79, type: 3}
+  - Key: can_metal
+    Clip: {fileID: 8300000, guid: 2543e573f3e9efd4fa6afacd2ff8b1ea, type: 3}
+  - Key: can_metal
+    Clip: {fileID: 8300000, guid: 6574983c5a194964cb0b06d572aebaac, type: 3}
 --- !u!1 &1961548796
 GameObject:
   m_ObjectHideFlags: 0
@@ -36308,8 +36324,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4427002660181736475, guid: 7c03ada71683a554e8520d4081581680, type: 3}
+      propertyPath: _scenePathHash
+      value: 83102251
+      objectReference: {fileID: 0}
+    - target: {fileID: 4427002660181736475, guid: 7c03ada71683a554e8520d4081581680, type: 3}
       propertyPath: <SceneId>k__BackingField
-      value: 356921452523991213
+      value: 356921451606573643
       objectReference: {fileID: 0}
     - target: {fileID: 8714169478425025202, guid: 7c03ada71683a554e8520d4081581680, type: 3}
       propertyPath: m_Name
@@ -37178,8 +37198,12 @@ PrefabInstance:
       value: Throwing Bottle_001
       objectReference: {fileID: 0}
     - target: {fileID: 5230277862451792774, guid: bb0db46ae36ecb842bd4ec6d33efeffb, type: 3}
+      propertyPath: _scenePathHash
+      value: 83102251
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230277862451792774, guid: bb0db46ae36ecb842bd4ec6d33efeffb, type: 3}
       propertyPath: <SceneId>k__BackingField
-      value: 356921452184529157
+      value: 356921451811272779
       objectReference: {fileID: 0}
     - target: {fileID: 6499064627468662289, guid: bb0db46ae36ecb842bd4ec6d33efeffb, type: 3}
       propertyPath: m_LocalPosition.x

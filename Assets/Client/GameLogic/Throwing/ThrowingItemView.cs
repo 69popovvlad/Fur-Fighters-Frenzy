@@ -1,14 +1,10 @@
 ﻿using Client.GameLogic.Collision;
-using Client.GameLogic.Throwing.Commands;
 using Client.Network.Entities;
-using Core.Ioc;
-using DG.Tweening;
-using FishNet.Object;
 using UnityEngine;
 
 namespace Client.GameLogic.Throwing
 {
-    public class ThrowingItemView : NetworkEntityView
+    public partial class ThrowingItemView : NetworkEntityView
     {
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Collider _collider;
@@ -26,15 +22,17 @@ namespace Client.GameLogic.Throwing
         [SerializeField] private bool _isDestroyable;
         [SerializeField] private GameObject _destroyParticlePrefab;
 
+        [Header("Audio settings")]
+        [SerializeField] private string _collisionSoundKey;
+
         private bool _isTaken;
         private string _ownerKey;
-        private ThrowingItemEntity _entity;
-        private CollisionBucket _collisionBucket;
         private Vector3 _startScale;
+        private ThrowingItemEntity _entity;
 
         public bool HasOwner => _isTaken || !string.IsNullOrEmpty(_ownerKey);
         public bool IsThrowing => _collider.enabled;
-        
+
         public Vector3 TakingItemOffset => _takingItemOffset;
         public Vector3 TakingItemRotation => _takingItemRotation;
 
@@ -44,117 +42,54 @@ namespace Client.GameLogic.Throwing
 
             _entity = new ThrowingItemEntity(ObjectId.ToString());
             Initialize(_entity);
+        }
 
-            if (!IsServerInitialized)
+        public override void OnStartServer()
+        {
+            base.OnStartServer();
+
+            if (IsServerInitialized)
             {
-                return;
+                OnServerInitialize();
             }
-
-            _collisionBucket = Ioc.Instance.Get<CollisionBucket>();
         }
 
-        [ServerRpc(RequireOwnership = false)]
-        public void Take(string ownerKey)
+        public override void OnStartClient()
         {
-            if (_isTaken)
+            base.OnStartClient();
+
+            if (IsClientInitialized)
             {
-                return;
+                OnClientInitialize();
             }
-            
-            TakeToAllClients(ownerKey);
-        }
-
-        [ServerRpc(RequireOwnership = false)]
-        public void Throw(Vector3 direction)
-        {
-            if (!_isTaken || IsThrowing)
-            {
-                return;
-            }
-
-            ThrowToAllClients(direction);
-        }
-
-        [ObserversRpc(RunLocally = true)]
-        private void TakeToAllClients(string ownerKey)
-        {
-            _isTaken = true;
-            _ownerKey = ownerKey;
-
-            _rigidbody.isKinematic = true;
-            _collider.enabled = false;
-
-            _startScale = transform.localScale;
-            transform.localScale = _startScale * _takenSize;
-        }
-
-        [ObserversRpc(RunLocally = true)]
-        private void ThrowToAllClients(Vector3 direction)
-        {
-            transform.SetParent(null);
-            
-            _rigidbody.isKinematic = false;
-            _collider.enabled = true;
-
-            _rigidbody.AddForce(direction.normalized * _throwPower, ForceMode.Impulse);
-            
-            transform.DOScale(_startScale, _scaleReturnDuration);
-            Invoke(nameof(AllowEveryone), _availabilityPauseDelay);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!IsServerInitialized
-                || !HasOwner
-                || !other.TryGetComponent<ColliderDataControl>(out var colliderData)
+            if (!HasOwner)
+            {
+                return;
+            }
+
+            if (!other.TryGetComponent<ColliderDataControl>(out var colliderData)
                 || _ownerKey.Equals(colliderData.CharacterEntityKey))
             {
                 return;
             }
-            
-            var command = new ThrowingCollisionCommand(_ownerKey, colliderData.CharacterEntityKey, _damage, colliderData.OnCollisionEnterKey);
-            _collisionBucket.Invoke(command);
 
-            if(_destroyParticlePrefab != null)
-            {
-                DestroyToAllClients();
-            }
-
-            if(_isDestroyable)
-            {
-                Despawn();
-            }
+            OnTriggerEnterClient(other, colliderData);
+            OnTriggerEnterServer(other, colliderData);
         }
 
         private void OnCollisionEnter(UnityEngine.Collision other)
         {
-            if (!IsServerInitialized
-                || !HasOwner)
+            if (!HasOwner)
             {
                 return;
             }
 
-            if(_destroyParticlePrefab != null)
-            {
-                DestroyToAllClients();
-            }
-
-            if(_isDestroyable)
-            {
-                Despawn();
-            }
-        }
-
-        private void AllowEveryone()
-        {
-            _isTaken = false;
-            _ownerKey = string.Empty;
-        }
-
-        [ObserversRpc]
-        private void DestroyToAllClients()
-        {
-            Instantiate(_destroyParticlePrefab, transform.position, Quaternion.identity);
+            OnCollisionEnterClient(other);
+            OnCollisionEnterServer(other);
         }
     }
 }

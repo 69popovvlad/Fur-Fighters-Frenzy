@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Core.Application;
-using Core.Application.Events;
 using UnityEngine;
 
 namespace Client.Audio
@@ -27,6 +26,11 @@ namespace Client.Audio
         /// <param name="volume">Audio clip playing volume</param>
         public void PlayClip(in Vector3 position, string key, int index = -1, float volume = 0.5f)
         {
+            if (string.IsNullOrEmpty(key))
+            {
+                return;
+            }
+
             if (!_clips.TryGetValue(key, out var list))
             {
                 Debug.LogWarning($"Clip {key} doesn't exist");
