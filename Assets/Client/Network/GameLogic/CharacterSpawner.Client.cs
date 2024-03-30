@@ -37,7 +37,14 @@ namespace Client.Network.GameLogic
             
             _characterOwnerBucket?.Unsubscribe<SetCharacterOwnerCommand>(OnSetCharacterOwnerCommand);
             _healthBucket?.Unsubscribe<DeadHealthCommand>(OnDeadHealthCommandClient);
-            Destroy(_input.gameObject);   
+
+            if(_input != null)
+            {
+                Destroy(_input.gameObject);
+                _input = null;
+            }
+
+            _characterViewClientSide = null;
         }
 
         private void OnDeadHealthCommandClient(DeadHealthCommand command)

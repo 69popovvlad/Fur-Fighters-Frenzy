@@ -4,20 +4,31 @@ using FishNet.Object;
 
 namespace Client.Network.Entities
 {
-    public abstract class NetworkEntityView: NetworkBehaviour, IEntityView
+    public abstract class NetworkEntityView : NetworkBehaviour, IEntityView
     {
         protected IEntity Entity;
-        
+        private bool _initialized;
+
         public string Guid => Entity.Guid;
-        
+
+        /// <summary>
+        /// Initialize in OnStartNetwork
+        /// </summary>
+        /// <param name="entity">Entity for this view</param>
         public void Initialize(IEntity entity)
         {
+            if (_initialized)
+            {
+                throw new System.Exception($"{nameof(NetworkEntityView)} {gameObject.name} {Guid} initialized already");
+            }
+
+            _initialized = true;
             Entity = entity;
             ViewsContainer.AddEntity(this);
 
             InitializeInternal();
         }
-        
+
         /// <summary>
         /// Here you should refer to a specific entity type and subscribe to events
         /// </summary>
@@ -33,12 +44,21 @@ namespace Client.Network.Entities
         {
             /* Nothing to do */
         }
-        
-        private void OnDestroy()
+
+        public override void OnStopNetwork()
         {
+            base.OnStopNetwork();
+
+            if (!_initialized)
+            {
+                return;
+            }
+
+            _initialized = false;
+            
             DeinitializationInternal();
-            Entity?.Dispose();
             ViewsContainer.RemoveEntity(this);
+            Entity?.Dispose();
         }
     }
 }
