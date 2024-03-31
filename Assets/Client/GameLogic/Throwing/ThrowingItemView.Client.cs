@@ -1,3 +1,4 @@
+using System;
 using Client.Audio;
 using Client.GameLogic.Collision;
 using Core.Ioc;
@@ -9,6 +10,9 @@ namespace Client.GameLogic.Throwing
 {
     public partial class ThrowingItemView
     {
+        public event Action OnTaken;
+        public event Action OnThrown;
+
         private AudioPlayerService _audioPlayerService;
 
         private void OnClientInitialize()
@@ -27,6 +31,8 @@ namespace Client.GameLogic.Throwing
 
             _startScale = transform.localScale;
             transform.localScale = _startScale * _takenSize;
+
+            OnTaken?.Invoke();
         }
 
         [ObserversRpc(RunLocally = true)]
@@ -41,6 +47,8 @@ namespace Client.GameLogic.Throwing
 
             transform.DOScale(_startScale, _scaleReturnDuration);
             Invoke(nameof(AllowEveryone), _availabilityPauseDelay);
+
+            OnThrown?.Invoke();
         }
 
         [ObserversRpc]

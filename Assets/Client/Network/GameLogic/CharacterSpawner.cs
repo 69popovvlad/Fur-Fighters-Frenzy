@@ -1,4 +1,5 @@
 ﻿using Client.GameLogic.Health;
+using Client.GameLogic.Inputs;
 using Client.Network.GameLogic.Characters;
 using Core.Assets;
 using Core.Ioc;
@@ -11,6 +12,7 @@ namespace Client.Network.GameLogic
         private CharacterOwnerBucket _characterOwnerBucket;
         private AssetsLoader _assetsLoader;
         private HealthBucket _healthBucket;
+        private InputBucket _inputBucket;
 
         private void Awake()
         {
@@ -18,6 +20,7 @@ namespace Client.Network.GameLogic
             _assetsLoader = ioc.Get<AssetsLoader>();
             _characterOwnerBucket = ioc.Get<CharacterOwnerBucket>();
             _healthBucket = ioc.Get<HealthBucket>();
+            _inputBucket = ioc.Get<InputBucket>();
         }
 
         public override void OnStartNetwork()
