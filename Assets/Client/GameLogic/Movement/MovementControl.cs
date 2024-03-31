@@ -56,6 +56,14 @@ namespace Client.GameLogic.Movement
             UnsubscribeFromInputs();
         }
 
+        /// <summary>
+        /// Server only
+        /// </summary>
+        public void AddKickImpulse(Vector3 direction, float power)
+        {
+            _rigidbody.AddForce(direction.normalized * power * _kickImpulseMultiplier, ForceMode.Impulse);
+        }
+
         private void UnsubscribeFromInputs()
         {
             if (_inputBucket == null)

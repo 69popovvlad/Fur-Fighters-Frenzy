@@ -22365,6 +22365,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1508950796}
   m_Mesh: {fileID: -1427354697000255682, guid: 438de4916c19fe04bbf4c6d14d9be79b, type: 3}
+--- !u!1 &1521261178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1521261179}
+  - component: {fileID: 1521261180}
+  m_Layer: 0
+  m_Name: KickingCommandsListener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1521261179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521261178}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1759943493}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1521261180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521261178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5623c86db30557446986c723f140d2c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 2
+  _addedNetworkObject: {fileID: 1759943492}
+  _networkObjectCache: {fileID: 1759943492}
 --- !u!1 &1521555817
 GameObject:
   m_ObjectHideFlags: 0
@@ -25909,6 +25956,7 @@ MonoBehaviour:
   _networkBehaviours:
   - {fileID: 678116943}
   - {fileID: 1254905492}
+  - {fileID: 1521261180}
   <SerializedRootNetworkBehaviour>k__BackingField: {fileID: 0}
   <NestedRootNetworkBehaviours>k__BackingField: []
   SerializedTransformProperties:
@@ -25941,6 +25989,7 @@ Transform:
   m_Children:
   - {fileID: 678116944}
   - {fileID: 1254905491}
+  - {fileID: 1521261179}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1766488065
@@ -33929,6 +33978,10 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: 51d44fb3548467749bbe9e9901d54fe8, type: 3}
   - Key: punch_swing
     Clip: {fileID: 8300000, guid: db92e5a76bd23334a92e63b617b4757a, type: 3}
+  - Key: kick_swing
+    Clip: {fileID: 8300000, guid: db92e5a76bd23334a92e63b617b4757a, type: 3}
+  - Key: leg_kick
+    Clip: {fileID: 8300000, guid: eb2843784399afe4a9305ff5021ad263, type: 3}
 --- !u!1 &1961548796
 GameObject:
   m_ObjectHideFlags: 0
@@ -34483,6 +34536,7 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 2002653622}
   _health: {fileID: 2002653618}
   _aimingControl: {fileID: 0}
+  _movementControl: {fileID: 0}
   _maxHealth: 2147483647
 --- !u!114 &2002653620
 MonoBehaviour:

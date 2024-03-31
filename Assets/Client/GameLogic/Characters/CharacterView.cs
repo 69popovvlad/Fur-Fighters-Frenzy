@@ -1,6 +1,7 @@
 ﻿using Client.GameLogic.Aiming;
 using Client.GameLogic.Health;
 using Client.GameLogic.Health.Commands;
+using Client.GameLogic.Movement;
 using Client.Network.Entities;
 using Client.Network.GameLogic.Characters;
 using Client.Network.GameLogic.Characters.Commands;
@@ -16,6 +17,7 @@ namespace Client.GameLogic.Characters
     {
         [SerializeField] private HealthControl _health;
         [SerializeField] private AimingControl _aimingControl;
+        [SerializeField] private MovementControl _movementControl;
 
         [SerializeField, Tooltip("Start and max health value at the same time")]
         private int _maxHealth = 10;
@@ -25,6 +27,7 @@ namespace Client.GameLogic.Characters
         public HealthControl Health => _health;
 
         public AimingControl AimingControl => _aimingControl;
+        public MovementControl MovementControl => _movementControl;
 
         public override void OnStartNetwork()
         {
