@@ -22,7 +22,7 @@ namespace Client.GameLogic.Punching
             var ioc = Ioc.Instance;
             _audioPlayerService = ioc.Get<AudioPlayerService>();
             _collisionBucket = ioc.Get<CollisionBucket>();
-            
+
             _leftCollisionProxy.OnCollided += OnPunchCollision;
             _rightCollisionProxy.OnCollided += OnPunchCollision;
         }
@@ -32,9 +32,14 @@ namespace Client.GameLogic.Punching
             _leftCollisionProxy.OnCollided -= OnPunchCollision;
             _rightCollisionProxy.OnCollided -= OnPunchCollision;
         }
-        
+
         private void OnPunchCollision(string entityKey, string partKey, ColliderDataControl colliderData)
         {
+            if (entityKey.Equals(colliderData.CharacterEntityKey))
+            {
+                return;
+            }
+
             var command = new PunchCollisionCommand(entityKey, partKey, colliderData.CharacterEntityKey, colliderData.OnCollisionEnterKey);
             _collisionBucket.Invoke(command);
 
