@@ -57,14 +57,14 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.5569231
+      - time: 0.43306988
         functionName: OnKickStartAnimationTrigger
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: e1d4303ca8cc64e4b88b8558847fb2ac, type: 3}
         floatParameter: 0
         intParameter: 1
         messageOptions: 0
-      - time: 0.6246154
+      - time: 0.6544319
         functionName: OnKickStopAnimationTrigger
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: e1d4303ca8cc64e4b88b8558847fb2ac, type: 3}
