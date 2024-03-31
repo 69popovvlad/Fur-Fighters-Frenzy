@@ -1,4 +1,5 @@
-﻿using FishNet.Object;
+﻿using Client.GameLogic.Inputs;
+using FishNet.Object;
 using UnityEngine;
 
 namespace Client.Network.GameLogic.Characters
@@ -6,18 +7,14 @@ namespace Client.Network.GameLogic.Characters
     public class CheckOwnerControl : NetworkBehaviour
     {
         [SerializeField, Tooltip("Components that should only be on the client character")]
-        private Component[] _onlyOwnerComponents;
+        private InputListenerNetworkComponentBase[] _onlyOwnerInputListeners;
 
         public override void OnStartClient()
         {
-            if (IsOwner)
+            var isOwner = IsOwner;
+            for (int i = 0, iLen = _onlyOwnerInputListeners.Length; i < iLen; ++i)
             {
-                return;
-            }
-
-            for (int i = 0, iLen = _onlyOwnerComponents.Length; i < iLen; ++i)
-            {
-                Destroy(_onlyOwnerComponents[i]);
+                _onlyOwnerInputListeners[i].InputsInitialize(isOwner);
             }
 
             Destroy(this);

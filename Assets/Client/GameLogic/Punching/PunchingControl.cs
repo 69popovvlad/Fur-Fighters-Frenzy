@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Client.GameLogic.Punching
 {
-    public class PunchingControl : MonoBehaviour
+    public class PunchingControl : InputListenerNetworkComponentBase
     {
         [Header("Left arm")]
         [SerializeField] private ArmPunchingControl _leftArm;
@@ -14,18 +14,33 @@ namespace Client.GameLogic.Punching
         [SerializeField] private ArmPunchingControl _rightArm;
 
         private InputBucket _inputBucket;
-        
+
         private void Awake()
         {
             var ioc = Ioc.Instance;
-            
+
             _inputBucket = ioc.Get<InputBucket>();
             _inputBucket.Subscribe<PunchInputCommand>(OnPunchCommand);
         }
 
         private void OnDestroy()
         {
+            if (_inputBucket == null)
+            {
+                return;
+            }
+
             _inputBucket.Unsubscribe<PunchInputCommand>(OnPunchCommand);
+        }
+        
+        public override void InputsInitialize(bool isOwner)
+        {
+            if(isOwner)
+            {
+                return;
+            }
+
+            Destroy(this);
         }
 
         private void OnPunchCommand(PunchInputCommand command)

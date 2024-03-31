@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Client.GameLogic.Movement
 {
-    public class MovementControl : MonoBehaviour
+    public class MovementControl : InputListenerNetworkComponentBase
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody _rigidbody;
@@ -17,6 +17,9 @@ namespace Client.GameLogic.Movement
 
         [Header("Animation")]
         [SerializeField] private float _animationStoppingSpeed = 1;
+
+        [Header("Kick")]
+        [SerializeField] private float _kickImpulseMultiplier = 15;
 
 
         private readonly int XSpeedHash = Animator.StringToHash("XSpeed");
@@ -32,7 +35,7 @@ namespace Client.GameLogic.Movement
 
         private void OnDestroy()
         {
-            _inputBucket.Unsubscribe<MovementCommand>(OnMovementCommand);
+            UnsubscribeFromInputs();
         }
 
         private void Update()
@@ -40,6 +43,27 @@ namespace Client.GameLogic.Movement
             var delta = Time.deltaTime / _animationStoppingSpeed;
             ResetAnimationFloat(XSpeedHash, delta);
             ResetAnimationFloat(ZSpeedHash, delta);
+        }
+
+        public override void InputsInitialize(bool isOwner)
+        {
+            if (isOwner)
+            {
+                return;
+            }
+
+            enabled = false;
+            UnsubscribeFromInputs();
+        }
+
+        private void UnsubscribeFromInputs()
+        {
+            if (_inputBucket == null)
+            {
+                return;
+            }
+
+            _inputBucket.Unsubscribe<MovementCommand>(OnMovementCommand);
         }
 
         private void OnMovementCommand(MovementCommand command)

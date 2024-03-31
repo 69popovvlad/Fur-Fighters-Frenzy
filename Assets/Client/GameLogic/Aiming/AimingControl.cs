@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Client.GameLogic.Aiming
 {
-    public class AimingControl : MonoBehaviour
+    public class AimingControl : InputListenerNetworkComponentBase
     {
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Transform _aim;
@@ -12,7 +12,6 @@ namespace Client.GameLogic.Aiming
         [SerializeField] private int _angleCorrection = 270;
         [SerializeField] private float _heightCorrection = 0.5f;
 
-        private InputBucket _inputBucket;
         private Quaternion _lookRotation;
         private Vector3 _offset;
 
@@ -26,6 +25,16 @@ namespace Client.GameLogic.Aiming
         {
             _rigidbody.MoveRotation(Quaternion.Slerp(_rigidbody.rotation, _lookRotation,
                 Time.deltaTime * _rotationSpeed));
+        }
+
+        public override void InputsInitialize(bool isOwner)
+        {
+            if (isOwner)
+            {
+                return;
+            }
+
+            Destroy(this);
         }
 
         public void SetAimAngle(float angle)

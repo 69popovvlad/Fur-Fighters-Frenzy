@@ -40,6 +40,11 @@ namespace Client.GameLogic.CameraLogic
 
         private void OnDestroy()
         {
+            if (_inputBucket == null)
+            {
+                return;
+            }
+
             _inputBucket.Unsubscribe<AimInputCommand>(OnAimingCommand);
             _inputBucket.Unsubscribe<ZoomingInputCommand>(OnZoomingCommand);
         }
