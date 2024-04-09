@@ -52,7 +52,6 @@ namespace Client.Network.GameLogic
 
         private void OnDeadHealthCommandClient(DeadHealthCommand command)
         {
-
             if (!_characterViewClientSide.Guid.Equals(command.ToEntityKey)
                 || _input == null)
             {

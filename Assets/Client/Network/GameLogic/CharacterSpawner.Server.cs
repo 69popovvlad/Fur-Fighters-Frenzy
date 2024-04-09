@@ -39,7 +39,7 @@ namespace Client.Network.GameLogic
         private void SpawnCharacter()
         {
             var prefab =
-                _assetsLoader.LoadResource<GameObject>("character", "cat_000"); // TODO: Load key or character data
+                _assetsLoader.LoadResource<GameObject>("character", "cat_001"); // TODO: Load key or character data
             var instance = Instantiate(prefab, transform.position, Quaternion.identity);
             ServerManager.Spawn(instance, Owner);
 

@@ -10529,7 +10529,7 @@ MonoBehaviour:
   _smoothSpeedX: 1
   _smoothSpeedY: 4
   _maxVerticalAngle: 75
-  _minVerticalAngle: 35
+  _minVerticalAngle: 25
   _distance: 3.5
   _maxDistance: 5
   _minDistance: 1
