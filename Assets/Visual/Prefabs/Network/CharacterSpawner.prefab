@@ -49,6 +49,7 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 2928413452614922113}
   _networkObjectCache: {fileID: 2928413452614922113}
   _inputPrefab: {fileID: 2599529805801837761, guid: 70090b06858e94e4c9bee11b61e3b114, type: 3}
+  _catsTikTok: {fileID: 8952465086606543245, guid: fc423f4dfddb4b540b400e04d9d24ff1, type: 3}
 --- !u!114 &2928413452614922113
 MonoBehaviour:
   m_ObjectHideFlags: 0
