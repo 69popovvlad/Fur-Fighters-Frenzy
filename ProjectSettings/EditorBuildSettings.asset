@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
-    guid: 94d0563ab3c83d14da02b13875a64197
+    path: Assets/Scenes/TikTok.unity
+    guid: 590db5935219c78499cb2086b57600e4
   m_configObjects: {}
