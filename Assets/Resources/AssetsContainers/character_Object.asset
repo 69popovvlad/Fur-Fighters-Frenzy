@@ -17,5 +17,3 @@ MonoBehaviour:
     Resource: {fileID: 1601355986984420237, guid: 498e781d2aa56a64fa42c97bf627ce2f, type: 3}
   - AssetPath: cat_001
     Resource: {fileID: 4434732405425161932, guid: 6e02b05a8afba844b83e94303754752f, type: 3}
-  - AssetPath: Cats
-    Resource: {fileID: 8952465086606543245, guid: fc423f4dfddb4b540b400e04d9d24ff1, type: 3}
