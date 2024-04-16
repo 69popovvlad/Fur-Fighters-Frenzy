@@ -13,12 +13,6 @@ namespace Client.Network.GameLogic.Characters
         {
             base.OnStartNetwork();
 
-            if (!IsClientInitialized)
-            {
-                Destroy(this);
-                return;
-            }
-
             var isOwner = Owner.IsLocalClient;
             for (int i = 0, iLen = _onlyOwnerInputListeners.Length; i < iLen; ++i)
             {
