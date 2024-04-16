@@ -11,6 +11,8 @@ namespace Client.Network.GameLogic.Characters
 
         public override void OnStartClient()
         {
+            base.OnStartClient();
+
             var isOwner = IsOwner;
             for (int i = 0, iLen = _onlyOwnerInputListeners.Length; i < iLen; ++i)
             {
@@ -18,6 +20,13 @@ namespace Client.Network.GameLogic.Characters
             }
 
             Destroy(this);
+        }
+
+        public override void OnStartServer()
+        {
+            base.OnStartServer();
+
+            OnStartClient();
         }
     }
 }
