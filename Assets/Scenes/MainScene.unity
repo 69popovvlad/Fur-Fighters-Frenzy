@@ -34560,6 +34560,12 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: db92e5a76bd23334a92e63b617b4757a, type: 3}
   - Key: leg_kick
     Clip: {fileID: 8300000, guid: eb2843784399afe4a9305ff5021ad263, type: 3}
+  - Key: eating
+    Clip: {fileID: 8300000, guid: 711721664861d2547b44b99fe1501f43, type: 3}
+  - Key: eating
+    Clip: {fileID: 8300000, guid: ed322e2d64f733f46bf0f01096e40734, type: 3}
+  - Key: eating
+    Clip: {fileID: 8300000, guid: b90dfbb630fa36e4482e07b06eacbd7c, type: 3}
 --- !u!1 &1961548796
 GameObject:
   m_ObjectHideFlags: 0

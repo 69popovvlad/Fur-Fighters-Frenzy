@@ -30,6 +30,7 @@ namespace Client.GameLogic.Eating
         private void DestroyToAllClients()
         {
             Instantiate(_destroyParticlePrefab, transform.position, Quaternion.identity);
+            _audioPlayerService.PlayClip(transform.position, "eating");
         }
     }
 }

@@ -1,5 +1,7 @@
 using System;
+using Client.Audio;
 using Client.GameLogic.Throwing.Taking;
+using Core.Ioc;
 using UnityEngine;
 
 namespace Client.GameLogic.Eating
@@ -13,6 +15,7 @@ namespace Client.GameLogic.Eating
         [SerializeField] private GameObject _destroyParticlePrefab;
 
         private EatingItemEntity _entity;
+        private AudioPlayerService _audioPlayerService;
 
         public override void OnStartNetwork()
         {
@@ -20,6 +23,11 @@ namespace Client.GameLogic.Eating
 
             _entity = new EatingItemEntity(ObjectId.ToString());
             Initialize(_entity);
+        }
+
+        private void Awake()
+        {
+            _audioPlayerService = Ioc.Instance.Get<AudioPlayerService>();
         }
     }
 }
