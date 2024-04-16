@@ -41,8 +41,7 @@ namespace Client.GameLogic.Eating.Rats
             .SetLookAt(0.01f)
             .OnComplete(() =>
             {
-                _pathTween = null;
-                Debug.Log("Rat finished");
+                Despawn();
             });
         }
 

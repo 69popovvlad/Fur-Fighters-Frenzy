@@ -9,7 +9,7 @@ namespace Client.GameLogic.Eating.Rats
         [SerializeField] private float _maxSpawnDelay = 15;
         [SerializeField] private float _pathDuration = 10;
         [SerializeField] private EatingRatView _eatingRatPrefab;
-        [SerializeField] private Transform[] _path;
+        [SerializeField] private PathStructure[] _paths;
 
         private float _delayLeft;
 
@@ -36,10 +36,11 @@ namespace Client.GameLogic.Eating.Rats
                 return;
             }
 
-            var instance = Instantiate(_eatingRatPrefab, _path[0].position, Quaternion.identity);
+            var pathIndex = Random.Range(0, _paths.Length);
+            var path = _paths[pathIndex];
+            var instance = Instantiate(_eatingRatPrefab, path.Points[0].position, Quaternion.identity);
             ServerManager.Spawn(instance.gameObject, Owner);
-            // var pathIndex = Random.Range(0, _paths.Length);
-            instance.InitializePath(_path, _pathDuration);
+            instance.InitializePath(path.Points, _pathDuration);
 
             _delayLeft = Random.Range(_minSpawnDelay, _maxSpawnDelay);
         }
