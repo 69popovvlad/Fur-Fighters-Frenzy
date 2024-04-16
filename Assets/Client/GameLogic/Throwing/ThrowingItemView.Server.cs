@@ -16,7 +16,7 @@ namespace Client.GameLogic.Throwing
         }
 
         [ServerRpc(RequireOwnership = false)]
-        public void Take(string ownerKey)
+        public override void Take(string ownerKey)
         {
             if (_isTaken)
             {
@@ -27,14 +27,14 @@ namespace Client.GameLogic.Throwing
         }
 
         [ServerRpc(RequireOwnership = false)]
-        public void Throw(Vector3 direction)
+        public override void Drop(Vector3 direction)
         {
             if (!_isTaken || IsThrowing)
             {
                 return;
             }
 
-            ThrowToAllClients(direction);
+            DropToAllClients(direction);
         }
 
         private void OnTriggerEnterServer(Collider other, ColliderDataControl colliderData)

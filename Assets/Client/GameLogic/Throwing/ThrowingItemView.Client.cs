@@ -10,8 +10,8 @@ namespace Client.GameLogic.Throwing
 {
     public partial class ThrowingItemView
     {
-        public event Action OnTaken;
-        public event Action OnThrown;
+        public override event Action OnTaken;
+        public override event Action OnDropped;
 
         private AudioPlayerService _audioPlayerService;
 
@@ -21,7 +21,7 @@ namespace Client.GameLogic.Throwing
         }
 
         [ObserversRpc(RunLocally = true)]
-        private void TakeToAllClients(string ownerKey)
+        internal protected override void TakeToAllClients(string ownerKey)
         {
             _isTaken = true;
             _ownerKey = ownerKey;
@@ -36,7 +36,7 @@ namespace Client.GameLogic.Throwing
         }
 
         [ObserversRpc(RunLocally = true)]
-        internal void ThrowToAllClients(Vector3 direction)
+        internal protected override void DropToAllClients(Vector3 direction)
         {
             transform.SetParent(null);
 
@@ -48,19 +48,13 @@ namespace Client.GameLogic.Throwing
             transform.DOScale(_startScale, _scaleReturnDuration);
             Invoke(nameof(AllowEveryone), _availabilityPauseDelay);
 
-            OnThrown?.Invoke();
+            OnDropped?.Invoke();
         }
 
-        [ObserversRpc]
+        [ObserversRpc(RunLocally = false)]
         private void DestroyToAllClients()
         {
             Instantiate(_destroyParticlePrefab, transform.position, Quaternion.identity);
-        }
-
-        private void AllowEveryone()
-        {
-            _isTaken = false;
-            _ownerKey = string.Empty;
         }
 
         private void OnTriggerEnterClient(Collider other, ColliderDataControl colliderData)

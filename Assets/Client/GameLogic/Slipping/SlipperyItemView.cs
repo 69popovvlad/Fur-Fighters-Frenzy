@@ -27,7 +27,7 @@ namespace Client.GameLogic.Slipping
             }
 
             _throwingItemView.OnTaken += OnTaken;
-            _throwingItemView.OnThrown += OnThrown;
+            _throwingItemView.OnDropped += OnThrown;
         }
 
         private void OnDestroy()
@@ -38,7 +38,7 @@ namespace Client.GameLogic.Slipping
             }
 
             _throwingItemView.OnTaken -= OnTaken;
-            _throwingItemView.OnThrown -= OnThrown;
+            _throwingItemView.OnDropped -= OnThrown;
         }
 
         private void OnCollisionEnter(UnityEngine.Collision other)

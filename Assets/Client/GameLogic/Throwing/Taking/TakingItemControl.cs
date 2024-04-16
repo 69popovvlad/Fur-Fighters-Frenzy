@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Client.GameLogic.Characters;
+using Client.GameLogic.Eating;
 using Client.GameLogic.Inputs;
 using Client.GameLogic.Inputs.Commands.Taking;
 using Core.Ioc;
@@ -11,8 +12,9 @@ namespace Client.GameLogic.Throwing.Taking
     {
         [SerializeField] private CharacterView _characterView;
         [SerializeField] private TakingArmControl _takingArm;
+        [SerializeField] private EatingArmControl _eatngArm;
 
-        private readonly HashSet<ThrowingItemView> _itemsNearby = new HashSet<ThrowingItemView>();
+        private readonly HashSet<TakingItemViewBase> _itemsNearby = new HashSet<TakingItemViewBase>();
 
         private InputBucket _inputBucket;
 
@@ -29,25 +31,49 @@ namespace Client.GameLogic.Throwing.Taking
 
         private void OnTakingInputCommand(TakingInputCommand command)
         {
-            if(_takingArm.HasItem)
-            {
-                return;
-            }
-
             var nearestItem = GetNearestItem();
             if (nearestItem == null || nearestItem.HasOwner)
             {
                 return;
             }
 
-            _itemsNearby.Remove(nearestItem);
-            nearestItem.Take(_characterView.Guid);
-            _takingArm.SetItem(nearestItem);
+            if (nearestItem is EatingItemView eatingItem)
+            {
+                TakeEatingItem(command, eatingItem);
+            }
+            else
+            {
+                TakeThrowingItem(command, nearestItem);
+            }
+        }
+
+        private void TakeThrowingItem(in TakingInputCommand command, TakingItemViewBase item)
+        {
+            if (_takingArm.HasItem)
+            {
+                return;
+            }
+
+            _itemsNearby.Remove(item);
+            item.Take(_characterView.Guid);
+            _takingArm.SetItem(item);
+        }
+
+        private void TakeEatingItem(in TakingInputCommand command, EatingItemView item)
+        {
+            if (_eatngArm.HasItem)
+            {
+                return;
+            }
+            
+            _itemsNearby.Remove(item);
+            item.Take(_characterView.Guid);
+            _takingArm.SetItem(item);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.TryGetComponent<ThrowingItemView>(out var item))
+            if (!other.TryGetComponent<TakingItemViewBase>(out var item))
             {
                 return;
             }
@@ -57,7 +83,7 @@ namespace Client.GameLogic.Throwing.Taking
 
         private void OnTriggerExit(Collider other)
         {
-            if (!other.TryGetComponent<ThrowingItemView>(out var item))
+            if (!other.TryGetComponent<TakingItemViewBase>(out var item))
             {
                 return;
             }
@@ -65,14 +91,14 @@ namespace Client.GameLogic.Throwing.Taking
             _itemsNearby.Remove(item);
         }
 
-        private ThrowingItemView GetNearestItem()
+        private TakingItemViewBase GetNearestItem()
         {
             if (_itemsNearby.Count < 1)
             {
                 return null;
             }
 
-            var nearestItem = default(ThrowingItemView);
+            var nearestItem = default(TakingItemViewBase);
             var minDistance = float.MaxValue;
             var myPosition = transform.position;
 

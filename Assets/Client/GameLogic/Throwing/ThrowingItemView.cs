@@ -1,22 +1,13 @@
 ﻿using Client.GameLogic.Collision;
-using Client.Network.Entities;
+using Client.GameLogic.Throwing.Taking;
 using UnityEngine;
 
 namespace Client.GameLogic.Throwing
 {
-    public partial class ThrowingItemView : NetworkEntityView
+    public partial class ThrowingItemView : TakingItemViewBase
     {
-        [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField] private Collider _collider;
         [SerializeField] private float _throwPower = 10;
         [SerializeField] private int _damage = 2;
-        [SerializeField] private float _availabilityPauseDelay = 0.5f;
-        [SerializeField] private float _takenSize = 0.2f;
-        [SerializeField] private float _scaleReturnDuration = 0.5f;
-
-        [Header("Holding settings")]
-        [SerializeField] private Vector3 _takingItemOffset;
-        [SerializeField] private Vector3 _takingItemRotation;
 
         [Header("Additional settings")]
         [SerializeField] private bool _isDestroyable;
@@ -25,16 +16,7 @@ namespace Client.GameLogic.Throwing
         [Header("Audio settings")]
         [SerializeField] private string _collisionSoundKey;
 
-        private bool _isTaken;
-        private string _ownerKey;
-        private Vector3 _startScale;
         private ThrowingItemEntity _entity;
-
-        public bool HasOwner => _isTaken || !string.IsNullOrEmpty(_ownerKey);
-        public bool IsThrowing => _collider.enabled;
-
-        public Vector3 TakingItemOffset => _takingItemOffset;
-        public Vector3 TakingItemRotation => _takingItemRotation;
 
         public override void OnStartNetwork()
         {

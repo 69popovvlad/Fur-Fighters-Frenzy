@@ -9,24 +9,23 @@ namespace Client.Network.GameLogic.Characters
         [SerializeField, Tooltip("Components that should only be on the client character")]
         private InputListenerNetworkComponentBase[] _onlyOwnerInputListeners;
 
-        public override void OnStartClient()
+        public override void OnStartNetwork()
         {
-            base.OnStartClient();
+            base.OnStartNetwork();
 
-            var isOwner = IsOwner;
+            if (!IsClientInitialized)
+            {
+                Destroy(this);
+                return;
+            }
+
+            var isOwner = Owner.IsLocalClient;
             for (int i = 0, iLen = _onlyOwnerInputListeners.Length; i < iLen; ++i)
             {
                 _onlyOwnerInputListeners[i].InputsInitialize(isOwner);
             }
 
             Destroy(this);
-        }
-
-        public override void OnStartServer()
-        {
-            base.OnStartServer();
-
-            OnStartClient();
         }
     }
 }
