@@ -10,8 +10,10 @@ namespace Client.GameLogic.Eating.Rats
 {
     public class EatingRatView : NetworkBehaviour
     {
+        private readonly int IdleHash = Animator.StringToHash("Idle");
+
         [SerializeField] private EatingItemView _eatingItemView;
-        [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private Animator _animator;
 
         private TweenerCore<Vector3, Path, PathOptions> _pathTween;
 
@@ -27,27 +29,9 @@ namespace Client.GameLogic.Eating.Rats
             _eatingItemView.OnDropped -= OnDropped;
         }
 
-        private void OnTaken()
-        {
-            _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-        }
-
-        private void OnDropped()
-        {
-            if (_pathTween == null)
-            {
-                return;
-            }
-
-            _pathTween.Kill();
-            _pathTween = null;
-
-            _rigidbody.constraints = RigidbodyConstraints.None;
-        }
-
         public void InitializePath(Transform[] points, float duration)
         {
-            if(_pathTween != null)
+            if (_pathTween != null)
             {
                 return;
             }
@@ -60,6 +44,28 @@ namespace Client.GameLogic.Eating.Rats
                 _pathTween = null;
                 Debug.Log("Rat finished");
             });
+        }
+
+        private void OnTaken()
+        {
+            _animator.SetBool(IdleHash, true);
+            StopPathFollowing();
+        }
+
+        private void OnDropped()
+        {
+            StopPathFollowing();
+        }
+
+        private void StopPathFollowing()
+        {
+            if (_pathTween == null)
+            {
+                return;
+            }
+
+            _pathTween.Kill();
+            _pathTween = null;
         }
     }
 }

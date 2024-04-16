@@ -70,7 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterView: {fileID: 2726741439655151412}
   _takingArm: {fileID: 2178363344196497680}
-  _eatngArm: {fileID: 0}
+  _eatingArm: {fileID: 3082840558773725058}
 --- !u!114 &4045868336063231202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,16 +292,25 @@ MonoBehaviour:
       time: 0
       value: 0
       inSlope: 0
-      outSlope: 1
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
+      time: 0.7146435
+      value: 0.7445963
+      inSlope: 3.2880151
+      outSlope: 3.2880151
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.07846366
+      outWeight: 0.12390298
+    - serializedVersion: 3
       time: 1
       value: 1
       inSlope: 1
-      outSlope: 0
+      outSlope: 1
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -520,7 +529,7 @@ MonoBehaviour:
   <PredictedSpawn>k__BackingField: {fileID: 0}
   _networkBehaviours:
   - {fileID: 2148288780493667524}
-  - {fileID: 2076117202027517775}
+  - {fileID: 3082840558773725058}
   <SerializedRootNetworkBehaviour>k__BackingField: {fileID: 869542685440331856}
   <NestedRootNetworkBehaviours>k__BackingField: []
   SerializedTransformProperties:
@@ -6352,7 +6361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7590960142762535391}
   - component: {fileID: 8934002494467091712}
-  - component: {fileID: 2076117202027517775}
+  - component: {fileID: 3082840558773725058}
   m_Layer: 0
   m_Name: Eating Left Hand
   m_TagString: Untagged
@@ -6390,15 +6399,15 @@ MonoBehaviour:
   m_Weight: 0
   m_Data:
     m_Root: {fileID: 2511825041801157577}
-    m_Tip: {fileID: 8420734311081152749}
-    m_Target: {fileID: 9201187146268280190}
+    m_Tip: {fileID: 3987300991629720294}
+    m_Target: {fileID: 2450900520547945222}
     m_ChainRotationWeight: 1
     m_TipRotationWeight: 0
     m_MaxIterations: 15
     m_Tolerance: 0.0001
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
---- !u!114 &2076117202027517775
+--- !u!114 &3082840558773725058
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6407,16 +6416,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4875334587989727962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b23134218cd4ff8be0112dd3994ba90, type: 3}
+  m_Script: {fileID: 11500000, guid: d491b217db5bf2946a823ff604e33e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _componentIndexCache: 1
-  _addedNetworkObject: {fileID: 6242283760366278073}
+  _addedNetworkObject: {fileID: 6963259129417019729}
   _networkObjectCache: {fileID: 6963259129417019729}
-  _armPunchingControl: {fileID: 5748679360091320056}
+  _armPunchingControl: {fileID: 2148288780493667524}
   _armIK: {fileID: 8934002494467091712}
   _takingItemAim: {fileID: 2450900520547945222}
-  _itemParent: {fileID: 8420734311081152749}
+  _itemParent: {fileID: 3987300991629720294}
   _throwingDirectionAim: {fileID: 6393377232997984786}
   _takingCurve:
     serializedVersion: 2
@@ -6425,16 +6434,25 @@ MonoBehaviour:
       time: 0
       value: 0
       inSlope: 0
-      outSlope: 1
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
+      time: 0.7146435
+      value: 0.7445963
+      inSlope: 3.2880151
+      outSlope: 3.2880151
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.07846366
+      outWeight: 0.12390298
+    - serializedVersion: 3
       time: 1
       value: 1
       inSlope: 1
-      outSlope: 0
+      outSlope: 1
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -6442,8 +6460,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _takingDuration: 0.2
+  _takingDuration: 0.3
   _comebackDuration: 0.1
+  _eatingAimParent: {fileID: 9201187146268280190}
+  _punchAim: {fileID: 7575417350400666680}
 --- !u!1 &5350107078450636603
 GameObject:
   m_ObjectHideFlags: 0
@@ -7062,7 +7082,7 @@ Transform:
   m_GameObject: {fileID: 7489610885718217645}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.000000029802319, z: -9.3132246e-10, w: 1}
-  m_LocalPosition: {x: 0.008399997, y: -0.0035000164, z: 0.13210008}
+  m_LocalPosition: {x: 0.008, y: 0.007, z: 0.078}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

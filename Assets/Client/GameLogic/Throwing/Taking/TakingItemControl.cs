@@ -12,7 +12,7 @@ namespace Client.GameLogic.Throwing.Taking
     {
         [SerializeField] private CharacterView _characterView;
         [SerializeField] private TakingArmControl _takingArm;
-        [SerializeField] private EatingArmControl _eatngArm;
+        [SerializeField] private EatingArmControl _eatingArm;
 
         private readonly HashSet<TakingItemViewBase> _itemsNearby = new HashSet<TakingItemViewBase>();
 
@@ -61,14 +61,14 @@ namespace Client.GameLogic.Throwing.Taking
 
         private void TakeEatingItem(in TakingInputCommand command, EatingItemView item)
         {
-            if (_eatngArm.HasItem)
+            if (_eatingArm.HasItem)
             {
                 return;
             }
             
             _itemsNearby.Remove(item);
             item.Take(_characterView.Guid);
-            _takingArm.SetItem(item);
+            _eatingArm.SetItem(item);
         }
 
         private void OnTriggerEnter(Collider other)

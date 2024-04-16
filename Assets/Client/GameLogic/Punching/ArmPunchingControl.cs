@@ -12,7 +12,8 @@ namespace Client.GameLogic.Punching
     public class ArmPunchingControl : NetworkBehaviour
     {
         public event Action OnPunched;
-
+        public event Action OnPunchReturned;
+        
         [SerializeField] private ChainIKConstraint _armIK;
         [SerializeField] private CollisionProxy _armCollision;
         [SerializeField] private AnimationCurve _punchCurve = AnimationCurve.Linear(0, 0, 1, 1);
@@ -71,6 +72,7 @@ namespace Client.GameLogic.Punching
             }
 
             _armCollision.Enable(false);
+            OnPunchReturned?.Invoke();
         }
 
         public void SetDontEnableColliderToggle()

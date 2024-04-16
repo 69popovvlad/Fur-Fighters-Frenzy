@@ -9,7 +9,7 @@ namespace Client.GameLogic.Throwing.Taking
 {
     public class TakingArmControl : NetworkBehaviour
     {
-        [SerializeField] private ArmPunchingControl _armPunchingControl;
+        [SerializeField] protected ArmPunchingControl _armPunchingControl;
         [SerializeField] private ChainIKConstraint _armIK;
         [SerializeField] private Transform _takingItemAim;
         [SerializeField] private Transform _itemParent;
@@ -70,6 +70,16 @@ namespace Client.GameLogic.Throwing.Taking
             }
         }
 
+        protected virtual void SetItemOnClientInternal(TakingItemViewBase item)
+        {
+            /* Nothing to do */
+        }
+
+        protected virtual void OnPunchedInternal()
+        {
+            /* Nothing to do */
+        }
+
         [ServerRpc(RequireOwnership = false)]
         private void SetParent()
         {
@@ -117,6 +127,8 @@ namespace Client.GameLogic.Throwing.Taking
             _takingItemAim.position = item.transform.position;
             _isTaking = true;
             _punchT = 0;
+
+            SetItemOnClientInternal(item);
         }
 
         private void OnPunched()
@@ -139,6 +151,8 @@ namespace Client.GameLogic.Throwing.Taking
             _item = null;
 
             _audioPlayerService.PlayClip(transform.position, "throwing");
+
+            OnPunchedInternal();
         }
     }
 }
