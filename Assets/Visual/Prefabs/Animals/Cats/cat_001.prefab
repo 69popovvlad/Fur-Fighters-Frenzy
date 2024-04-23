@@ -5958,7 +5958,7 @@ MonoBehaviour:
   _health: {fileID: 2007069664305629270}
   _aimingControl: {fileID: 75306317068230355}
   _movementControl: {fileID: 570051015931748713}
-  _maxHealth: 10
+  _maxHealth: 1000
 --- !u!114 &570051015931748713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5976,6 +5976,7 @@ MonoBehaviour:
   _forwardSpeed: 1200
   _backwardSpeed: 1000
   _sideSpeed: 1000
+  _maxUpwardForce: 5000
   _animationStoppingSpeed: 1
   _kickImpulseMultiplier: 10
 --- !u!114 &7753363988015977239

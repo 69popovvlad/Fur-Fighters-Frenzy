@@ -14,6 +14,7 @@ namespace Client.GameLogic.Movement
         [SerializeField] private float _forwardSpeed = 0.05f;
         [SerializeField] private float _backwardSpeed = 0.025f;
         [SerializeField] private float _sideSpeed = 0.025f;
+        [SerializeField] private float _maxUpwardForce = 1f;
 
         [Header("Animation")]
         [SerializeField] private float _animationStoppingSpeed = 1;
@@ -83,7 +84,37 @@ namespace Client.GameLogic.Movement
             vector.z *= vector.z > 0 ? _forwardSpeed : _backwardSpeed;
             vector.x *= _sideSpeed;
 
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1f))
+            {
+                var surfaceNormal = hit.normal;
+                var upwardForce = Mathf.Lerp(0, _maxUpwardForce, 1 - Vector3.Dot(Vector3.up, surfaceNormal));
+                vector.y += upwardForce;
+            }
+
             _rigidbody.AddForce(transform.TransformDirection(vector) * Time.deltaTime);
+        }
+
+        private void Foo(MovementCommand command)
+        {
+            _animator.SetFloat(XSpeedHash, command.XSpeed);
+            _animator.SetFloat(ZSpeedHash, command.ZSpeed);
+
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1f))
+            {
+                var surfaceNormal = hit.normal;
+                var upDirection = Vector3.Cross(transform.right, surfaceNormal);
+
+                var moveDirectionAlongSurface = Vector3.Cross(surfaceNormal, -transform.forward);
+
+                var force = (moveDirectionAlongSurface * _forwardSpeed * command.ZSpeed) + (transform.right * _sideSpeed * command.XSpeed);
+                _rigidbody.AddForce(force * Time.deltaTime, ForceMode.VelocityChange);
+
+                if (surfaceNormal != Vector3.up)
+                {
+                    var upwardsForce = upDirection * _forwardSpeed * command.ZSpeed;
+                    _rigidbody.AddForce(upwardsForce * Time.deltaTime, ForceMode.VelocityChange);
+                }
+            }
         }
 
         private void ResetAnimationFloat(int id, float delta)
