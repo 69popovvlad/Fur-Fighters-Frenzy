@@ -27,7 +27,7 @@ namespace Client.GameLogic.Kicking
             _kickCollisionProxy.OnCollided -= OnPunchCollision;
         }
 
-        private void OnPunchCollision(string entityKey, string partKey, ColliderDataControl colliderData)
+        private void OnPunchCollision(string entityKey, string partKey, ColliderDataControl colliderData, UnityEngine.Collision collision)
         {
             var command = new KickCollisionCommand(entityKey, partKey, colliderData.CharacterEntityKey);
             _collisionBucket.Invoke(command);

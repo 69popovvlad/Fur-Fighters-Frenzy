@@ -54,8 +54,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.5, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 1, y: 1.5, z: 0.5815563}
+  m_Center: {x: 0, y: 0.5, z: 0.20922184}
 --- !u!114 &3222450758738467126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -921,7 +921,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.05
+  m_Radius: 0.02
   m_Center: {x: 0, y: 0.02, z: 0}
 --- !u!114 &6583971190688382685
 MonoBehaviour:
@@ -6044,6 +6044,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _leftCollisionProxy: {fileID: 8627093920772881790}
   _rightCollisionProxy: {fileID: 6583971190688382685}
+  _debugPointPrefab: {fileID: 3421260758016349986, guid: 9e59d9ee0f8a1e042bad9f17b58492fe, type: 3}
+  _debugPointLifetime: 3
 --- !u!114 &4366785427655980510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17188,7 +17190,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.05
+  m_Radius: 0.02
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8627093920772881790
 MonoBehaviour:

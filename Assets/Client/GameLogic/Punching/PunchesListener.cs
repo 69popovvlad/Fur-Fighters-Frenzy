@@ -14,6 +14,10 @@ namespace Client.GameLogic.Punching
         [Header("Right arm")]
         [SerializeField] private CollisionProxy _rightCollisionProxy;
 
+        [Header("Debug")]
+        [SerializeField] private GameObject _debugPointPrefab;
+        [SerializeField] private float _debugPointLifetime = 3;
+
         private CollisionBucket _collisionBucket;
         private AudioPlayerService _audioPlayerService;
 
@@ -33,7 +37,7 @@ namespace Client.GameLogic.Punching
             _rightCollisionProxy.OnCollided -= OnPunchCollision;
         }
 
-        private void OnPunchCollision(string entityKey, string partKey, ColliderDataControl colliderData)
+        private void OnPunchCollision(string entityKey, string partKey, ColliderDataControl colliderData, UnityEngine.Collision collision)
         {
             if (entityKey.Equals(colliderData.CharacterEntityKey))
             {
@@ -44,6 +48,15 @@ namespace Client.GameLogic.Punching
             _collisionBucket.Invoke(command);
 
             _audioPlayerService.PlayClip(colliderData.transform.position, "punch");
+
+#if UNITY_EDITOR
+            if (collision != null)
+            {
+                var instance = Instantiate(_debugPointPrefab, collision.contacts[0].point, Quaternion.identity);
+                instance.transform.SetParent(colliderData.transform);
+                Destroy(instance, _debugPointLifetime);
+            }
+#endif
         }
     }
 }
