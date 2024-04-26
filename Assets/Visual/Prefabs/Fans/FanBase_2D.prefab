@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5657456247580931558}
   - component: {fileID: 890841953478083505}
   m_Layer: 0
-  m_Name: FanBase
+  m_Name: FanBase_2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
