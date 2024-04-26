@@ -101,7 +101,7 @@ MonoBehaviour:
   NetworkObserver: {fileID: 0}
   <PrefabId>k__BackingField: 0
   <SpawnableCollectionId>k__BackingField: 0
-  _scenePathHash: 0
+  _scenePathHash: 1215852603
   <SceneId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 0
 --- !u!114 &4383348472309359731
@@ -544,7 +544,7 @@ MonoBehaviour:
   NetworkObserver: {fileID: 0}
   <PrefabId>k__BackingField: 0
   <SpawnableCollectionId>k__BackingField: 0
-  _scenePathHash: 0
+  _scenePathHash: 1215852603
   <SceneId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 0
 --- !u!114 &1738445221438129003
@@ -850,7 +850,7 @@ MonoBehaviour:
   NetworkObserver: {fileID: 0}
   <PrefabId>k__BackingField: 0
   <SpawnableCollectionId>k__BackingField: 0
-  _scenePathHash: 0
+  _scenePathHash: 1215852603
   <SceneId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 0
 --- !u!114 &4587744811095126970
@@ -5905,6 +5905,7 @@ GameObject:
   - component: {fileID: 8513731265897958160}
   - component: {fileID: 5476414831562213005}
   - component: {fileID: 7304739914654123376}
+  - component: {fileID: 2001659291355625564}
   - component: {fileID: 4633223898437874748}
   - component: {fileID: 8054882811231932849}
   - component: {fileID: 6497923295368532258}
@@ -5938,6 +5939,8 @@ Transform:
   - {fileID: 1161859983241350323}
   - {fileID: 8132948266303068551}
   - {fileID: 8047755896221268224}
+  - {fileID: 4185930809156862992}
+  - {fileID: 458892625971478389}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2726741439655151412
@@ -5959,6 +5962,7 @@ MonoBehaviour:
   _aimingControl: {fileID: 75306317068230355}
   _movementControl: {fileID: 570051015931748713}
   _maxHealth: 1000
+  _cameraTarget: {fileID: 4185930809156862992}
 --- !u!114 &570051015931748713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6186,6 +6190,29 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!136 &2001659291355625564
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4434732405425161932}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.11637092
+  m_Height: 0.6535964
+  m_Direction: 1
+  m_Center: {x: 0.0086426735, y: 0.32771266, z: -0.021876574}
 --- !u!135 &4633223898437874748
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6203,7 +6230,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.125
   m_Center: {x: 0, y: 0.125, z: 0}
@@ -6236,7 +6263,7 @@ MonoBehaviour:
   - {fileID: 6078750750212272471}
   - {fileID: 4045868336063231202}
   SerializedTransformProperties:
-    Position: {x: -0.077, y: 0, z: -3.179}
+    Position: {x: -20.054323, y: -3.4999995, z: -81.16322}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     LocalScale: {x: 1, y: 1, z: 1}
   _isNetworked: 1
@@ -6247,7 +6274,7 @@ MonoBehaviour:
   NetworkObserver: {fileID: 0}
   <PrefabId>k__BackingField: 2
   <SpawnableCollectionId>k__BackingField: 0
-  _scenePathHash: 0
+  _scenePathHash: 1215852603
   <SceneId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 15264123605922535772
 --- !u!114 &6497923295368532258
@@ -6354,6 +6381,37 @@ MonoBehaviour:
   - {fileID: 570051015931748713}
   - {fileID: 7409362164538345287}
   - {fileID: 75306317068230355}
+--- !u!1 &4519614836391601584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4185930809156862992}
+  m_Layer: 11
+  m_Name: CameraTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4185930809156862992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519614836391601584}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.02, y: 0.88, z: 0.46}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5770798962165825363}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4875334587989727962
 GameObject:
   m_ObjectHideFlags: 0
@@ -6467,6 +6525,89 @@ MonoBehaviour:
   _comebackDuration: 0.1
   _eatingAimParent: {fileID: 9201187146268280190}
   _punchAim: {fileID: 7575417350400666680}
+--- !u!1 &5298003636347907245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 458892625971478389}
+  - component: {fileID: 197892032493687551}
+  m_Layer: 11
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &458892625971478389
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5298003636347907245}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.011438661, y: 0.91550875, z: 0.026099147, w: -0.40128762}
+  m_LocalPosition: {x: 0.71502113, y: 0.65880895, z: 0.5994568}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5770798962165825363}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &197892032493687551
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5298003636347907245}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 6
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &5350107078450636603
 GameObject:
   m_ObjectHideFlags: 0
@@ -17341,6 +17482,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Walking SparkTrail
       objectReference: {fileID: 0}
+    - target: {fileID: 6406229655036095077, guid: ef48c4fbc5ec97d48b5668cbccd2036d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17537,6 +17682,10 @@ PrefabInstance:
     - target: {fileID: 6406229655036095077, guid: ef48c4fbc5ec97d48b5668cbccd2036d, type: 3}
       propertyPath: m_Name
       value: Walking SparkTrail
+      objectReference: {fileID: 0}
+    - target: {fileID: 6406229655036095077, guid: ef48c4fbc5ec97d48b5668cbccd2036d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18238,7 +18387,7 @@ MonoBehaviour:
   NetworkObserver: {fileID: 0}
   <PrefabId>k__BackingField: 0
   <SpawnableCollectionId>k__BackingField: 0
-  _scenePathHash: 0
+  _scenePathHash: 1215852603
   <SceneId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 0
 --- !u!114 &869542685440331856
