@@ -22,12 +22,17 @@ namespace Client.GameLogic.Characters
         [SerializeField, Tooltip("Start and max health value at the same time")]
         private int _maxHealth = 10;
 
+        [SerializeField] private Transform _cameraTarget;
+
         private CharacterEntity _entity;
 
         public HealthControl Health => _health;
 
         public AimingControl AimingControl => _aimingControl;
+
         public MovementControl MovementControl => _movementControl;
+
+        public Transform CameraTarget => _cameraTarget;
 
         public override void OnStartNetwork()
         {

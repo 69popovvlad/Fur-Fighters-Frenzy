@@ -69,7 +69,7 @@ namespace Client.Network.GameLogic
             }
 
             _characterViewClientSide = ViewsContainer.GetView<CharacterView>(command.EntityKey);
-            FindObjectOfType<CameraFollow>().SetTarget(_characterViewClientSide.transform, _characterViewClientSide.AimingControl);
+            FindObjectOfType<CameraFollow>().SetTarget(_characterViewClientSide.CameraTarget, _characterViewClientSide.AimingControl);
             _input.SetEnable(true);
         }
 
