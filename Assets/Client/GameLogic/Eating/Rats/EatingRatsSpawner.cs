@@ -1,3 +1,4 @@
+using DG.Tweening;
 using FishNet.Object;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace Client.GameLogic.Eating.Rats
         [SerializeField] private float _maxSpawnDelay = 15;
         [SerializeField] private float _pathDuration = 10;
         [SerializeField] private EatingRatView _eatingRatPrefab;
+        [SerializeField] private PathType _pathType;
         [SerializeField] private PathStructure[] _paths;
 
         private float _delayLeft;
@@ -40,7 +42,7 @@ namespace Client.GameLogic.Eating.Rats
             var path = _paths[pathIndex];
             var instance = Instantiate(_eatingRatPrefab, path.Points[0].position, Quaternion.identity);
             ServerManager.Spawn(instance.gameObject, Owner);
-            instance.InitializePath(path.Points, _pathDuration);
+            instance.InitializePath(path.Points, _pathDuration, _pathType);
 
             _delayLeft = Random.Range(_minSpawnDelay, _maxSpawnDelay);
         }

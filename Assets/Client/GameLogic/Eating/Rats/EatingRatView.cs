@@ -29,7 +29,7 @@ namespace Client.GameLogic.Eating.Rats
             _eatingItemView.OnDropped -= OnDropped;
         }
 
-        public void InitializePath(Transform[] points, float duration)
+        public void InitializePath(Transform[] points, float duration, PathType pathType)
         {
             if (_pathTween != null)
             {
@@ -37,7 +37,7 @@ namespace Client.GameLogic.Eating.Rats
             }
 
             var pointsPositions = points.Select(p => p.position).ToArray();
-            _pathTween = transform.DOPath(pointsPositions, duration)
+            _pathTween = transform.DOPath(pointsPositions, duration, pathType)
             .SetLookAt(0.01f)
             .OnComplete(() =>
             {
