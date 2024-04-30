@@ -31,6 +31,8 @@ namespace Client.GameLogic.Throwing.Taking
 
         public Vector3 TakingItemRotation => _takingItemRotation;
 
+        public Rigidbody Rigidbody => _rigidbody;
+
         public abstract void Take(string ownerKey);
 
         public abstract void Drop(Vector3 direction);

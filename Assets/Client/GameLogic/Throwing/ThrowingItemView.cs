@@ -18,6 +18,8 @@ namespace Client.GameLogic.Throwing
 
         private ThrowingItemEntity _entity;
 
+        public float ThrowPower => _throwPower;
+
         public override void OnStartNetwork()
         {
             base.OnStartNetwork();

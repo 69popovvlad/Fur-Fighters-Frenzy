@@ -1,4 +1,5 @@
-﻿using Client.Audio;
+﻿using System;
+using Client.Audio;
 using Client.GameLogic.Punching;
 using Core.Ioc;
 using FishNet.Object;
@@ -9,6 +10,9 @@ namespace Client.GameLogic.Throwing.Taking
 {
     public class TakingArmControl : NetworkBehaviour
     {
+        public event Action ItemTaken;
+        public event Action ItemDropped;
+
         [SerializeField] protected ArmPunchingControl _armPunchingControl;
         [SerializeField] private ChainIKConstraint _armIK;
         [SerializeField] private Transform _takingItemAim;
@@ -27,6 +31,12 @@ namespace Client.GameLogic.Throwing.Taking
         private bool _isTaking;
 
         public bool HasItem => _item != null;
+
+        public TakingItemViewBase Item => _item;
+        
+        public Transform ItemParent => _itemParent;
+
+        public Transform ThrowingDirectionAim => _throwingDirectionAim;
 
         private void Awake()
         {
@@ -98,6 +108,8 @@ namespace Client.GameLogic.Throwing.Taking
             itemTransform.SetParent(_itemParent);
             itemTransform.localPosition = _item.TakingItemOffset;
             itemTransform.localRotation = Quaternion.Euler(_item.TakingItemRotation);
+
+            ItemTaken?.Invoke();
         }
 
         private void CalculateTakingReturn()
@@ -153,6 +165,7 @@ namespace Client.GameLogic.Throwing.Taking
             _audioPlayerService.PlayClip(transform.position, "throwing");
 
             OnPunchedInternal();
+            ItemDropped?.Invoke();
         }
     }
 }
