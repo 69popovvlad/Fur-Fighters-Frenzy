@@ -340,15 +340,22 @@ MonoBehaviour:
   _origin: {fileID: 9082005915318542359}
   _throwingArm: {fileID: 2178363344196497680}
   _lineRenderer: {fileID: 3334953711993469733}
-  _fromToOrigin: {fileID: 9063063114972434209}
   _armBones:
   - {fileID: 7529230879615893322}
   - {fileID: 1104918103589344952}
   - {fileID: 4480064822653071392}
   - {fileID: 5691009644598925965}
   - {fileID: 8420734311081152749}
-  _armLength: 20
+  _armLength: 0
+  _spineChainIK: {fileID: 9018070876845158573}
+  _spineBones:
+  - {fileID: 2511825041801157577}
+  - {fileID: 9063063114972434209}
+  - {fileID: 7529230879615893322}
+  - {fileID: 3964764437898638135}
+  - {fileID: 4363973184966105677}
   _throwingStartPoint: {fileID: 828397560223625763}
+  _spineCorrectionMultiplayer: 1
 --- !u!1 &2043471437645506754
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,7 +1027,7 @@ Transform:
   m_GameObject: {fileID: 3973279147702747305}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.053, y: -0, z: 0.466}
+  m_LocalPosition: {x: 0.2, y: -0, z: 0.466}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

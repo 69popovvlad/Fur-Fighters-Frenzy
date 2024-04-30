@@ -11,6 +11,7 @@ namespace Client.GameLogic.Throwing.Taking
     public class TakingArmControl : NetworkBehaviour
     {
         public event Action ItemTaken;
+        public event Action ItemThrowingStarted;
         public event Action ItemDropped;
 
         [SerializeField] protected ArmPunchingControl _armPunchingControl;
@@ -29,11 +30,12 @@ namespace Client.GameLogic.Throwing.Taking
         private TakingItemViewBase _item;
         private float _punchT;
         private bool _isTaking;
+        private Vector3 throwingDirection;
 
         public bool HasItem => _item != null;
 
         public TakingItemViewBase Item => _item;
-        
+
         public Transform ItemParent => _itemParent;
 
         public Transform ThrowingDirectionAim => _throwingDirectionAim;
@@ -77,6 +79,9 @@ namespace Client.GameLogic.Throwing.Taking
 
                 // If client will reconect, this object should be without owner locally
                 _item.DropToAllClients(Vector3.zero);
+
+                _armPunchingControl.OnPunchStarted -= OnPunchStarted;
+                _armPunchingControl.OnPunched -= OnPunched;
             }
         }
 
@@ -132,6 +137,7 @@ namespace Client.GameLogic.Throwing.Taking
         [ObserversRpc(RunLocally = true)]
         private void SetItemToAllClients(TakingItemViewBase item)
         {
+            _armPunchingControl.OnPunchStarted += OnPunchStarted;
             _armPunchingControl.OnPunched += OnPunched;
             _armPunchingControl.SetDontEnableColliderToggle();
 
@@ -141,6 +147,13 @@ namespace Client.GameLogic.Throwing.Taking
             _punchT = 0;
 
             SetItemOnClientInternal(item);
+        }
+
+        private void OnPunchStarted()
+        {
+            _armPunchingControl.OnPunchStarted -= OnPunchStarted;
+            throwingDirection = _throwingDirectionAim.position - _itemParent.position;
+            ItemThrowingStarted?.Invoke();
         }
 
         private void OnPunched()
@@ -158,8 +171,7 @@ namespace Client.GameLogic.Throwing.Taking
                 _punchT = 0;
             }
 
-            var direction = _throwingDirectionAim.position - _itemParent.position;
-            _item.Drop(direction);
+            _item.Drop(throwingDirection);
             _item = null;
 
             _audioPlayerService.PlayClip(transform.position, "throwing");

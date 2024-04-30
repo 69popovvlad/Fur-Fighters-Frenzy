@@ -13,6 +13,7 @@ namespace Client.GameLogic.Punching
     {
         public event Action OnPunched;
         public event Action OnPunchReturned;
+        public event Action OnPunchStarted;
 
         [SerializeField] private ChainIKConstraint _armIK;
         [SerializeField] private CollisionProxy _armCollision;
@@ -116,6 +117,7 @@ namespace Client.GameLogic.Punching
 
             _punchT = 0;
             _armCollision.OnCollided += OnPunchCollision;
+            OnPunchStarted?.Invoke();
         }
 
         private void OnPunchCollision(string entityKey, string partKey, ColliderDataControl control, UnityEngine.Collision collision)

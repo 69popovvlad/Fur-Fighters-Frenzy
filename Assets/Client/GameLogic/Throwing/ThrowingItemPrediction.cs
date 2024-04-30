@@ -1,6 +1,7 @@
 using System;
 using Client.GameLogic.Throwing.Taking;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 namespace Client.GameLogic.Throwing
 {
@@ -17,8 +18,9 @@ namespace Client.GameLogic.Throwing
         [SerializeField] private Transform[] _armBones;
         [SerializeField] private float _armLength = 20;
 
-        [Header("Debug")]
-        [SerializeField] private Transform _throwingStartPoint;
+        [Header("Spine bending correction")]
+        [SerializeField] private ChainIKConstraint _spineChainIK;
+        [SerializeField] private Transform[] _spineBones;
 
         private void Start()
         {
@@ -31,18 +33,18 @@ namespace Client.GameLogic.Throwing
         private void OnDestroy()
         {
             _throwingArm.ItemTaken -= OnItemTaken;
-            _throwingArm.ItemDropped -= ItemDropped;
+            _throwingArm.ItemThrowingStarted -= OnItemThrowingStarted;
         }
 
         private void OnItemTaken()
         {
-            _throwingArm.ItemDropped += ItemDropped;
+            _throwingArm.ItemThrowingStarted += OnItemThrowingStarted;
             enabled = true;
         }
 
-        private void ItemDropped()
+        private void OnItemThrowingStarted()
         {
-            _throwingArm.ItemDropped -= ItemDropped;
+            _throwingArm.ItemThrowingStarted -= OnItemThrowingStarted;
             enabled = false;
         }
 
@@ -65,24 +67,25 @@ namespace Client.GameLogic.Throwing
                 return Array.Empty<Vector3>();
             }
 
-            var throwingAimPosition = _throwingArm.ThrowingDirectionAim.position;
-
             var spineBonePosition = _armBones[0].position;
             var predictedArmPosition = spineBonePosition + (_origin.position - spineBonePosition).normalized * _armLength;
 
-            var toItemParentDirection = (_throwingArm.ItemParent.position - _origin.position).normalized;
-            predictedArmPosition += throwingItemView.transform.localPosition;
+            var itemParentPosition = _throwingArm.ItemParent.position;
+            var toItemParentDirection = (itemParentPosition - _origin.position).normalized;
             predictedArmPosition = _origin.position + toItemParentDirection * Vector3.Distance(predictedArmPosition, _origin.position);
-            _throwingStartPoint.position = predictedArmPosition;
 
-            var direction = (throwingAimPosition - predictedArmPosition).normalized;
+            var spineCorrection = CalculateSpineCorrection();
+            predictedArmPosition -= spineCorrection;
+
+            var startPosition = predictedArmPosition - throwingItemView.transform.localPosition;
+            var direction = (_throwingArm.ThrowingDirectionAim.position - itemParentPosition).normalized;
             var velocity = throwingItemView.ThrowPower / throwingItemView.Rigidbody.mass;
 
             var maxSteps = Mathf.Min(_predictionStepsLimit, Mathf.RoundToInt(_predictionDurationLimit / Time.fixedDeltaTime / _predictionTimeStepInterval));
             var predictionPoints = new Vector3[maxSteps];
             for (int i = 0; i < maxSteps; ++i)
             {
-                var calculatedPosition = ComputePosition(predictedArmPosition, direction, velocity, i * Time.fixedDeltaTime);
+                var calculatedPosition = ComputePosition(startPosition, direction, velocity, i * Time.fixedDeltaTime);
                 predictionPoints[i] = calculatedPosition;
             }
 
@@ -115,24 +118,20 @@ namespace Client.GameLogic.Throwing
             }
         }
 
-        private float CalculateBoneLength(Transform currentBone, Transform endBone)
+        private Vector3 CalculateSpineCorrection()
         {
-            float boneLength = 0;
+            var totalCorrection = Vector3.zero;
 
-            foreach (Transform child in currentBone)
+            foreach (Transform spineBone in _spineBones)
             {
-                if (child != endBone)
-                {
-                    boneLength += CalculateBoneLength(child, endBone);
-                }
-                else
-                {
-                    boneLength += Vector3.Distance(currentBone.position, child.position);
-                    Debug.Log(child.name);
-                }
+                var localOffset = spineBone.localPosition;
+                localOffset *= _spineChainIK.weight;
+                var globalOffset = spineBone.parent.TransformVector(localOffset);
+
+                totalCorrection += globalOffset;
             }
 
-            return boneLength;
+            return totalCorrection;
         }
     }
 }
