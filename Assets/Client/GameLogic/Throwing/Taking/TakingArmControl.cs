@@ -1,36 +1,25 @@
 ﻿using System;
-using Client.Audio;
-using Client.GameLogic.Punching;
-using Core.Ioc;
+using Client.GameLogic.Arm;
+using Client.GameLogic.Arm.IK;
+using Client.GameLogic.Inputs.Commands.Taking;
 using FishNet.Object;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 
 namespace Client.GameLogic.Throwing.Taking
 {
-    public class TakingArmControl : NetworkBehaviour
+    public class TakingArmControl : NetworkBehaviour, ArmStateControlBase<TakingInputCommand>
     {
-        public event Action ItemTaken;
-        public event Action ItemThrowingStarted;
-        public event Action ItemDropped;
+        public event Action OnItemTaken;
+        public event Action OnNoItem;
 
-        [SerializeField] protected ArmPunchingControl _armPunchingControl;
-        [SerializeField] private ChainIKConstraint _armIK;
+        [SerializeField] private ArmType _armType;
+        [SerializeField] private ArmIKControl _armTakingIk;
         [SerializeField] private Transform _takingItemAim;
         [SerializeField] private Transform _itemParent;
-        [SerializeField] private Transform _throwingDirectionAim;
 
-        [Header("Animation")]
-        [SerializeField] private AnimationCurve _takingCurve = AnimationCurve.Linear(0, 0, 1, 1);
+        [SerializeField] private TakingItemAreaControl _takingItemArea;
 
-        [SerializeField] private float _takingDuration = 0.2f;
-        [SerializeField] private float _comebackDuration = 0.3f;
-
-        private AudioPlayerService _audioPlayerService;
-        private TakingItemViewBase _item;
-        private float _punchT;
-        private bool _isTaking;
-        private Vector3 throwingDirection;
+        protected TakingItemViewBase _item;
 
         public bool HasItem => _item != null;
 
@@ -38,74 +27,62 @@ namespace Client.GameLogic.Throwing.Taking
 
         public Transform ItemParent => _itemParent;
 
-        public Transform ThrowingDirectionAim => _throwingDirectionAim;
-
-        private void Awake()
-        {
-            _audioPlayerService = Ioc.Instance.Get<AudioPlayerService>();
-        }
-
-        private void Update()
-        {
-            if (!_isTaking)
-            {
-                CalculateTakingReturn();
-                return;
-            }
-
-            CalculateTaking();
-        }
-
-        private void CalculateTaking()
-        {
-            if (_punchT >= 1)
-            {
-                _isTaking = false;
-                SetParent();
-                return;
-            }
-
-            _punchT += Time.deltaTime / _takingDuration;
-            _armIK.weight = _takingCurve.Evaluate(_punchT);
-        }
-
         public override void OnStopClient()
         {
             base.OnStopClient();
 
             if (HasItem)
             {
-                _item.Drop(Vector3.zero);
+                var itemTemp = _item;
+                DropItem(Vector3.zero);
 
                 // If client will reconect, this object should be without owner locally
-                _item.DropToAllClients(Vector3.zero);
-
-                _armPunchingControl.OnPunchStarted -= OnPunchStarted;
-                _armPunchingControl.OnPunched -= OnPunched;
+                itemTemp.DropToAllClients(Vector3.zero);
             }
         }
 
-        protected virtual void SetItemOnClientInternal(TakingItemViewBase item)
+        public void Enable(bool enabled) =>
+            this.enabled = enabled;
+
+        public void Enter() { /* Nothing to do */ }
+
+        public void Exit() { /* Nothing to do */ }
+
+        public void OnInputCommand(TakingInputCommand inputCommand)
         {
-            /* Nothing to do */
+            if (HasItem)
+            {
+                OnNoItem?.Invoke();
+                return;
+            }
+
+            var nearestItem = _takingItemArea.GetNearestItem();
+            if (nearestItem == null || nearestItem.HasOwner || nearestItem.TargetArm != _armType)
+            {
+                OnNoItem?.Invoke();
+                return;
+            }
+
+            _takingItemArea.TakeItem(nearestItem);
+            SetItem(nearestItem);
         }
 
-        protected virtual void OnPunchedInternal()
+        public void DropItem(Vector3 direction)
         {
-            /* Nothing to do */
+            _item.Drop(direction);
+            _item = null;
         }
 
         [ServerRpc(RequireOwnership = false)]
-        private void SetParent()
-        {
+        private void SetParentToServer() =>
             SetParentToAllClients();
-        }
 
         [ObserversRpc(RunLocally = true)]
         private void SetParentToAllClients()
         {
             if (_item == null)
             {
+                OnNoItem?.Invoke();
                 return;
             }
 
@@ -114,18 +91,7 @@ namespace Client.GameLogic.Throwing.Taking
             itemTransform.localPosition = _item.TakingItemOffset;
             itemTransform.localRotation = Quaternion.Euler(_item.TakingItemRotation);
 
-            ItemTaken?.Invoke();
-        }
-
-        private void CalculateTakingReturn()
-        {
-            if (_punchT <= 0)
-            {
-                return;
-            }
-
-            _punchT -= Time.deltaTime / _comebackDuration;
-            _armIK.weight = _takingCurve.Evaluate(_punchT);
+            OnItemTaken?.Invoke();
         }
 
         [ServerRpc]
@@ -137,47 +103,16 @@ namespace Client.GameLogic.Throwing.Taking
         [ObserversRpc(RunLocally = true)]
         private void SetItemToAllClients(TakingItemViewBase item)
         {
-            _armPunchingControl.OnPunchStarted += OnPunchStarted;
-            _armPunchingControl.OnPunched += OnPunched;
-            _armPunchingControl.SetDontEnableColliderToggle();
-
             _item = item;
             _takingItemAim.position = item.transform.position;
-            _isTaking = true;
-            _punchT = 0;
-
-            SetItemOnClientInternal(item);
+            _armTakingIk.OnTargetReached += OnTargetItemReached;
+            _armTakingIk.Play();
         }
 
-        private void OnPunchStarted()
+        private void OnTargetItemReached()
         {
-            _armPunchingControl.OnPunchStarted -= OnPunchStarted;
-            throwingDirection = _throwingDirectionAim.position - _itemParent.position;
-            ItemThrowingStarted?.Invoke();
-        }
-
-        private void OnPunched()
-        {
-            _armPunchingControl.OnPunched -= OnPunched;
-
-            if (_item == null)
-            {
-                return;
-            }
-
-            if (_isTaking)
-            {
-                _isTaking = false;
-                _punchT = 0;
-            }
-
-            _item.Drop(throwingDirection);
-            _item = null;
-
-            _audioPlayerService.PlayClip(transform.position, "throwing");
-
-            OnPunchedInternal();
-            ItemDropped?.Invoke();
+            _armTakingIk.OnTargetReached -= OnTargetItemReached;
+            SetParentToServer();
         }
     }
 }

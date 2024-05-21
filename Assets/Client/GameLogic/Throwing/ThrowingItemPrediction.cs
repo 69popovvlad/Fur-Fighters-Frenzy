@@ -1,5 +1,4 @@
 using System;
-using Client.GameLogic.Throwing.Taking;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -11,7 +10,7 @@ namespace Client.GameLogic.Throwing
         [SerializeField] private float _predictionTimeStepInterval = 1;
         [SerializeField] private int _predictionStepsLimit = 20;
         [SerializeField] private Transform _origin;
-        [SerializeField] private TakingArmControl _throwingArm;
+        [SerializeField] private ThrowingArmControl _throwingArm;
         [SerializeField] private LineRenderer _lineRenderer;
 
         [Header("Arm length")]
@@ -25,27 +24,8 @@ namespace Client.GameLogic.Throwing
         private void Start()
         {
             enabled = false;
-            _throwingArm.ItemTaken += OnItemTaken;
 
             CalculateArmLenght();
-        }
-
-        private void OnDestroy()
-        {
-            _throwingArm.ItemTaken -= OnItemTaken;
-            _throwingArm.ItemThrowingStarted -= OnItemThrowingStarted;
-        }
-
-        private void OnItemTaken()
-        {
-            _throwingArm.ItemThrowingStarted += OnItemThrowingStarted;
-            enabled = true;
-        }
-
-        private void OnItemThrowingStarted()
-        {
-            _throwingArm.ItemThrowingStarted -= OnItemThrowingStarted;
-            enabled = false;
         }
 
         private void FixedUpdate()
@@ -58,6 +38,12 @@ namespace Client.GameLogic.Throwing
             var predictionPoints = CalculatePrediction();
             _lineRenderer.positionCount = predictionPoints.Length;
             _lineRenderer.SetPositions(predictionPoints);
+        }
+
+        public void Show(bool enabled)
+        {
+            this.enabled = enabled;
+            gameObject.SetActive(enabled);
         }
 
         private Vector3[] CalculatePrediction()

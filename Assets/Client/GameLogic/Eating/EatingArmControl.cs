@@ -1,40 +1,55 @@
+using System;
+using Client.GameLogic.Arm;
+using Client.GameLogic.Arm.IK;
+using Client.GameLogic.Inputs.Commands.Punching;
 using Client.GameLogic.Throwing.Taking;
+using FishNet.Object;
 using UnityEngine;
 
 namespace Client.GameLogic.Eating
 {
-    public class EatingArmControl : TakingArmControl
+    public class EatingArmControl : NetworkBehaviour, ArmStateControlBase<PunchInputCommand>
     {
-        [SerializeField] private Transform _eatingAimParent;
-        [SerializeField] private Transform _punchAim;
+        public event Action OnEaten;
 
-        private Transform _lastPunchAimParent;
-        private Vector3 _lastPunchAimPosition;
+        [SerializeField] private TakingArmControl _takingArm;
 
-        protected override void SetItemOnClientInternal(TakingItemViewBase item)
+        [Header("Eating")]
+        [SerializeField] private ArmIKControl _armIk;
+
+        public void Enable(bool enabled) =>
+            this.enabled = enabled;
+
+        public void Enter() { /* Nothing to do */ }
+
+        public void Exit() { /* Nothing to do */ }
+
+        public void OnInputCommand(PunchInputCommand inputCommand)
         {
-            base.SetItemOnClientInternal(item);
-
-            _lastPunchAimParent = _punchAim.parent;
-            _lastPunchAimPosition = _punchAim.localPosition;
-
-            _punchAim.SetParent(_eatingAimParent);
-            _punchAim.localPosition = Vector3.zero;
+            if (inputCommand.ButtonState == 1)
+            {
+                EatToServer();
+            }
         }
 
-        protected override void OnPunchedInternal()
-        {
-            base.OnPunchedInternal();
+        [ServerRpc]
+        public void EatToServer() =>
+            EatToAllClients();
 
-            _armPunchingControl.OnPunchReturned += OnPunchReturned;
+        [ObserversRpc(RunLocally = true)]
+        private void EatToAllClients()
+        {
+            _armIk.OnTargetReached += OnMouthAimReached;
+            _armIk.Play();
         }
 
-        private void OnPunchReturned()
+        private void OnMouthAimReached()
         {
-            _armPunchingControl.OnPunchReturned -= OnPunchReturned;
+            _armIk.OnTargetReached -= OnMouthAimReached;
 
-            _punchAim.SetParent(_lastPunchAimParent);
-            _punchAim.localPosition = _lastPunchAimPosition;
+            _takingArm.DropItem(Vector3.zero);
+
+            OnEaten?.Invoke();
         }
     }
 }

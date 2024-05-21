@@ -1,89 +1,44 @@
-﻿using System;
-using Client.Audio;
+﻿using Client.Audio;
+using Client.GameLogic.Arm;
+using Client.GameLogic.Arm.IK;
 using Client.GameLogic.Collision;
 using Client.GameLogic.Inputs.Commands.Punching;
 using Core.Ioc;
 using FishNet.Object;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 
 namespace Client.GameLogic.Punching
 {
-    public class ArmPunchingControl : NetworkBehaviour
+    public class ArmPunchingControl : NetworkBehaviour, ArmStateControlBase<PunchInputCommand>
     {
-        public event Action OnPunched;
-        public event Action OnPunchReturned;
-        public event Action OnPunchStarted;
-
-        [SerializeField] private ChainIKConstraint _armIK;
+        [SerializeField] private ArmIKControl _armIk;
         [SerializeField] private CollisionProxy _armCollision;
-        [SerializeField] private AnimationCurve _punchCurve = AnimationCurve.Linear(0, 0, 1, 1);
-        [SerializeField] private float _punchDuration = 0.2f;
-        [SerializeField] private float _comebackDuration = 0.3f;
 
         private AudioPlayerService _audioPlayerService;
-        private bool _inPunching;
-        private bool _dontEnableCollisionToggle; // Onetime toggle
-        private float _punchT;
 
         private void Awake()
         {
             var ioc = Ioc.Instance;
             _audioPlayerService = ioc.Get<AudioPlayerService>();
+
+            _armIk.OnTargetReached += PlayPunchSound;
         }
 
-        private void Update()
+        private void OnDestroy()
         {
-            if (!_inPunching)
-            {
-                CalculatePunchReturn();
-                return;
-            }
-
-            CalculatePunch();
+            _armIk.OnTargetReached -= PlayPunchSound;
         }
 
-        private void CalculatePunch()
+        public void Enable(bool enabled) =>
+            this.enabled = enabled;
+
+        public void Enter() { /* Nothing to do */ }
+
+        public void Exit() { /* Nothing to do */ }
+
+        public void OnInputCommand(PunchInputCommand inputCommand)
         {
-            if (_punchT >= 1)
-            {
-                OnPunched?.Invoke();
-                _inPunching = false;
-                _audioPlayerService.PlayClip(transform.position, "punch_swing");
-                return;
-            }
-
-            _punchT += Time.deltaTime / _punchDuration;
-            _armIK.weight = _punchCurve.Evaluate(_punchT);
-        }
-
-        private void CalculatePunchReturn()
-        {
-            if (_punchT <= 0)
-            {
-                return;
-            }
-
-            _punchT -= Time.deltaTime / _comebackDuration;
-            _armIK.weight = _punchCurve.Evaluate(_punchT);
-
-            if (_punchT > 0)
-            {
-                return;
-            }
-
-            _armCollision.Enable(false);
-            OnPunchReturned?.Invoke();
-        }
-
-        public void SetDontEnableColliderToggle()
-        {
-            _dontEnableCollisionToggle = true;
-        }
-
-        internal void Punch(in PunchInputCommand command)
-        {
-            if (!IsOwner)
+            if (!IsOwner || inputCommand.ButtonState != 1)
             {
                 return;
             }
@@ -92,40 +47,40 @@ namespace Client.GameLogic.Punching
         }
 
         [ServerRpc(RequireOwnership = true)]
-        private void SetWeightToServer()
-        {
+        private void SetWeightToServer() =>
             SetWeightOnClients();
-        }
 
         [ObserversRpc(RunLocally = true)]
         private void SetWeightOnClients()
         {
-            if (_punchT > 0)
+            if (_armIk.AnimationT > 0)
             {
                 return;
             }
 
-            _inPunching = true;
-            if (_dontEnableCollisionToggle)
-            {
-                _dontEnableCollisionToggle = false;
-            }
-            else
-            {
-                _armCollision.Enable(true);
-            }
+            _armIk.OnReturned += OnPunchReturned;
+            _armIk.Play();
 
-            _punchT = 0;
+            _armCollision.Enable(true);
             _armCollision.OnCollided += OnPunchCollision;
-            OnPunchStarted?.Invoke();
         }
 
         private void OnPunchCollision(string entityKey, string partKey, ColliderDataControl control, UnityEngine.Collision collision)
         {
             _armCollision.OnCollided -= OnPunchCollision;
 
-            OnPunched?.Invoke();
-            _inPunching = false;
+            _armIk.ForceReturn();
+            PlayPunchSound();
+        }
+
+        private void OnPunchReturned()
+        {
+            _armIk.OnReturned -= OnPunchReturned;
+            _armCollision.Enable(false);
+        }
+
+        private void PlayPunchSound()
+        {
             _audioPlayerService.PlayClip(transform.position, "punch_swing");
         }
     }

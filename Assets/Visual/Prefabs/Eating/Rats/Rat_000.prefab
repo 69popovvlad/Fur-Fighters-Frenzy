@@ -339,6 +339,7 @@ MonoBehaviour:
   _availabilityPauseDelay: 2
   _takenSize: 1
   _scaleReturnDuration: 0.3
+  _targetArm: 1
   _takingItemOffset: {x: 0.002, y: 0.09, z: 0.014}
   _takingItemRotation: {x: -53, y: 133, z: 31}
   _healPoints: 1

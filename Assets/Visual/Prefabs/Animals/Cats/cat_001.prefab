@@ -69,8 +69,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterView: {fileID: 2726741439655151412}
-  _takingArm: {fileID: 2178363344196497680}
-  _eatingArm: {fileID: 3082840558773725058}
 --- !u!114 &4045868336063231202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,7 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <IsNested>k__BackingField: 1
-  <ComponentIndex>k__BackingField: 4
+  <ComponentIndex>k__BackingField: 8
   <PredictedSpawn>k__BackingField: {fileID: 0}
   _networkBehaviours: []
   <SerializedRootNetworkBehaviour>k__BackingField: {fileID: 2726741439655151412}
@@ -219,8 +217,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2774297848829183224}
   - component: {fileID: 494900962869511745}
-  - component: {fileID: 2178363344196497680}
-  - component: {fileID: 2628612205714915889}
+  - component: {fileID: 1885069036802516197}
+  - component: {fileID: 3837860124612408228}
   m_Layer: 0
   m_Name: Taking Right Hand
   m_TagString: Untagged
@@ -241,6 +239,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4583676077485531280}
   - {fileID: 5644586198157701004}
   m_Father: {fileID: 2110450625829952432}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -267,7 +266,46 @@ MonoBehaviour:
     m_Tolerance: 0.0001
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
---- !u!114 &2178363344196497680
+--- !u!114 &1885069036802516197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722837488282525512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f0d0032420714041b755227b02b4518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _armIK: {fileID: 494900962869511745}
+  _animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _duration: 0.2
+  _comebackDuration: 0.1
+--- !u!114 &3837860124612408228
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -279,83 +317,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b23134218cd4ff8be0112dd3994ba90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 1
+  _componentIndexCache: 0
   _addedNetworkObject: {fileID: 6242283760366278073}
-  _networkObjectCache: {fileID: 6242283760366278073}
-  _armPunchingControl: {fileID: 5748679360091320056}
-  _armIK: {fileID: 494900962869511745}
+  _networkObjectCache: {fileID: 0}
+  _armType: 0
+  _armTakingIk: {fileID: 1885069036802516197}
   _takingItemAim: {fileID: 2450900520547945222}
   _itemParent: {fileID: 8420734311081152749}
-  _throwingDirectionAim: {fileID: 6393377232997984786}
-  _takingCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.7146435
-      value: 0.7445963
-      inSlope: 3.2880151
-      outSlope: 3.2880151
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.07846366
-      outWeight: 0.12390298
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _takingDuration: 0.2
-  _comebackDuration: 0.1
---- !u!114 &2628612205714915889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722837488282525512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccfe7d433556d46458498d5edfc9449d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _predictionDurationLimit: 1
-  _predictionTimeStepInterval: 1
-  _predictionStepsLimit: 20
-  _origin: {fileID: 9082005915318542359}
-  _throwingArm: {fileID: 2178363344196497680}
-  _lineRenderer: {fileID: 3334953711993469733}
-  _armBones:
-  - {fileID: 7529230879615893322}
-  - {fileID: 1104918103589344952}
-  - {fileID: 4480064822653071392}
-  - {fileID: 5691009644598925965}
-  - {fileID: 8420734311081152749}
-  _armLength: 0
-  _spineChainIK: {fileID: 9018070876845158573}
-  _spineBones:
-  - {fileID: 2511825041801157577}
-  - {fileID: 9063063114972434209}
-  - {fileID: 7529230879615893322}
-  - {fileID: 3964764437898638135}
-  - {fileID: 4363973184966105677}
-  _throwingStartPoint: {fileID: 828397560223625763}
-  _spineCorrectionMultiplayer: 1
+  _takingItemArea: {fileID: 3222450758738467126}
 --- !u!1 &2043471437645506754
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +415,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 926900709880725458}
+  - component: {fileID: 1516774853341578859}
   - component: {fileID: 7376999343908440694}
+  - component: {fileID: 3433068296125834224}
   - component: {fileID: 2148288780493667524}
   - component: {fileID: 6963259129417019729}
   - component: {fileID: 1738445221438129003}
@@ -473,6 +444,23 @@ Transform:
   - {fileID: 7590960142762535391}
   m_Father: {fileID: 2411736098665789109}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1516774853341578859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2590957273316063100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd81208e2c1f29942bb06b4dd0e77fee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _armType: 1
+  _armComponents:
+  - {fileID: 2148288780493667524}
+  - {fileID: 2875469368224655810}
+  - {fileID: 6904841544857848417}
 --- !u!114 &7376999343908440694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,6 +484,45 @@ MonoBehaviour:
     m_Tolerance: 0.0001
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
+--- !u!114 &3433068296125834224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2590957273316063100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f0d0032420714041b755227b02b4518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _armIK: {fileID: 7376999343908440694}
+  _animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _duration: 0.1
+  _comebackDuration: 0.3
 --- !u!114 &2148288780493667524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,43 +538,8 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 6963259129417019729}
   _networkObjectCache: {fileID: 6963259129417019729}
-  _armIK: {fileID: 7376999343908440694}
+  _armIk: {fileID: 3433068296125834224}
   _armCollision: {fileID: 8627093920772881790}
-  _punchCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.7146435
-      value: 0.7445963
-      inSlope: 3.2880151
-      outSlope: 3.2880151
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.07846366
-      outWeight: 0.12390298
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _punchDuration: 0.1
-  _comebackDuration: 0.3
 --- !u!114 &6963259129417019729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,9 +557,9 @@ MonoBehaviour:
   <PredictedSpawn>k__BackingField: {fileID: 0}
   _networkBehaviours:
   - {fileID: 2148288780493667524}
-  - {fileID: 3082840558773725058}
   <SerializedRootNetworkBehaviour>k__BackingField: {fileID: 869542685440331856}
-  <NestedRootNetworkBehaviours>k__BackingField: []
+  <NestedRootNetworkBehaviours>k__BackingField:
+  - {fileID: 0}
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
@@ -753,7 +745,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2110450625829952432}
+  - component: {fileID: 2279094598888660585}
   - component: {fileID: 4030170298396456401}
+  - component: {fileID: 7426269551349172536}
   - component: {fileID: 5748679360091320056}
   - component: {fileID: 6242283760366278073}
   - component: {fileID: 4587744811095126970}
@@ -780,6 +774,23 @@ Transform:
   - {fileID: 2774297848829183224}
   m_Father: {fileID: 2411736098665789109}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2279094598888660585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3359896101915585544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd81208e2c1f29942bb06b4dd0e77fee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _armType: 0
+  _armComponents:
+  - {fileID: 5748679360091320056}
+  - {fileID: 3837860124612408228}
+  - {fileID: 5521655807538880084}
 --- !u!114 &4030170298396456401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -803,6 +814,45 @@ MonoBehaviour:
     m_Tolerance: 0.0001
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
+--- !u!114 &7426269551349172536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3359896101915585544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f0d0032420714041b755227b02b4518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _armIK: {fileID: 4030170298396456401}
+  _animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _duration: 0.1
+  _comebackDuration: 0.3
 --- !u!114 &5748679360091320056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -818,43 +868,8 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 6242283760366278073}
   _networkObjectCache: {fileID: 6242283760366278073}
-  _armIK: {fileID: 4030170298396456401}
+  _armIk: {fileID: 7426269551349172536}
   _armCollision: {fileID: 6583971190688382685}
-  _punchCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.7146435
-      value: 0.7445963
-      inSlope: 3.2880151
-      outSlope: 3.2880151
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.07846366
-      outWeight: 0.12390298
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _punchDuration: 0.1
-  _comebackDuration: 0.3
 --- !u!114 &6242283760366278073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -868,13 +883,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <IsNested>k__BackingField: 1
-  <ComponentIndex>k__BackingField: 3
+  <ComponentIndex>k__BackingField: 5
   <PredictedSpawn>k__BackingField: {fileID: 0}
   _networkBehaviours:
   - {fileID: 5748679360091320056}
-  - {fileID: 2178363344196497680}
   <SerializedRootNetworkBehaviour>k__BackingField: {fileID: 869542685440331856}
-  <NestedRootNetworkBehaviours>k__BackingField: []
+  <NestedRootNetworkBehaviours>k__BackingField:
+  - {fileID: 0}
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
@@ -5932,7 +5947,6 @@ GameObject:
   - component: {fileID: 570051015931748713}
   - component: {fileID: 7753363988015977239}
   - component: {fileID: 75306317068230355}
-  - component: {fileID: 7409362164538345287}
   - component: {fileID: 613713714868898266}
   - component: {fileID: 4366785427655980510}
   - component: {fileID: 8875891287190295487}
@@ -6057,20 +6071,6 @@ MonoBehaviour:
   _radius: 1
   _angleCorrection: 280
   _heightCorrection: 0.1
---- !u!114 &7409362164538345287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4434732405425161932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40d72de7cc744399823120ac2a93f1ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _leftArm: {fileID: 2148288780493667524}
-  _rightArm: {fileID: 5748679360091320056}
 --- !u!114 &613713714868898266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6416,8 +6416,9 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 8054882811231932849}
   _onlyOwnerInputListeners:
   - {fileID: 570051015931748713}
-  - {fileID: 7409362164538345287}
   - {fileID: 75306317068230355}
+  - {fileID: 1516774853341578859}
+  - {fileID: 2279094598888660585}
 --- !u!1 &4519614836391601584
 GameObject:
   m_ObjectHideFlags: 0
@@ -6490,9 +6491,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7590960142762535391}
   - component: {fileID: 8934002494467091712}
-  - component: {fileID: 3082840558773725058}
+  - component: {fileID: 3489850007894921785}
+  - component: {fileID: 2875469368224655810}
   m_Layer: 0
-  m_Name: Eating Left Hand
+  m_Name: Taking Left Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6510,7 +6512,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3829614759288907022}
   m_Father: {fileID: 926900709880725458}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8934002494467091712
@@ -6536,7 +6539,7 @@ MonoBehaviour:
     m_Tolerance: 0.0001
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
---- !u!114 &3082840558773725058
+--- !u!114 &3489850007894921785
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6545,43 +6548,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 4875334587989727962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d491b217db5bf2946a823ff604e33e4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f0d0032420714041b755227b02b4518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 1
-  _addedNetworkObject: {fileID: 6963259129417019729}
-  _networkObjectCache: {fileID: 6963259129417019729}
-  _armPunchingControl: {fileID: 2148288780493667524}
   _armIK: {fileID: 8934002494467091712}
-  _takingItemAim: {fileID: 2450900520547945222}
-  _itemParent: {fileID: 3987300991629720294}
-  _throwingDirectionAim: {fileID: 6393377232997984786}
-  _takingCurve:
+  _animationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
       inSlope: 0
-      outSlope: 0
+      outSlope: 1
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.7146435
-      value: 0.7445963
-      inSlope: 3.2880151
-      outSlope: 3.2880151
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.07846366
-      outWeight: 0.12390298
-    - serializedVersion: 3
       time: 1
       value: 1
       inSlope: 1
-      outSlope: 1
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -6589,10 +6576,28 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _takingDuration: 0.3
+  _duration: 0.2
   _comebackDuration: 0.1
-  _eatingAimParent: {fileID: 9201187146268280190}
-  _punchAim: {fileID: 7575417350400666680}
+--- !u!114 &2875469368224655810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4875334587989727962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b23134218cd4ff8be0112dd3994ba90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 6963259129417019729}
+  _networkObjectCache: {fileID: 0}
+  _armType: 1
+  _armTakingIk: {fileID: 3489850007894921785}
+  _takingItemAim: {fileID: 2450900520547945222}
+  _itemParent: {fileID: 3987300991629720294}
+  _takingItemArea: {fileID: 3222450758738467126}
 --- !u!1 &4956466544255704641
 GameObject:
   m_ObjectHideFlags: 0
@@ -6602,6 +6607,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5644586198157701004}
+  - component: {fileID: 4728337408096931055}
   - component: {fileID: 3334953711993469733}
   m_Layer: 0
   m_Name: PredictionLine
@@ -6625,6 +6631,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2774297848829183224}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4728337408096931055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4956466544255704641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfe7d433556d46458498d5edfc9449d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _predictionDurationLimit: 1
+  _predictionTimeStepInterval: 1
+  _predictionStepsLimit: 20
+  _origin: {fileID: 9082005915318542359}
+  _throwingArm: {fileID: 5521655807538880084}
+  _lineRenderer: {fileID: 3334953711993469733}
+  _armBones:
+  - {fileID: 7529230879615893322}
+  - {fileID: 1104918103589344952}
+  - {fileID: 4480064822653071392}
+  - {fileID: 5691009644598925965}
+  - {fileID: 8420734311081152749}
+  _armLength: 0
+  _spineChainIK: {fileID: 9018070876845158573}
+  _spineBones:
+  - {fileID: 2511825041801157577}
+  - {fileID: 9063063114972434209}
+  - {fileID: 7529230879615893322}
+  - {fileID: 3964764437898638135}
+  - {fileID: 4363973184966105677}
 --- !u!120 &3334953711993469733
 LineRenderer:
   serializedVersion: 2
@@ -7233,6 +7271,121 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!1 &6422783223314537474
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4583676077485531280}
+  - component: {fileID: 2371218423572458180}
+  - component: {fileID: 1246690908385083359}
+  - component: {fileID: 5521655807538880084}
+  m_Layer: 0
+  m_Name: Throwing Right Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4583676077485531280
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6422783223314537474}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2774297848829183224}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2371218423572458180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6422783223314537474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796b75e345bd64d47a31edd757bd2670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Weight: 0
+  m_Data:
+    m_Root: {fileID: 2511825041801157577}
+    m_Tip: {fileID: 8420734311081152749}
+    m_Target: {fileID: 9082005915318542359}
+    m_ChainRotationWeight: 1
+    m_TipRotationWeight: 0
+    m_MaxIterations: 15
+    m_Tolerance: 0.0001
+    m_MaintainTargetPositionOffset: 0
+    m_MaintainTargetRotationOffset: 0
+--- !u!114 &1246690908385083359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6422783223314537474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f0d0032420714041b755227b02b4518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _armIK: {fileID: 2371218423572458180}
+  _animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _duration: 0.1
+  _comebackDuration: 0.3
+--- !u!114 &5521655807538880084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6422783223314537474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d00e04c941f876489347f1a3f93ba48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 6242283760366278073}
+  _networkObjectCache: {fileID: 0}
+  _takingArm: {fileID: 3837860124612408228}
+  _armIk: {fileID: 1246690908385083359}
+  _throwingPredication: {fileID: 4728337408096931055}
+  _throwingDirectionAim: {fileID: 6393377232997984786}
 --- !u!1 &6779457121365712114
 GameObject:
   m_ObjectHideFlags: 0
@@ -7412,6 +7565,119 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7155857306462970924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3829614759288907022}
+  - component: {fileID: 5505673387713934307}
+  - component: {fileID: 399862796611610354}
+  - component: {fileID: 6904841544857848417}
+  m_Layer: 0
+  m_Name: Eating Left Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3829614759288907022
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7155857306462970924}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7590960142762535391}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5505673387713934307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7155857306462970924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796b75e345bd64d47a31edd757bd2670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Weight: 0
+  m_Data:
+    m_Root: {fileID: 2511825041801157577}
+    m_Tip: {fileID: 3987300991629720294}
+    m_Target: {fileID: 9201187146268280190}
+    m_ChainRotationWeight: 1
+    m_TipRotationWeight: 0
+    m_MaxIterations: 15
+    m_Tolerance: 0.0001
+    m_MaintainTargetPositionOffset: 0
+    m_MaintainTargetRotationOffset: 0
+--- !u!114 &399862796611610354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7155857306462970924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f0d0032420714041b755227b02b4518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _armIK: {fileID: 5505673387713934307}
+  _animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _duration: 0.3
+  _comebackDuration: 0.1
+--- !u!114 &6904841544857848417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7155857306462970924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d491b217db5bf2946a823ff604e33e4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 6963259129417019729}
+  _networkObjectCache: {fileID: 0}
+  _takingArm: {fileID: 2875469368224655810}
+  _armIk: {fileID: 399862796611610354}
 --- !u!1 &7489610885718217645
 GameObject:
   m_ObjectHideFlags: 0

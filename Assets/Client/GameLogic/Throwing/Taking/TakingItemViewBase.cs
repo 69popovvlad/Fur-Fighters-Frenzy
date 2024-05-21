@@ -1,4 +1,5 @@
 using System;
+using Client.GameLogic.Arm;
 using Client.Network.Entities;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace Client.GameLogic.Throwing.Taking
         [SerializeField] protected float _scaleReturnDuration = 0.3f;
 
         [Header("Holding settings")]
+        [SerializeField] protected ArmType _targetArm;
         [SerializeField] protected Vector3 _takingItemOffset;
         [SerializeField] protected Vector3 _takingItemRotation;
 
@@ -32,6 +34,8 @@ namespace Client.GameLogic.Throwing.Taking
         public Vector3 TakingItemRotation => _takingItemRotation;
 
         public Rigidbody Rigidbody => _rigidbody;
+        
+        public ArmType TargetArm => _targetArm;
 
         public abstract void Take(string ownerKey);
 
