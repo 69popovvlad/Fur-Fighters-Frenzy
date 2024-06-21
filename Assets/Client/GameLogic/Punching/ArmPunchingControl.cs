@@ -31,16 +31,7 @@ namespace Client.GameLogic.Punching
             _audioPlayerService = ioc.Get<AudioPlayerService>();
         }
 
-        private void Update()
-        {
-            if (!_inPunching)
-            {
-                CalculatePunchReturn();
-                return;
-            }
 
-            CalculatePunch();
-        }
 
         private void CalculatePunch()
         {
