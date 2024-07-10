@@ -1,18 +1,20 @@
-﻿using Client.GameLogic.Inputs.Commands.Taking;
+using Client.GameLogic.Inputs.Commands.ChokeHold;
+using Client.GameLogic.Inputs.Commands.Zooming;
+using Client.GameLogic.Inputs.Parts;
 using Core.Ioc;
 using UnityEngine;
 
-namespace Client.GameLogic.Inputs.Parts
+namespace Client.GameLogic.Inputs
 {
-    public class TakingItemInputPart : IInputPart
+    public class ChokeHoldInputPart : IInputPart
     {
         private readonly InputBucket _inputBucket;
-
-        public TakingItemInputPart()
+        
+        public ChokeHoldInputPart()
         {
             _inputBucket = Ioc.Instance.Get<InputBucket>();
         }
-
+        
         public void Dispose()
         {
             /* Nothing to do */
@@ -20,12 +22,7 @@ namespace Client.GameLogic.Inputs.Parts
 
         public void Update(in InputPartData data, float delta)
         {
-            if (!Input.GetKeyDown(KeyCode.E))
-            {
-                return;
-            }
-
-            var command = new TakingInputCommand(data.OwnerKey);
+            var command = new ChokeHoldInputCommand(data.OwnerKey);
             _inputBucket.Invoke(command);
         }
     }

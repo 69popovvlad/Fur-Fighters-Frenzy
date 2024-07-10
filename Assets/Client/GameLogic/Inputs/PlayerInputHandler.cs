@@ -6,52 +6,50 @@ namespace Client.GameLogic.Inputs
 {
     public class PlayerInputHandler : InputHandlerBase
     {
-        private readonly List<IInputPart> _inputParts = new List<IInputPart>();
+        private PlayerInputStateMachine _stateMachine;
+        
+        protected override void AwakeInternal()
+        {
+            base.AwakeInternal();
+            
+            _stateMachine = new PlayerInputStateMachine();
+
+            _stateMachine.AddState(new FightingPlayerInputState(OwnerKey, enabled,CurrentEntityKey, PlayerInputStateType.Fighting));
+            _stateMachine.AddState(new ChokeHoldInputState(OwnerKey, CurrentEntityKey, PlayerInputStateType.ChokeHold));
+        }
+        
+        private void Start()
+        {
+          _stateMachine.Run();
+        }
+
+        private void OnDestroy()
+        {
+            _stateMachine.Stop();
+        }
+
+        private void Update() =>
+            _stateMachine.Update(Time.deltaTime);
 
         public override void Initialize()
         {
             // CurrentEntityKey
         }
+        
+        // public override void InputsInitialize(bool isOwner)
+        // {
+        //     if (isOwner)
+        //     {
+        //         return;
+        //     }
+        //
+        //     Destroy(this);
+        // }
+        
 
         public override void SetEnable(bool enable)
         {
             enabled = enable;
-        }
-
-        protected override void AwakeInternal()
-        {
-            base.AwakeInternal();
-
-            _inputParts.Add(new PunchingInputPart());
-            _inputParts.Add(new MovementInputPart());
-            _inputParts.Add(new AimingInputPart());
-            _inputParts.Add(new ZoomingInputPart());
-            _inputParts.Add(new DodgeInputPart());
-            _inputParts.Add(new TakingItemInputPart());
-            _inputParts.Add(new LegKickInputPart());
-        }
-
-        private void OnDestroy()
-        {
-            for (int i = 0, length = _inputParts.Count; i < length; ++i)
-            {
-                _inputParts[i].Dispose();
-            }
-        }
-
-        private void Update()
-        {
-            var inputData = new InputPartData()
-            {
-                OwnerKey = OwnerKey,
-                EntityKey = CurrentEntityKey,
-            };
-
-            var delta = Time.deltaTime;
-            for (int i = 0, length = _inputParts.Count; i < length; ++i)
-            {
-                _inputParts[i].Update(inputData, delta);
-            }
         }
     }
 }
