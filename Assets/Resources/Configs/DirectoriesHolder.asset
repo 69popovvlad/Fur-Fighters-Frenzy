@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -592883453, guid: 44b76a97b33081e48921ae503e5580ce, type: 3}
+  m_Script: {fileID: -592883453, guid: 0e611df0be638f840a67e1ec16078663, type: 3}
   m_Name: DirectoriesHolder
   m_EditorClassIdentifier: 
   allDirectories:
