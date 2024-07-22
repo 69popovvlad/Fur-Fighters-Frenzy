@@ -80,6 +80,11 @@ Temporary Items
 # *.iml
 # *.ipr
 
+# *.asset
+*.csproj
+*.pidb
+*.suo
+*.user
 # CMake
 cmake-build-*/
 
