@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1835157486, guid: 1e7f25ac51f84fa43b34d7c452a61e83, type: 3}
-  m_Name: WindowsLookupConfig
+  m_Script: {fileID: -1667242163, guid: a4c8e3b57a6d65b4f8f168f573574216, type: 3}
+  m_Name: AssetsContainers_Object
   m_EditorClassIdentifier: 
-  _lookup: []
+  Assets: []
