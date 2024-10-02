@@ -32,15 +32,20 @@ namespace Core.Assets.Editor
             var assetFullPath = Path.Combine(ConfigsPath, DirectoriesHolderPath) + ScriptableObjectFormat;
             if (!File.Exists(assetFullPath))
             {
+                Debug.log($"Try to craete a new {nameof(AssetsDirectoriesHolder)}");
                 CreateDirectoryIfNeed(ConfigsPath);
 
+                Debug.log($"Try to craete 0");
                 directoriesHolder = ScriptableObject.CreateInstance<AssetsDirectoriesHolder>();
+                Debug.log($"Try to craete 1");
                 AssetDatabase.CreateAsset(directoriesHolder, assetFullPath);
+                Debug.log($"Try to craete 2");
                 AssetDatabase.SaveAssetIfDirty(directoriesHolder);
                 Debug.Log($"{nameof(AssetsDirectoriesHolder)} was created. Please, fill this file");
             }
             else
             {
+                Debug.log($"Try to load 0");
                 directoriesHolder = Resources.Load<AssetsDirectoriesHolder>(assetFullPath.GetResourcePathForLoading());
                 Debug.Log(
                     $"{directoriesHolder.name} was loaded with {directoriesHolder.AllDirectories.Length} directories");
